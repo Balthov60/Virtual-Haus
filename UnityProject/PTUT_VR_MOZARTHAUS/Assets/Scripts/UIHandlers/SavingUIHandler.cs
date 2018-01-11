@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class SavingUIHandler : MonoBehaviour {
 
@@ -16,6 +17,8 @@ public class SavingUIHandler : MonoBehaviour {
     private bool isTeleportableOnSavingUI = true;
     private bool isAbleToSave = false;
 
+    SavingManager savingManager;
+
 
 
     // Use this for initialization
@@ -30,12 +33,12 @@ public class SavingUIHandler : MonoBehaviour {
 
         print(Input.GetButtonDown(PRESSED_BUTTON_NAME));
 
-        if (IsModChangeButtonPressed() && isAbleToSave)
+        if (IsModChangeButtonPressed() && isTeleportableOnSavingUI)
         {
             playerSavingPosition = player.transform.position;
             print("Save Position :" + playerSavingPosition);
             player.transform.position = SAVING_HAUS_SPAWN;
-            isAbleToSave = false;
+            isTeleportableOnSavingUI = false;
         }
 
         if (inputManager.IsTriggerClicked() && rayCast.Hit())
@@ -45,19 +48,29 @@ public class SavingUIHandler : MonoBehaviour {
             {
                 print("Hello !");
                 player.transform.position = playerSavingPosition;
-                isAbleToSave = true;
+                isTeleportableOnSavingUI = true;
             }
             else if (rayCast.GetHit().transform.name == "Save")
             {
-                print("Save"); // Not Implemented
-                player.transform.position = playerSavingPosition;
-                isAbleToSave = true;
+                if (IsAbleToSave())
+                {
+                    SaveAs();
+                    player.transform.position = playerSavingPosition;
+                    isTeleportableOnSavingUI = true;
+                }
+                else
+                {
+                    Save();
+                    player.transform.position = playerSavingPosition;
+                    isTeleportableOnSavingUI = true;
+                }
+                
             }
             else if (rayCast.GetHit().transform.name == "Save_as")
             {
-                print("Save_as"); // Not Implemented
+                SaveAs();
                 player.transform.position = playerSavingPosition;
-                isAbleToSave = true;
+                isTeleportableOnSavingUI = true;
             }
         }
 
@@ -69,7 +82,18 @@ public class SavingUIHandler : MonoBehaviour {
         return Input.GetButtonDown(PRESSED_BUTTON_NAME);
     }
 
-
+    public bool IsAbleToSave()
+    {
+        String userSaved;
+        if ()
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
     /// <summary>
     /// Function that save the new content into the current file.
     /// </summary>
@@ -84,7 +108,7 @@ public class SavingUIHandler : MonoBehaviour {
     /// </summary>
     public void SaveAs()
     {
-
+        savingManager.SaveGameObjects();
     }
 
 }
