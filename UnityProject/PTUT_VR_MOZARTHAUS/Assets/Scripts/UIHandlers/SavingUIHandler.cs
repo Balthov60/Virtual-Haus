@@ -5,7 +5,7 @@ using System;
 
 public class SavingUIHandler : MonoBehaviour {
 
-    private readonly Vector3 SAVING_HAUS_SPAWN = new Vector3(-0.5f, 4.591f, -26.38f);
+    private readonly Vector3 SAVING_HAUS_SPAWN = new Vector3(-0.5f, 3.1f, -26.38f);
     private static readonly string PRESSED_BUTTON_NAME = "SavingMod";
 
     //Attributes 
@@ -15,8 +15,6 @@ public class SavingUIHandler : MonoBehaviour {
     private Vector3 playerSavingPosition;
 
     private bool isTeleportableOnSavingUI = true;
-    private bool isAbleToSave = false;
-
     SavingManager savingManager;
 
 
@@ -26,12 +24,12 @@ public class SavingUIHandler : MonoBehaviour {
         rayCast = GameObject.Find("PointerController").GetComponent<RayCast>();
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         player = GameObject.Find("Player");
+        savingManager = new SavingManager();
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        print(Input.GetButtonDown(PRESSED_BUTTON_NAME));
 
         if (IsModChangeButtonPressed() && isTeleportableOnSavingUI)
         {
@@ -46,20 +44,22 @@ public class SavingUIHandler : MonoBehaviour {
 
             if (rayCast.GetHit().transform.name == "Back")
             {
-                print("Hello !");
+                print(player.transform.position);
                 player.transform.position = playerSavingPosition;
                 isTeleportableOnSavingUI = true;
             }
             else if (rayCast.GetHit().transform.name == "Save")
             {
-                if (IsAbleToSave())
+                if (savingManager.IsUserSavedExist())
                 {
+                    print("No Save before");
                     SaveAs();
                     player.transform.position = playerSavingPosition;
                     isTeleportableOnSavingUI = true;
                 }
                 else
                 {
+                    print("Save before");
                     Save();
                     player.transform.position = playerSavingPosition;
                     isTeleportableOnSavingUI = true;
@@ -82,18 +82,6 @@ public class SavingUIHandler : MonoBehaviour {
         return Input.GetButtonDown(PRESSED_BUTTON_NAME);
     }
 
-    public bool IsAbleToSave()
-    {
-        String userSaved;
-        if ()
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-    }
     /// <summary>
     /// Function that save the new content into the current file.
     /// </summary>

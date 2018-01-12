@@ -23,6 +23,7 @@ public class SavingManager : MonoBehaviour {
     {
         SAVING_DIRECTORY = Application.dataPath + "/Saves";
         editableGameObjects = GameObject.FindGameObjectsWithTag(EDITABLE_TAG);
+        
     }
 
     /// <summary>
@@ -54,7 +55,10 @@ public class SavingManager : MonoBehaviour {
     /// </summary>
     public void SaveGameObjects()
     {
+        editableGameObjects = GameObject.FindGameObjectsWithTag(EDITABLE_TAG);
         SavedScene savedScene = new SavedScene(SceneManager.GetActiveScene().name, editableGameObjects);
+        
+
         CreateSavingDirectoryIfNotExist(savedScene.name);
 
         String saveID = GenerateFreeSaveID();
@@ -65,6 +69,34 @@ public class SavingManager : MonoBehaviour {
         {
             String[] filesName = GetFilesName(SAVING_DIRECTORY + "/" + directoryName);
             foreach(string fileName in filesName)
+            {
+                Debug.Log(directoryName + " " + fileName);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Search if there are saves that have been created 
+    /// </summary>
+    /// <returns>true if used usedSaveIdentifiers.Count == 0</returns>
+    public bool IsUserSavedExist()
+    {
+        List<String> usedSaveIdentifiers = new List<string>();
+        usedSaveIdentifiers = GetUsedSaveIDs();
+        print(usedSaveIdentifiers.Count);
+
+        if (usedSaveIdentifiers.Count == 0) { return true; }
+        else { return false; }
+
+    }
+
+    public void UpdateCurrentSave()
+    {
+        String[] directoriesName = GetDirectoriesName(SAVING_DIRECTORY);
+        foreach (string directoryName in directoriesName)
+        {
+            String[] filesName = GetFilesName(SAVING_DIRECTORY + "/" + directoryName);
+            foreach (string fileName in filesName)
             {
                 Debug.Log(directoryName + " " + fileName);
             }
@@ -153,6 +185,7 @@ public class SavedScene
     public SavedScene(string name, GameObject[] gameObjectToSave)
     {
         this.name = name;
+       
 
         savedGameObjects = new List<SavedGameObject>();
         foreach (GameObject editableGameObject in gameObjectToSave)
