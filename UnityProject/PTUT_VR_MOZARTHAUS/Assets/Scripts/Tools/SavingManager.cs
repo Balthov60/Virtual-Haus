@@ -17,15 +17,11 @@ public class SavingManager : MonoBehaviour {
 
     private static readonly string EDITABLE_TAG = "Editable";
     private static string SAVING_DIRECTORY;
-    private static string SAVING_FILE = "test.save";
-    private String currentConnexionID;
-    private String currentDirectoryName;
-    public GUIText fileSaveID;
+    private static String currentConnexionID;
 
     public void Start()
     {
         SAVING_DIRECTORY = Application.dataPath + "/Saves";
-        fileSaveID = GetComponent<GUIText>();
         editableGameObjects = GameObject.FindGameObjectsWithTag(EDITABLE_TAG);
         
     }
@@ -33,9 +29,12 @@ public class SavingManager : MonoBehaviour {
     /// <summary>
     /// load games objects data and place them on the scene.
     /// </summary>
-    public void LoadGameObjects()
+    public void LoadGameObjects(String currentConnexionID)
     {
-        string savingPath = SAVING_DIRECTORY + '/' + SceneManager.GetActiveScene().name + '/' + SAVING_FILE;
+        string savingPath = SAVING_DIRECTORY + '/' + SceneManager.GetActiveScene().name + '/' + currentConnexionID + ".save";
+
+        SetCurrentConnexionID(currentConnexionID);
+
         if (File.Exists(savingPath))
         {
             string data = File.ReadAllText(savingPath);
@@ -44,6 +43,13 @@ public class SavingManager : MonoBehaviour {
             PlaceGameObjects(savedScene);
         }
     }
+
+
+    /// <summary>
+    /// Place each editable game objects informations that have been saved in SaveGameObjects. 
+    /// This function is called in LoadGameObjects.
+    /// </summary>
+    /// <param name="savedScene"></param>
     private void PlaceGameObjects(SavedScene savedScene)
     {
         foreach (SavedGameObject savedGameObject in savedScene.savedGameObjects)
@@ -65,10 +71,10 @@ public class SavingManager : MonoBehaviour {
 
         CreateSavingDirectoryIfNotExist(savedScene.name);
 
-        String saveID = GenerateUserSaveID();
+        String saveID = GenerateFreeSaveID();
         SetCurrentConnexionID(saveID);
 
-        File.WriteAllText(SAVING_DIRECTORY + "/" + savedScene.name + "/" + saveID + ".save", JsonUtility.ToJson(savedScene));
+        File.WriteAllText(SAVING_DIRECTORY + "/" + savedScene.name + "/" + GetCurrentConnexionID() + ".save", JsonUtility.ToJson(savedScene));
 
         String[] directoriesName = GetDirectoriesName(SAVING_DIRECTORY);
         foreach (string directoryName in directoriesName)
@@ -101,7 +107,7 @@ public class SavingManager : MonoBehaviour {
         editableGameObjects = GameObject.FindGameObjectsWithTag(EDITABLE_TAG);
         SavedScene savedScene = new SavedScene(SceneManager.GetActiveScene().name, editableGameObjects);
 
-        if (GetConnexionID() != null)
+        if (GetCurrentConnexionID() != null)
         {
             String[] directoriesName = GetDirectoriesName(SAVING_DIRECTORY);
             foreach (string directoryName in directoriesName)
@@ -109,12 +115,12 @@ public class SavingManager : MonoBehaviour {
                 String[] filesName = GetFilesName(SAVING_DIRECTORY + "/" + directoryName);
                 foreach (string fileName in filesName)
                 {
-                    if (fileName == GetConnexionID())
+                    if (fileName == GetCurrentConnexionID())
                     {
-                        File.Delete(SAVING_DIRECTORY + "/" + savedScene.name + "/" + GetConnexionID() + ".save");
-                        print("Fichier :" + GetConnexionID() + "Deleted");
-                        File.WriteAllText(SAVING_DIRECTORY + "/" + savedScene.name + "/" + GetConnexionID() + ".save", JsonUtility.ToJson(savedScene));
-                        print("Fichier :" + GetConnexionID() + "Rewrite");
+                        File.Delete(SAVING_DIRECTORY + "/" + savedScene.name + "/" + GetCurrentConnexionID() + ".save");
+                        print("Fichier :" + GetCurrentConnexionID() + "Deleted");
+                        File.WriteAllText(SAVING_DIRECTORY + "/" + savedScene.name + "/" + GetCurrentConnexionID() + ".save", JsonUtility.ToJson(savedScene));
+                        print("Fichier :" + GetCurrentConnexionID() + "Rewrite");
                     }
                 }
             }
@@ -123,10 +129,10 @@ public class SavingManager : MonoBehaviour {
 
     public void SetCurrentConnexionID(String connexionID)
     {
-        this.currentConnexionID = connexionID;
+        SavingManager.currentConnexionID = connexionID;
     }
 
-    public String GetConnexionID() { return this.currentConnexionID; }
+    public String GetCurrentConnexionID() { return SavingManager.currentConnexionID; }
 
     /// <summary>
     /// Create current scene saving directory if not exist
@@ -155,28 +161,7 @@ public class SavingManager : MonoBehaviour {
         return saveIdentifier;
 
     }
-    private String GenerateUserSaveID()
-    {
-        foreach (char c in Input.inputString)
-        {
-            if (c == '\b') // has backspace/delete been pressed?
-            {
-                if (fileSaveID.text.Length != 0)
-                {
-                    fileSaveID.text = fileSaveID.text.Substring(0, fileSaveID.text.Length - 1);
-                }
-            }
-            else if ((c == '\n') || (c == '\r')) // enter/return
-            {
-                print("User entered their name: " + fileSaveID.text);
-            }
-            else
-            {
-                fileSaveID.text += c;
-            }
-        }
-        return fileSaveID.ToString();
-    }
+   
     private List<String> GetUsedSaveIDs()
     {
         List<String> usedSaveIdentifiers = new List<string>();
