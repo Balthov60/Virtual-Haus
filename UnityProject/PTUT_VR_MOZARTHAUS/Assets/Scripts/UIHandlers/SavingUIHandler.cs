@@ -87,7 +87,7 @@ public class SavingUIHandler : MonoBehaviour {
     /// </summary>
     public void Save()
     {
-
+        savingManager.UpdateCurrentSave();
     }
 
 

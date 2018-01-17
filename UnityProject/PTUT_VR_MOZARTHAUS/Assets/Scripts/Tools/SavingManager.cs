@@ -18,10 +18,14 @@ public class SavingManager : MonoBehaviour {
     private static readonly string EDITABLE_TAG = "Editable";
     private static string SAVING_DIRECTORY;
     private static string SAVING_FILE = "test.save";
+    private String currentConnexionID;
+    private String currentDirectoryName;
+    public GUIText fileSaveID;
 
     public void Start()
     {
         SAVING_DIRECTORY = Application.dataPath + "/Saves";
+        fileSaveID = GetComponent<GUIText>();
         editableGameObjects = GameObject.FindGameObjectsWithTag(EDITABLE_TAG);
         
     }
@@ -61,7 +65,9 @@ public class SavingManager : MonoBehaviour {
 
         CreateSavingDirectoryIfNotExist(savedScene.name);
 
-        String saveID = GenerateFreeSaveID();
+        String saveID = GenerateUserSaveID();
+        SetCurrentConnexionID(saveID);
+
         File.WriteAllText(SAVING_DIRECTORY + "/" + savedScene.name + "/" + saveID + ".save", JsonUtility.ToJson(savedScene));
 
         String[] directoriesName = GetDirectoriesName(SAVING_DIRECTORY);
@@ -92,16 +98,35 @@ public class SavingManager : MonoBehaviour {
 
     public void UpdateCurrentSave()
     {
-        String[] directoriesName = GetDirectoriesName(SAVING_DIRECTORY);
-        foreach (string directoryName in directoriesName)
+        editableGameObjects = GameObject.FindGameObjectsWithTag(EDITABLE_TAG);
+        SavedScene savedScene = new SavedScene(SceneManager.GetActiveScene().name, editableGameObjects);
+
+        if (GetConnexionID() != null)
         {
-            String[] filesName = GetFilesName(SAVING_DIRECTORY + "/" + directoryName);
-            foreach (string fileName in filesName)
+            String[] directoriesName = GetDirectoriesName(SAVING_DIRECTORY);
+            foreach (string directoryName in directoriesName)
             {
-                Debug.Log(directoryName + " " + fileName);
+                String[] filesName = GetFilesName(SAVING_DIRECTORY + "/" + directoryName);
+                foreach (string fileName in filesName)
+                {
+                    if (fileName == GetConnexionID())
+                    {
+                        File.Delete(SAVING_DIRECTORY + "/" + savedScene.name + "/" + GetConnexionID() + ".save");
+                        print("Fichier :" + GetConnexionID() + "Deleted");
+                        File.WriteAllText(SAVING_DIRECTORY + "/" + savedScene.name + "/" + GetConnexionID() + ".save", JsonUtility.ToJson(savedScene));
+                        print("Fichier :" + GetConnexionID() + "Rewrite");
+                    }
+                }
             }
         }
     }
+
+    public void SetCurrentConnexionID(String connexionID)
+    {
+        this.currentConnexionID = connexionID;
+    }
+
+    public String GetConnexionID() { return this.currentConnexionID; }
 
     /// <summary>
     /// Create current scene saving directory if not exist
@@ -109,12 +134,13 @@ public class SavingManager : MonoBehaviour {
     /// <param name="directory">Saving directory for current scene</param>
     private void CreateSavingDirectoryIfNotExist(string directory)
     {
+        ;
         if (!Directory.Exists(SAVING_DIRECTORY))
             Directory.CreateDirectory(SAVING_DIRECTORY);
         if (!Directory.Exists(SAVING_DIRECTORY + '/' + directory))
             Directory.CreateDirectory(SAVING_DIRECTORY + '/' + directory);
     }
-    
+
     private String GenerateFreeSaveID()
     {
         List<String> usedSaveIdentifiers = GetUsedSaveIDs();
@@ -128,6 +154,28 @@ public class SavingManager : MonoBehaviour {
 
         return saveIdentifier;
 
+    }
+    private String GenerateUserSaveID()
+    {
+        foreach (char c in Input.inputString)
+        {
+            if (c == '\b') // has backspace/delete been pressed?
+            {
+                if (fileSaveID.text.Length != 0)
+                {
+                    fileSaveID.text = fileSaveID.text.Substring(0, fileSaveID.text.Length - 1);
+                }
+            }
+            else if ((c == '\n') || (c == '\r')) // enter/return
+            {
+                print("User entered their name: " + fileSaveID.text);
+            }
+            else
+            {
+                fileSaveID.text += c;
+            }
+        }
+        return fileSaveID.ToString();
     }
     private List<String> GetUsedSaveIDs()
     {
@@ -173,6 +221,8 @@ public class SavingManager : MonoBehaviour {
 
         return files;
     }
+
+    
 }
 
 
