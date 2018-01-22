@@ -41,10 +41,12 @@ public class LoadUIHandler : MonoBehaviour {
         if (inputManager.IsTriggerClicked() && rayCast.Hit() && canClick)
         {
             
-            if (rayCast.GetHit().transform.name == "ButtonDown")
+            if (rayCast.GetHit().transform.name == "ButtonDownLoad")
             {
 
-                saveLetterSelector = rayCast.GetHit().transform.parent.Find("LetterView").GetComponentInChildren<Text>();
+                saveLetterSelector = rayCast.GetHit().transform.parent.Find("LetterViewLoad").GetComponentInChildren<Text>();
+                saveLetterSelector.text = asciiCodeLetter.ToString();
+
 
                 if (asciiCodeLetter == 'A')
                 {
@@ -62,9 +64,11 @@ public class LoadUIHandler : MonoBehaviour {
                     canClick = false;
                 }
             }
-            else if (rayCast.GetHit().transform.name == "ButtonUp")
+            else if (rayCast.GetHit().transform.name == "ButtonUpLoad")
             {
-                saveLetterSelector = rayCast.GetHit().transform.parent.Find("LetterView").GetComponentInChildren<Text>();
+
+                saveLetterSelector = rayCast.GetHit().transform.parent.Find("LetterViewLoad").GetComponentInChildren<Text>();
+                saveLetterSelector.text = asciiCodeLetter.ToString();
 
                 if (asciiCodeLetter == 'Z')
                 {
@@ -86,9 +90,9 @@ public class LoadUIHandler : MonoBehaviour {
                 for (int i = 0; i < gameObject.transform.childCount; i++)
                 {
 
-                    if (gameObject.transform.GetChild(i).name == "LetterSelector")
+                    if (gameObject.transform.GetChild(i).name == "LetterSelectorLoad")
                     {
-                        currentStringSelected += gameObject.transform.GetChild(i).Find("LetterView").GetComponentInChildren<Text>().text;
+                        currentStringSelected += gameObject.transform.GetChild(i).Find("LetterViewLoad").GetComponentInChildren<Text>().text;
                     }
 
                 }

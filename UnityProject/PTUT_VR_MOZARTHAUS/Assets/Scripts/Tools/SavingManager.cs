@@ -20,7 +20,7 @@ public class SavingManager : MonoBehaviour {
     private static String currentConnexionID;
     private LetterSelectorUIHandler letterSelectorUIHandler;
 
-    public void Start()
+    public void Awake()
     {
         SAVING_DIRECTORY = Application.dataPath + "/Saves";
         editableGameObjects = GameObject.FindGameObjectsWithTag(EDITABLE_TAG);
@@ -96,7 +96,7 @@ public class SavingManager : MonoBehaviour {
     /// Save each editable GameObject informations with a dedicated Save Name
     /// </summary>
     /// <param name="currentStringSelected"></param>
-    internal void SaveGameObjects(string currentStringSelected)
+    public void SaveGameObjects(string currentStringSelected)
     {
         editableGameObjects = GameObject.FindGameObjectsWithTag(EDITABLE_TAG);
         SavedScene savedScene = new SavedScene(SceneManager.GetActiveScene().name, editableGameObjects);
@@ -107,6 +107,7 @@ public class SavingManager : MonoBehaviour {
         SetCurrentConnexionID(saveID);
 
         File.WriteAllText(SAVING_DIRECTORY + "/" + savedScene.name + "/" + GetCurrentConnexionID() + ".save", JsonUtility.ToJson(savedScene));
+        print("Save");
         
     }
 
@@ -138,9 +139,11 @@ public class SavingManager : MonoBehaviour {
             String[] directoriesName = GetDirectoriesName(SAVING_DIRECTORY);
             foreach (string directoryName in directoriesName)
             {
+                print("First");
                 String[] filesName = GetFilesName(SAVING_DIRECTORY + "/" + directoryName);
                 foreach (string fileName in filesName)
                 {
+                    print("second");
                     if (fileName == GetCurrentConnexionID())
                     {
                         File.Delete(SAVING_DIRECTORY + "/" + savedScene.name + "/" + GetCurrentConnexionID() + ".save");

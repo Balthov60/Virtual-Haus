@@ -35,6 +35,8 @@ public class LetterSelectorUIHandler : MonoBehaviour {
         savingUIHandler = GameObject.Find("SavingUi").GetComponent<SavingUIHandler>();
 
         saveAsSelector = GameObject.Find("SelectorSaveAsMenu");
+        saveLetterSelector = GameObject.Find("LetterView").GetComponent<Text>();
+
 
         DisplaySaveId();
     }
@@ -45,19 +47,24 @@ public class LetterSelectorUIHandler : MonoBehaviour {
 
         if (inputManager.IsTriggerClicked() && rayCast.Hit() && canClick)
         {
-            
 
+           
+            
             if (rayCast.GetHit().transform.name == "ButtonDown")
             {
+                print("asciiCodeLetter : " + asciiCodeLetter);
+                saveLetterSelector = rayCast.GetHit().transform.parent.Find("LetterView").GetComponentInChildren<Text>();
+                char[] temp = saveLetterSelector.text.ToCharArray();
+                asciiCodeLetter = temp[0];
+                saveLetterSelector.text = asciiCodeLetter.ToString();
 
-               saveLetterSelector = rayCast.GetHit().transform.parent.Find("LetterView").GetComponentInChildren<Text>();
 
                 if (asciiCodeLetter == 'A')
                 {
                     
                     asciiCodeLetter = 'Z';
                     saveLetterSelector.text = asciiCodeLetter.ToString();
-
+                    
                     canClick = false;
 
                 }
@@ -65,6 +72,7 @@ public class LetterSelectorUIHandler : MonoBehaviour {
                 {
                     asciiCodeLetter--;
                     saveLetterSelector.text = asciiCodeLetter.ToString();
+                    
 
                     canClick = false;
                 }
@@ -72,6 +80,9 @@ public class LetterSelectorUIHandler : MonoBehaviour {
             else if(rayCast.GetHit().transform.name == "ButtonUp")
             {
                 saveLetterSelector = rayCast.GetHit().transform.parent.Find("LetterView").GetComponentInChildren<Text>();
+                char[] temp = saveLetterSelector.text.ToCharArray();
+                asciiCodeLetter = temp[0];
+                saveLetterSelector.text = asciiCodeLetter.ToString();
 
                 if (asciiCodeLetter == 'Z')
                 {
@@ -83,7 +94,7 @@ public class LetterSelectorUIHandler : MonoBehaviour {
                 else
                 {
                     asciiCodeLetter++;
-                    saveLetterSelector.text = asciiCodeLetter.ToString();
+                    saveLetterSelector.text = asciiCodeLetter.ToString(); ;
 
                     canClick = false;
                 }
@@ -100,17 +111,18 @@ public class LetterSelectorUIHandler : MonoBehaviour {
                     
                 }
 
-                if(savingManager.GetCurrentConnexionID() == null)
+                if(savingManager.GetCurrentConnexionID() == null || savingManager.GetCurrentConnexionID() != currentStringSelected)
                 {
                     savingManager.SaveGameObjects(currentStringSelected);
                 }                    
-                else
+                else if(savingManager.GetCurrentConnexionID() == currentStringSelected)
                 {
                     savingManager.UpdateCurrentSave();
                 }
 
                 TeleportBack();
                 canClick = false;
+                currentStringSelected = "";
             }
 
         }
