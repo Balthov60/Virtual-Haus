@@ -40,16 +40,19 @@ public class LoadUIHandler : MonoBehaviour {
     void Update () {
         if (inputManager.IsTriggerClicked() && rayCast.Hit() && canClick)
         {
-            
+
             if (rayCast.GetHit().transform.name == "ButtonDownLoad")
             {
-
+                print("asciiCodeLetter : " + asciiCodeLetter);
                 saveLetterSelector = rayCast.GetHit().transform.parent.Find("LetterViewLoad").GetComponentInChildren<Text>();
+                char[] temp = saveLetterSelector.text.ToCharArray();
+                asciiCodeLetter = temp[0];
                 saveLetterSelector.text = asciiCodeLetter.ToString();
 
 
                 if (asciiCodeLetter == 'A')
                 {
+
                     asciiCodeLetter = 'Z';
                     saveLetterSelector.text = asciiCodeLetter.ToString();
 
@@ -61,13 +64,15 @@ public class LoadUIHandler : MonoBehaviour {
                     asciiCodeLetter--;
                     saveLetterSelector.text = asciiCodeLetter.ToString();
 
+
                     canClick = false;
                 }
             }
             else if (rayCast.GetHit().transform.name == "ButtonUpLoad")
             {
-
                 saveLetterSelector = rayCast.GetHit().transform.parent.Find("LetterViewLoad").GetComponentInChildren<Text>();
+                char[] temp = saveLetterSelector.text.ToCharArray();
+                asciiCodeLetter = temp[0];
                 saveLetterSelector.text = asciiCodeLetter.ToString();
 
                 if (asciiCodeLetter == 'Z')
@@ -80,7 +85,7 @@ public class LoadUIHandler : MonoBehaviour {
                 else
                 {
                     asciiCodeLetter++;
-                    saveLetterSelector.text = asciiCodeLetter.ToString();
+                    saveLetterSelector.text = asciiCodeLetter.ToString(); ;
 
                     canClick = false;
                 }
