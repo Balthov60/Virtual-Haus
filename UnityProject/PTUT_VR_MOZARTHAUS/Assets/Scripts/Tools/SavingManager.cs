@@ -18,6 +18,7 @@ public class SavingManager : MonoBehaviour {
     private static readonly string EDITABLE_TAG = "Editable";
     private static string SAVING_DIRECTORY;
     private static String currentConnexionID;
+    private LetterSelectorUIHandler letterSelectorUIHandler;
 
     public void Start()
     {
@@ -134,6 +135,8 @@ public class SavingManager : MonoBehaviour {
 
     public String GetCurrentConnexionID() { return SavingManager.currentConnexionID; }
 
+    public String GetFreeGeneratedID() { return GenerateFreeSaveID(); }
+
     /// <summary>
     /// Create current scene saving directory if not exist
     /// </summary>
@@ -147,7 +150,7 @@ public class SavingManager : MonoBehaviour {
             Directory.CreateDirectory(SAVING_DIRECTORY + '/' + directory);
     }
 
-    private String GenerateFreeSaveID()
+    public String GenerateFreeSaveID()
     {
         List<String> usedSaveIdentifiers = GetUsedSaveIDs();
         String saveIdentifier;
