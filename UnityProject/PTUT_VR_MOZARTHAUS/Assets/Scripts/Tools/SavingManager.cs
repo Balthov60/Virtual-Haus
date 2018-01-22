@@ -34,14 +34,18 @@ public class SavingManager : MonoBehaviour {
     {
         string savingPath = SAVING_DIRECTORY + '/' + SceneManager.GetActiveScene().name + '/' + currentConnexionID + ".save";
 
-        SetCurrentConnexionID(currentConnexionID);
-
         if (File.Exists(savingPath))
         {
             string data = File.ReadAllText(savingPath);
             SavedScene savedScene = JsonUtility.FromJson(data, typeof(SavedScene)) as SavedScene;
 
             PlaceGameObjects(savedScene);
+            print("Successful Load !");
+            SetCurrentConnexionID(currentConnexionID);
+        }
+        else
+        {
+            print("ERROR !");
         }
     }
 
@@ -89,6 +93,24 @@ public class SavingManager : MonoBehaviour {
     }
 
     /// <summary>
+    /// Save each editable GameObject informations with a dedicated Save Name
+    /// </summary>
+    /// <param name="currentStringSelected"></param>
+    internal void SaveGameObjects(string currentStringSelected)
+    {
+        editableGameObjects = GameObject.FindGameObjectsWithTag(EDITABLE_TAG);
+        SavedScene savedScene = new SavedScene(SceneManager.GetActiveScene().name, editableGameObjects);
+
+        CreateSavingDirectoryIfNotExist(savedScene.name);
+
+        String saveID = currentStringSelected;
+        SetCurrentConnexionID(saveID);
+
+        File.WriteAllText(SAVING_DIRECTORY + "/" + savedScene.name + "/" + GetCurrentConnexionID() + ".save", JsonUtility.ToJson(savedScene));
+        
+    }
+
+    /// <summary>
     /// Search if there are saves that have been created 
     /// </summary>
     /// <returns>true if used usedSaveIdentifiers.Count == 0</returns>
@@ -103,6 +125,9 @@ public class SavingManager : MonoBehaviour {
 
     }
 
+    /// <summary>
+    /// Erase The Current Save and Rewrite on the Current Save.
+    /// </summary>
     public void UpdateCurrentSave()
     {
         editableGameObjects = GameObject.FindGameObjectsWithTag(EDITABLE_TAG);
@@ -134,8 +159,6 @@ public class SavingManager : MonoBehaviour {
     }
 
     public String GetCurrentConnexionID() { return SavingManager.currentConnexionID; }
-
-    public String GetFreeGeneratedID() { return GenerateFreeSaveID(); }
 
     /// <summary>
     /// Create current scene saving directory if not exist

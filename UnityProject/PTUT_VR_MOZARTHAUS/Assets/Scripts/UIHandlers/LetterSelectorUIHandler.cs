@@ -1,28 +1,41 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LetterSelectorUIHandler : MonoBehaviour {
 
+    private readonly Vector3 SAVING_SELECTOR = new Vector3(-8.7f, 2.0f, -25.38f);
+
     private RayCast rayCast;
+
     private InputManager inputManager;
+
     private Text saveLetterSelector;
-    private GameObject saveAsSelector;
+    
     private SavingManager savingManager;
+    private SavingUIHandler savingUIHandler;
+
+    private GameObject player;
+    private GameObject saveAsSelector;
+
 
     private string currentStringSelected;
-
     private char asciiCodeLetter;
-
     private bool canClick = true;
-
-
 
 	void Start () {
         rayCast = GameObject.Find("PointerController").GetComponent<RayCast>();
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
-        savingManager = new SavingManager();
+
+        player = GameObject.Find("Player");
+
+        savingManager = GameObject.Find("SavingManager").GetComponent<SavingManager>();
+        savingUIHandler = GameObject.Find("SavingUi").GetComponent<SavingUIHandler>();
+
+        saveAsSelector = GameObject.Find("SelectorSaveAsMenu");
+
         DisplaySaveId();
     }
 	
@@ -45,7 +58,6 @@ public class LetterSelectorUIHandler : MonoBehaviour {
                     asciiCodeLetter = 'Z';
                     saveLetterSelector.text = asciiCodeLetter.ToString();
 
-
                     canClick = false;
 
                 }
@@ -53,7 +65,6 @@ public class LetterSelectorUIHandler : MonoBehaviour {
                 {
                     asciiCodeLetter--;
                     saveLetterSelector.text = asciiCodeLetter.ToString();
-
 
                     canClick = false;
                 }
@@ -89,9 +100,16 @@ public class LetterSelectorUIHandler : MonoBehaviour {
                     
                 }
 
-                SetCurrentStringSelected(currentStringSelected);
-                print(currentStringSelected);
+                if(savingManager.GetCurrentConnexionID() == null)
+                {
+                    savingManager.SaveGameObjects(currentStringSelected);
+                }                    
+                else
+                {
+                    savingManager.UpdateCurrentSave();
+                }
 
+                TeleportBack();
                 canClick = false;
             }
 
@@ -102,6 +120,12 @@ public class LetterSelectorUIHandler : MonoBehaviour {
             canClick = !inputManager.IsTriggerClicked();
         }
 
+    }
+
+    private void TeleportBack()
+    {
+        player.transform.position = savingUIHandler.GetPlayerSavingPosition();
+        saveAsSelector.transform.position = SAVING_SELECTOR;
     }
 
     private void DisplaySaveId()
@@ -131,6 +155,4 @@ public class LetterSelectorUIHandler : MonoBehaviour {
         }
     }
 
-    public string GetCurrentStringSelected() { return this.currentStringSelected;  }
-    public void SetCurrentStringSelected(string currentStringSelected) { this.currentStringSelected = currentStringSelected; }
 }

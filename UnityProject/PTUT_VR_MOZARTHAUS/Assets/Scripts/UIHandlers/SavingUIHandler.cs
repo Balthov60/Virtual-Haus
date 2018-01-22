@@ -6,7 +6,7 @@ using System;
 public class SavingUIHandler : MonoBehaviour {
 
     private readonly Vector3 SAVING_HAUS_SPAWN = new Vector3(-0.5f, 3.1f, -26.38f);
-    private readonly Vector4 SAVING_SELECTOR = new Vector4(-0.7f, 2.0f, -25.38f);
+    private readonly Vector3 SAVING_SELECTOR = new Vector3(-0.7f, 2.0f, -25.38f);
 
 
     private static readonly string PRESSED_BUTTON_NAME = "SavingMod";
@@ -17,9 +17,10 @@ public class SavingUIHandler : MonoBehaviour {
     private GameObject player;
     private Vector3 playerSavingPosition;
     private GameObject saveAsSelector;
+    private SavingManager savingManager;
 
     private bool isTeleportableOnSavingUI = true;
-    SavingManager savingManager;
+    
 
 
 
@@ -28,7 +29,7 @@ public class SavingUIHandler : MonoBehaviour {
         rayCast = GameObject.Find("PointerController").GetComponent<RayCast>();
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         player = GameObject.Find("Player");
-        savingManager = new SavingManager();
+        savingManager = GameObject.Find("SavingManager").GetComponent<SavingManager>();
         saveAsSelector = GameObject.Find("SelectorSaveAsMenu");
     }
 	
@@ -39,7 +40,8 @@ public class SavingUIHandler : MonoBehaviour {
         if (IsModChangeButtonPressed() && isTeleportableOnSavingUI)
         {
             playerSavingPosition = player.transform.position;
-         
+            SetPlayerSavingPosition(playerSavingPosition);
+
             player.transform.position = SAVING_HAUS_SPAWN;
             isTeleportableOnSavingUI = false;
         }
@@ -57,21 +59,21 @@ public class SavingUIHandler : MonoBehaviour {
             {
                 if (savingManager.GetCurrentConnexionID() == null)
                 {                  
-                    OpenSaveAsPanel();                    
+                    OpenSaveAsPanel();
+                    isTeleportableOnSavingUI = true;
                 }
                 else
                 {                    
                     Save();
-                    //player.transform.position = playerSavingPosition;
-                    //isTeleportableOnSavingUI = true;
+                    player.transform.position = playerSavingPosition;
+                    isTeleportableOnSavingUI = true;
                 }
                 
             }
             else if (rayCast.GetHit().transform.name == "Save_as")
             {
                 OpenSaveAsPanel();
-                //player.transform.position = playerSavingPosition;
-                //isTeleportableOnSavingUI = true;
+                isTeleportableOnSavingUI = true;
             }
         }
 
@@ -95,11 +97,16 @@ public class SavingUIHandler : MonoBehaviour {
 
 
     /// <summary>
-    /// Function that allow you to Save the new Content on the Emplacement you want to. 
+    /// Function which opens the SaveAs Panel
     /// </summary>
     public void OpenSaveAsPanel()
     {
         saveAsSelector.transform.position = SAVING_SELECTOR;
     }
 
+    public Vector3 GetPlayerSavingPosition() { return playerSavingPosition; }
+    public void SetPlayerSavingPosition(Vector3 playerSavingPosition)
+    {
+        this.playerSavingPosition = playerSavingPosition;
+    }
 }
