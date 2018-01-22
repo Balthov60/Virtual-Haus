@@ -50,7 +50,7 @@ public class SavingUIHandler : MonoBehaviour {
             }
             else if (rayCast.GetHit().transform.name == "Save")
             {
-                if (savingManager.IsUserSavedExist())
+                if (savingManager.GetCurrentConnexionID() == null)
                 {
                     print("No Save before");
                     SaveAs();
