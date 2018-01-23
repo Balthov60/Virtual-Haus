@@ -120,7 +120,6 @@ public class SavingUIHandler : MonoBehaviour {
         {
 
             string temp = savingManager.GenerateFreeSaveID();
-            savingManager.SetCurrentConnexionID(temp);
             char[] freeGeneratedID = temp.ToCharArray();
             return freeGeneratedID;
         }
@@ -128,7 +127,6 @@ public class SavingUIHandler : MonoBehaviour {
         {
             string temp = savingManager.GetCurrentConnexionID();
             char[] freeGeneratedID = temp.ToCharArray();
-            savingManager.SetCurrentConnexionID(temp);
             return freeGeneratedID;
         }
     }

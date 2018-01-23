@@ -99,14 +99,20 @@ public class LetterSelectorUIHandler : MonoBehaviour {
             }
             else if(rayCast.GetHit().transform.name == "SaveAs")
             {
-                for(int i = 0; i < gameObject.transform.childCount; i++)
-                { 
+                canClick = false;
 
-                    if(gameObject.transform.GetChild(i).name == "LetterSelector")
+                print(gameObject.transform.childCount); // Renvoie 4 (pour SelectorSaveAsPanel) puis renvoie 5 (pour LoadSavePanel)
+
+
+                for (int i = 0; i < gameObject.transform.childCount; i++)
+                {                    
+                    if (gameObject.transform.GetChild(i).name == "LetterSelector")
                     {
                         currentStringSelected += gameObject.transform.GetChild(i).Find("LetterView").GetComponentInChildren<Text>().text;
+                        //print("parent : " + gameObject.transform.parent.name); //Appelé une première fois pour SelectorSaveAsPanel puis une deuxième fois pour LoadSavePanel
+                        //print("Gparent : " + gameObject.transform.parent.transform.parent.name); //Appelé une première fois pour SelectorSaveAsPanel puis une deuxième fois pour LoadSavePanel
                     }
-                    
+
                 }
 
                 if(savingManager.GetCurrentConnexionID() == null || savingManager.GetCurrentConnexionID() != currentStringSelected)
@@ -120,7 +126,6 @@ public class LetterSelectorUIHandler : MonoBehaviour {
                 }
 
                 TeleportBack();
-                canClick = false;
                 currentStringSelected = "";
             }
 
@@ -145,7 +150,7 @@ public class LetterSelectorUIHandler : MonoBehaviour {
         for (int i = 0; i < freeGeneratedID.Length; i++)
         {
             gameObject.transform.GetChild(i).Find("LetterView").GetComponentInChildren<Text>().text = freeGeneratedID[i].ToString();
-            print(freeGeneratedID[i].ToString());
+            //print(freeGeneratedID[i].ToString());
         }
         
     }

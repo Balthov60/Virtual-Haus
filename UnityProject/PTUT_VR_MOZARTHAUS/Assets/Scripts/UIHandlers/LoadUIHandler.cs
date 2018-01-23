@@ -46,15 +46,19 @@ public class LoadUIHandler : MonoBehaviour {
            
             if (rayCast.GetHit().transform.name == "Load")
             {
-                for (int i = 0; i < gameObject.transform.childCount; i++)
+                print(rayCast.GetHit().transform.parent.transform.childCount);
+                for (int i = 0; i < gameObject.transform.parent.transform.childCount; i++)
                 {
-
-                    if (gameObject.transform.GetChild(i).name == "LetterSelector")
+                    print("For");
+                    print(gameObject.transform.parent.transform.GetChild(i).name);
+                    if (gameObject.transform.parent.transform.GetChild(i).name == "LetterSelector")
                     {
-                        currentStringSelected += gameObject.transform.GetChild(i).Find("LetterView").GetComponent<Text>().text;
+                        print("If");
+                        currentStringSelected += gameObject.transform.parent.transform.GetChild(i).Find("LetterView").GetComponent<Text>().text;
                     }
 
                 }
+                print(currentStringSelected); // Renvoie Null
                 savingManager.LoadGameObjects(currentStringSelected);
 
                 TeleportHome();
