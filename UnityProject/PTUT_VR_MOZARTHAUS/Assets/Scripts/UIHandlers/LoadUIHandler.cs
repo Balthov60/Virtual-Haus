@@ -43,69 +43,25 @@ public class LoadUIHandler : MonoBehaviour {
     void Update () {
         if (inputManager.IsTriggerClicked() && canClick && rayCast.Hit())
         {
-            if (rayCast.GetHit().transform.name == "ButtonDownLoad")
-            {
-                print("asciiCodeLetter : " + asciiCodeLetter);
-                saveLetterSelector = rayCast.GetHit().transform.parent.Find("LetterViewLoad").GetComponentInChildren<Text>();
-                char[] temp = saveLetterSelector.text.ToCharArray();
-                asciiCodeLetter = temp[0];
-                saveLetterSelector.text = asciiCodeLetter.ToString();
-
-
-                if (asciiCodeLetter == 'A')
-                {
-
-                    asciiCodeLetter = 'Z';
-                    saveLetterSelector.text = asciiCodeLetter.ToString();
-
-                    canClick = false;
-
-                }
-                else
-                {
-                    asciiCodeLetter--;
-                    saveLetterSelector.text = asciiCodeLetter.ToString();
-
-
-                    canClick = false;
-                }
-            }
-            else if (rayCast.GetHit().transform.name == "ButtonUpLoad")
-            {
-                saveLetterSelector = rayCast.GetHit().transform.parent.Find("LetterViewLoad").GetComponentInChildren<Text>();
-                char[] temp = saveLetterSelector.text.ToCharArray();
-                asciiCodeLetter = temp[0];
-                saveLetterSelector.text = asciiCodeLetter.ToString();
-
-                if (asciiCodeLetter == 'Z')
-                {
-                    asciiCodeLetter = 'A';
-                    saveLetterSelector.text = asciiCodeLetter.ToString();
-
-                    canClick = false;
-                }
-                else
-                {
-                    asciiCodeLetter++;
-                    saveLetterSelector.text = asciiCodeLetter.ToString(); ;
-
-                    canClick = false;
-                }
-            }
-            else if (rayCast.GetHit().transform.name == "Load")
+           
+            if (rayCast.GetHit().transform.name == "Load")
             {
                 for (int i = 0; i < gameObject.transform.childCount; i++)
                 {
 
-                    if (gameObject.transform.GetChild(i).name == "LetterSelectorLoad")
+                    if (gameObject.transform.GetChild(i).name == "LetterSelector")
                     {
-                        currentStringSelected += gameObject.transform.GetChild(i).Find("LetterViewLoad").GetComponentInChildren<Text>().text;
+                        currentStringSelected += gameObject.transform.GetChild(i).Find("LetterView").GetComponent<Text>().text;
                     }
 
                 }
-
                 savingManager.LoadGameObjects(currentStringSelected);
 
+                TeleportHome();
+                canClick = false;
+            }
+            else if (rayCast.GetHit().transform.name == "NewGame")
+            {
                 TeleportHome();
                 canClick = false;
             }

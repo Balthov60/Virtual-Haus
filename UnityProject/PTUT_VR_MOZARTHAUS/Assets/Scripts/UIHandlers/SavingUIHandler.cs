@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 public class SavingUIHandler : MonoBehaviour {
@@ -18,22 +19,22 @@ public class SavingUIHandler : MonoBehaviour {
     private Vector3 playerSavingPosition;
     private GameObject saveAsSelector;
     private SavingManager savingManager;
+    private Text saveLetterSelector;
+    private LetterSelectorUIHandler letterSelectorUIHandler;
 
     private bool isTeleportableOnSavingUI = true;
+    private char[] randomSaveIDForSelector;
     
-
-
-
-    // Use this for initialization
     void Start () {
         rayCast = GameObject.Find("PointerController").GetComponent<RayCast>();
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         player = GameObject.Find("Player");
         savingManager = GameObject.Find("SavingManager").GetComponent<SavingManager>();
         saveAsSelector = GameObject.Find("SelectorSaveAsMenu");
+        saveLetterSelector = GameObject.Find("LetterView").GetComponent<Text>();
+        letterSelectorUIHandler = GameObject.Find("GroupeSelectorUI").GetComponent<LetterSelectorUIHandler>();
     }
-	
-	// Update is called once per frame
+
 	void Update () {
 
 
@@ -102,6 +103,9 @@ public class SavingUIHandler : MonoBehaviour {
     public void OpenSaveAsPanel()
     {
         saveAsSelector.transform.position = SAVING_SELECTOR;
+        RandomSaveIDForSelector();
+        letterSelectorUIHandler.DisplaySaveID();
+
     }
 
     public Vector3 GetPlayerSavingPosition() { return playerSavingPosition; }
@@ -109,4 +113,26 @@ public class SavingUIHandler : MonoBehaviour {
     {
         this.playerSavingPosition = playerSavingPosition;
     }
+
+    private char[] RandomSaveIDForSelector()
+    {
+        if (savingManager.GetCurrentConnexionID() == null)
+        {
+
+            string temp = savingManager.GenerateFreeSaveID();
+            savingManager.SetCurrentConnexionID(temp);
+            char[] freeGeneratedID = temp.ToCharArray();
+            return freeGeneratedID;
+        }
+        else
+        {
+            string temp = savingManager.GetCurrentConnexionID();
+            char[] freeGeneratedID = temp.ToCharArray();
+            savingManager.SetCurrentConnexionID(temp);
+            return freeGeneratedID;
+        }
+    }
+
+    public char[] GetRandomSaveIDForSelector() { return RandomSaveIDForSelector(); }
+    public void SetRandomSaveIDForSelector(char[] randomSaveIDForSelector) { this.randomSaveIDForSelector = randomSaveIDForSelector; }
 }

@@ -32,13 +32,10 @@ public class LetterSelectorUIHandler : MonoBehaviour {
         player = GameObject.Find("Player");
 
         savingManager = GameObject.Find("SavingManager").GetComponent<SavingManager>();
-        savingUIHandler = GameObject.Find("SavingUi").GetComponent<SavingUIHandler>();
+        savingUIHandler = GameObject.Find("SavingUI").GetComponent<SavingUIHandler>();
 
         saveAsSelector = GameObject.Find("SelectorSaveAsMenu");
         saveLetterSelector = GameObject.Find("LetterView").GetComponent<Text>();
-
-
-        DisplaySaveId();
     }
 	
 
@@ -84,6 +81,7 @@ public class LetterSelectorUIHandler : MonoBehaviour {
                 asciiCodeLetter = temp[0];
                 saveLetterSelector.text = asciiCodeLetter.ToString();
 
+
                 if (asciiCodeLetter == 'Z')
                 {
                     asciiCodeLetter = 'A';
@@ -114,6 +112,7 @@ public class LetterSelectorUIHandler : MonoBehaviour {
                 if(savingManager.GetCurrentConnexionID() == null || savingManager.GetCurrentConnexionID() != currentStringSelected)
                 {
                     savingManager.SaveGameObjects(currentStringSelected);
+                    print(currentStringSelected);
                 }                    
                 else if(savingManager.GetCurrentConnexionID() == currentStringSelected)
                 {
@@ -140,31 +139,15 @@ public class LetterSelectorUIHandler : MonoBehaviour {
         saveAsSelector.transform.position = SAVING_SELECTOR;
     }
 
-    private void DisplaySaveId()
+    public void DisplaySaveID()
     {
-        if (savingManager.GetCurrentConnexionID() == null)
+        char[] freeGeneratedID = savingUIHandler.GetRandomSaveIDForSelector();
+        for (int i = 0; i < freeGeneratedID.Length; i++)
         {
-
-            string temp = savingManager.GenerateFreeSaveID();
-            char[] freeGeneratedID = temp.ToCharArray();
-
-            for (int i = 0; i < freeGeneratedID.Length; i++)
-            {
-                gameObject.transform.GetChild(i).Find("LetterView").GetComponentInChildren<Text>().text = freeGeneratedID[i].ToString();
-                asciiCodeLetter = freeGeneratedID[i];
-            }
+            gameObject.transform.GetChild(i).Find("LetterView").GetComponentInChildren<Text>().text = freeGeneratedID[i].ToString();
+            print(freeGeneratedID[i].ToString());
         }
-        else
-        {
-            string temp = savingManager.GetCurrentConnexionID();
-            char[] freeGeneratedID = temp.ToCharArray();
-
-            for (int i = 0; i < freeGeneratedID.Length; i++)
-            {
-                gameObject.transform.GetChild(i).Find("LetterView").GetComponentInChildren<Text>().text = freeGeneratedID[i].ToString();
-                asciiCodeLetter = freeGeneratedID[i];
-            }
-        }
+        
     }
 
 }
