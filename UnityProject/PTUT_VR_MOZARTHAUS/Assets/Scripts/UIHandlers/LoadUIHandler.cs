@@ -7,16 +7,21 @@ public class LoadUIHandler : MonoBehaviour {
 
     private readonly Vector3 MOZART_HAUS_SPAWN = new Vector3(-2, 0.5f, -3.5f);
 
-    private SavingManager savingManager;
-    private SavingUIHandler savingUIHandler;
 
     private RayCast rayCast;
     private InputManager inputManager;
 
-    private Text saveLetterSelector;
+    private GameObject player;
+
+    private SavingManager savingManager;
+    private SavingUIHandler savingUIHandler;
 
     private GameObject loadSelector;
-    private GameObject player;
+
+
+
+    private Text saveLetterSelector;
+
 
     private bool canClick = true;
     private char asciiCodeLetter;
@@ -30,17 +35,14 @@ public class LoadUIHandler : MonoBehaviour {
         player = GameObject.Find("Player");
 
         savingManager = GameObject.Find("SavingManager").GetComponent<SavingManager>();
-        savingUIHandler = GameObject.Find("SavingUi").GetComponent<SavingUIHandler>();
+        savingUIHandler = GameObject.Find("SavingUI").GetComponent<SavingUIHandler>();
 
         loadSelector = GameObject.Find("SelectorLoadSave");
-
     }
 
-
     void Update () {
-        if (inputManager.IsTriggerClicked() && rayCast.Hit() && canClick)
+        if (inputManager.IsTriggerClicked() && canClick && rayCast.Hit())
         {
-
             if (rayCast.GetHit().transform.name == "ButtonDownLoad")
             {
                 print("asciiCodeLetter : " + asciiCodeLetter);
