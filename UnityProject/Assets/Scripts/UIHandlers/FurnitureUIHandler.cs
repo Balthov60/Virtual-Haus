@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -156,6 +157,7 @@ public class FurnitureUIHandler : MonoBehaviour {
             }
 
             temp.GetComponentInChildren<Text>().text = room.GetChild(i).name;
+            temp.GetComponentInChildren<RawImage>().texture = (Texture)AssetDatabase.LoadAssetAtPath("Assets/UIComponents/Thumbnails/" + room.GetChild(i).name + ".renderTexture", typeof(RenderTexture));
         }
     }
 }
