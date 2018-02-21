@@ -19,7 +19,7 @@ public class TeleportationHandler : MonoBehaviour
 
     void Update()
     {
-        if (inputManager.IsTriggerClicked() && canTeleport && modHandler.IsInUtilitiesMod() && rayCast.Hit())
+        if (inputManager.IsTriggerClicked() && canTeleport && modHandler.IsInUtilitiesMod() && rayCast.Hit() && rayCast.GetHit().point.y < 0.1f)
         {
             Teleport(rayCast.GetHit());
             canTeleport = false;
@@ -27,6 +27,7 @@ public class TeleportationHandler : MonoBehaviour
         else if (!canTeleport)
         {
             canTeleport = !inputManager.IsTriggerClicked();
+            
         }
     }
 
