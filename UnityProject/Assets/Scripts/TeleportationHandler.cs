@@ -19,7 +19,6 @@ public class TeleportationHandler : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(rayCast.GetHit().transform.name + !rayCast.GetHit().transform.name.Contains("Wall"));
         if (inputManager.IsTriggerClicked() && canTeleport && modHandler.IsInUtilitiesMod() && rayCast.Hit() && !rayCast.GetHit().transform.name.Contains("Wall"))
         {
             Teleport(rayCast.GetHit());
