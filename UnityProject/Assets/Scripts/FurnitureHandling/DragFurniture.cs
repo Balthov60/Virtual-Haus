@@ -41,11 +41,16 @@ public class DragFurniture : MonoBehaviour {
             {
                 canClick = false;
 
-                if (rayCast.HitFurniture() && !isClicked && !isOnDrag) // Select Game Object
+                if (isOnDrag) // Place Game Object
+                {
+                    furnitureSelected.GetComponent<Collider>().enabled = true;
+                    furnitureSelected = null;
+
+                    isOnDrag = false;
+                }
+                else if (rayCast.HitFurniture() && !isClicked && !isOnDrag) // Select Game Object
                 {
                     furnitureSelected = GameObject.Find(rayCast.GetHit().transform.name);
-                    DisplayMovableUIInFrontOfFurniture();
-
                     isClicked = true;
                 }
                 else if (isClicked && !isOnDrag && !movableUIHandler.HitMovableUI()) // UnSelect Game Object
@@ -53,15 +58,7 @@ public class DragFurniture : MonoBehaviour {
                     DestroyMovableUI();
 
                     isClicked = false;
-                }
-                else if(isOnDrag) // Place Game Object
-                {
-                    furnitureSelected.GetComponent<Collider>().enabled = true;
-                    furnitureSelected = null;
-
-                    isClicked = isOnDrag = false;
-                }
-               
+                }                              
             }
             if (isOnDrag) // Move Game Object
             {
@@ -76,16 +73,6 @@ public class DragFurniture : MonoBehaviour {
         }
     }
 
-    private void DisplayMovableUIInFrontOfFurniture()
-    {
-        movableUI.GetComponent<RectTransform>().anchoredPosition3D = furnitureSelected.transform.position;
-        movableUI.GetComponent<RectTransform>().LookAt(rayCast.source.transform);
-
-        Vector3 newpos = furnitureSelected.transform.position + (movableUI.transform.forward - 0.5f * movableUI.transform.right);
-        newpos.y = 0.5f;
-
-        movableUI.GetComponent<RectTransform>().anchoredPosition3D = newpos;
-    }
     private void DestroyMovableUI()
     {
         movableUI.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(0, -40, 0);
@@ -114,6 +101,7 @@ public class DragFurniture : MonoBehaviour {
     public void MakeSelectedObjectMovable()
     {
         furnitureSelected.GetComponent<Collider>().enabled = false;
+        isClicked = false;
         isOnDrag = true;
         canClick = false;
 
@@ -171,5 +159,9 @@ public class DragFurniture : MonoBehaviour {
     public bool CanClick()
     {
         return canClick;
+    }
+    public bool IsClicked()
+    {
+        return isClicked;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,13 +21,13 @@ public class FurnitureUIHandler : MonoBehaviour {
     private RayCast rayCast;
     private DragFurniture dragFurniture;
 
-
     private float scrollViewHeight;
     private float rightSideHeight;
     private float leftPartUIItemHeight;
     private float rightPartUIItemHeight;
 
     private double scrollStack;
+    private bool canClick;
 
 
     void Start() {
@@ -40,7 +41,7 @@ public class FurnitureUIHandler : MonoBehaviour {
         modHandler = GameObject.Find("ModHandler").GetComponent<ModHandler>();
         rayCast = GameObject.Find("PointerController").GetComponent<RayCast>();
         dragFurniture = GameObject.Find("EditionHandler").GetComponent<DragFurniture>();
-    
+
         scrollStack = 0;
 
         CreateUI();
@@ -50,7 +51,15 @@ public class FurnitureUIHandler : MonoBehaviour {
     void Update()
     {
         Scroll();
-        Select();
+
+        if (canClick)
+        {
+            Select();
+        }
+        else
+        {
+            canClick = !inputManager.IsTriggerClicked();
+        }
     }
 
     private void Scroll()
@@ -92,6 +101,7 @@ public class FurnitureUIHandler : MonoBehaviour {
         if (!rayCast.Hit())
             return;
 
+        canClick = false;
         Transform hitObject = rayCast.GetHit().transform;
 
         if (hitObject.parent == leftSide.transform)
@@ -107,6 +117,7 @@ public class FurnitureUIHandler : MonoBehaviour {
 
     private void CreateUI()
     {
+        ThumbnailsHandler.CreateThumbnailsIfNotExist(furnitures);
         UpdateLeftUIPart();
         UpdateRightUIPart(0);
     }
@@ -156,6 +167,10 @@ public class FurnitureUIHandler : MonoBehaviour {
             }
 
             temp.GetComponentInChildren<Text>().text = room.GetChild(i).name;
+            Texture2D texture = new Texture2D(512, 512);
+            texture.LoadImage(File.ReadAllBytes(ThumbnailsHandler.thumbnailsPath + room.GetChild(i).name + ".png"));
+
+            temp.GetComponentInChildren<RawImage>().texture = texture;
         }
     }
 }
