@@ -110,9 +110,14 @@ public class DragFurniture : MonoBehaviour {
 
     private void UpdateFurniturePosition(RaycastHit hit)
     {
+        HandleWallCollision(hit);
+        HandleFurnitureCollision(hit);
+    }
+    private void HandleWallCollision(RaycastHit hit)
+    {
         Vector3 newPos = hit.point;
 
-        if (hit.point.y > 0.1) // TODO: Compress
+        if (hit.transform.name == "AppartmentMesh" || hit.transform.name.Contains("Wall"))
         {
             float yAngle = hit.transform.rotation.eulerAngles.y;
 
@@ -146,6 +151,70 @@ public class DragFurniture : MonoBehaviour {
 
         newPos.y = furnitureSelected.transform.localScale.y / 2;
         furnitureSelected.transform.position = newPos;
+    }
+    private void HandleFurnitureCollision(RaycastHit hit)
+    {
+        Collider[] colliders = Physics.OverlapBox(furnitureSelected.transform.position,
+                                                  furnitureSelected.GetComponent<Renderer>().bounds.size / 2,
+                                                  furnitureSelected.transform.rotation);
+
+        foreach(Collider collider in colliders)
+        {
+            if (collider.transform.parent != null && collider.transform.parent.parent != null)
+            {
+                if (collider.transform.parent.parent.name == "Furnitures")
+                {
+                    Vector3 difference = furnitureSelected.transform.position - collider.transform.position;
+
+                    Vector3 distance = (furnitureSelected.GetComponent<Renderer>().bounds.size / 2);
+                    Vector3 maxDistance = (furnitureSelected.GetComponent<Renderer>().bounds.size / 2);
+                    distance.Scale(difference.normalized);
+
+                    Vector3 selectedToCollideInsidePoint = furnitureSelected.transform.position + distance;
+
+                  
+                    distance = collider.bounds.size / 2;
+                    maxDistance += distance;
+                    distance.Scale(difference.normalized);
+
+                    Vector3 collideToSelectInsidePoint = collider.transform.position + distance;
+
+                    distance = (selectedToCollideInsidePoint - collideToSelectInsidePoint);
+                    distance.Scale(difference.normalized);
+
+                    Vector3 distanceToUpdate = (maxDistance - distance);
+
+                    Vector3 newPos = furnitureSelected.transform.position;
+
+                    Vector3 direction = (rayCast.source.transform.position - furnitureSelected.transform.position);
+                    
+                    if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+                    {
+                        if (direction.x > 0)
+                        {
+                            newPos.x += distanceToUpdate.x;
+                        }
+                        else
+                        {
+                            newPos.x -= distanceToUpdate.x;
+                        }
+                    }
+                    else
+                    {
+                        if (direction.z > 0)
+                        {
+                            newPos.z += distanceToUpdate.z;
+                        }
+                        else
+                        {
+                            newPos.z -= distanceToUpdate.z;
+                        }
+                    }
+
+                    furnitureSelected.transform.position = newPos;
+                }
+            }
+        }
     }
 
     public bool IsFurnitureSelected()
