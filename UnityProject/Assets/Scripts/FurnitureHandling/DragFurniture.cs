@@ -117,7 +117,7 @@ public class DragFurniture : MonoBehaviour {
     {
         Vector3 newPos = hit.point;
 
-        if (hit.transform.name == "AppartmentMesh" || hit.transform.name.Contains("Wall"))
+        if (hit.transform.name.Contains("Wall"))
         {
             float yAngle = hit.transform.rotation.eulerAngles.y;
 

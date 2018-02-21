@@ -45,9 +45,9 @@ public class LaserHandler : MonoBehaviour
         {
             cylinder.GetComponent<Renderer>().enabled = true;
 
-            if (hit.point.y > 0.1f)
+            if (rayCast.GetHit().transform.name.Contains("Wall"))
             {
-                laserLine.GetComponent<Renderer>().enabled = false;
+                laserLine.enabled = false;
                 cylinder.GetComponent<Renderer>().enabled = false;
             }
         }

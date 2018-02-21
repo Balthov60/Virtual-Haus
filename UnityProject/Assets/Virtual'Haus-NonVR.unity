@@ -1187,11 +1187,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_Layer
-      value: 8
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_Layer
-      value: 8
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_Constraints
@@ -1216,6 +1216,10 @@ Prefab:
     - target: {fileID: 2000000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: field of view
       value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_JumpSpeed
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
@@ -1503,7 +1507,7 @@ GameObject:
   - component: {fileID: 355850539}
   - component: {fileID: 355850538}
   - component: {fileID: 355850537}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1697,7 +1701,7 @@ GameObject:
   - component: {fileID: 433020830}
   - component: {fileID: 433020832}
   - component: {fileID: 433020831}
-  m_Layer: 8
+  m_Layer: 2
   m_Name: PointerController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1982,15 +1986,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1758467901541322, guid: d71e71f9c5ad6ee42a75eb1acb202b27, type: 2}
       propertyPath: m_Layer
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1160983580849172, guid: d71e71f9c5ad6ee42a75eb1acb202b27, type: 2}
       propertyPath: m_Layer
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1431812536681420, guid: d71e71f9c5ad6ee42a75eb1acb202b27, type: 2}
       propertyPath: m_Layer
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 23903207919345774, guid: d71e71f9c5ad6ee42a75eb1acb202b27,
         type: 2}
@@ -2258,7 +2262,7 @@ GameObject:
   - component: {fileID: 672125123}
   - component: {fileID: 672125122}
   - component: {fileID: 672125121}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5045,7 +5049,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1670349983}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PlayerPosPointer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
