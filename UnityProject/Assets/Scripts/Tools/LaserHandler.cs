@@ -36,7 +36,6 @@ public class LaserHandler : MonoBehaviour
         laserLine.SetPosition(0, new Vector3(transform.position.x, transform.position.y, transform.position.z));
 
         cylinder.transform.position = new Vector3(hit.point.x, 0.05f, hit.point.z);
-
         cylinder.GetComponent<Renderer>().enabled = false;
 
         UpdateLaserAndPointerColor();

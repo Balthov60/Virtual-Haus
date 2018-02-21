@@ -27,6 +27,7 @@ public class TeleportationHandler : MonoBehaviour
         else if (!canTeleport)
         {
             canTeleport = !inputManager.IsTriggerClicked();
+            
         }
     }
 
