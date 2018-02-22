@@ -26,13 +26,13 @@ public class SaveUIHandler : MonoBehaviour {
         {
             if (rayCast.GetHit().transform.name == "Save")
             {
-                if (savingManager.GetCurrentSaveID().Length == 3)
+                if (savingManager.UpdateCurrentSave())
                 {
-                    savingManager.UpdateCurrentSave();
+                    //TODO: Display Success Message
                 }
                 else
                 {
-                    //TODO: Display Message
+                    //TODO: Display Failed Message
                 }
                 canClick = false;
             }
@@ -41,7 +41,6 @@ public class SaveUIHandler : MonoBehaviour {
                 IDSelectorUIHandler idSelectorUIHandler = transform.GetChild(0).Find("IDSelectorUI").GetComponent<IDSelectorUIHandler>();
                 string saveID = idSelectorUIHandler.GetCurrentID();
 
-                Debug.Log(saveID);
                 // TODO: display override message
                 savingManager.SaveGameObjects(saveID);
 

@@ -918,7 +918,10 @@ Prefab:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114418515351561730, guid: d8e2db4371db9174e9f05ae766e3556e, type: 2}
+    - {fileID: 114081267828525572, guid: d8e2db4371db9174e9f05ae766e3556e, type: 2}
+    - {fileID: 114380605889246098, guid: d8e2db4371db9174e9f05ae766e3556e, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: d8e2db4371db9174e9f05ae766e3556e, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &194126770
@@ -3832,6 +3835,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64f9506045b09204d8876e0ab547527b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tags:
+  - Furniture
 --- !u!224 &1667655954
 RectTransform:
   m_ObjectHideFlags: 0
