@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class IDSelectorUIHandler : MonoBehaviour
@@ -65,7 +63,7 @@ public class IDSelectorUIHandler : MonoBehaviour
         return (char)ascii;
     }
 
-    public string GetCurrentID()
+    public string GetID()
     {
         string selectedID = "";
 
@@ -79,7 +77,7 @@ public class IDSelectorUIHandler : MonoBehaviour
 
         return selectedID;
     } 
-    public void SetCurrentID(string id)
+    public void SetID(string id)
     {
         for (int i = 0; i < id.Length; i++)
         {

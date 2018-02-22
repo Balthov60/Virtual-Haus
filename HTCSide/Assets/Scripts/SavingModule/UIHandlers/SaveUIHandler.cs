@@ -28,18 +28,18 @@ public class SaveUIHandler : MonoBehaviour {
             {
                 if (savingManager.UpdateCurrentSave())
                 {
-                    //TODO: Display Success Message
+                    PopUp.DisplayBasicPopUp(gameObject, "Votre appartement a bien été sauvegardé", 3);
                 }
                 else
                 {
-                    //TODO: Display Failed Message
+                    PopUp.DisplayBasicPopUp(gameObject, "Vous n'avez pas de sauvegarde en cours \n Créé en une nouvelle", 4);
                 }
                 canClick = false;
             }
             else if (rayCast.GetHit().transform.name == "SaveAs")
             {
                 IDSelectorUIHandler idSelectorUIHandler = transform.GetChild(0).Find("IDSelectorUI").GetComponent<IDSelectorUIHandler>();
-                string saveID = idSelectorUIHandler.GetCurrentID();
+                string saveID = idSelectorUIHandler.GetID();
 
                 // TODO: display override message
                 savingManager.SaveGameObjects(saveID);

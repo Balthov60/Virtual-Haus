@@ -16,7 +16,7 @@ public class SavingManager : MonoBehaviour {
     private List<GameObject> editableGameObjects;
     private string currentSaveId;
 
-    void Start()
+    private void Start()
     {
         currentSaveId = null;
         editableGameObjects = new List<GameObject>();

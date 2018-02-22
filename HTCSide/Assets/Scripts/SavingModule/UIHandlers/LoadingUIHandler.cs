@@ -27,7 +27,7 @@ public class LoadingUIHandler : MonoBehaviour {
         {
             if (rayCast.GetHit().transform.name == "Load")
             {
-                savingManager.LoadGameObjects(idSelectorUIHandler.GetCurrentID()); // TODO: Use return to display fail or success message                 
+                savingManager.LoadGameObjects(idSelectorUIHandler.GetID()); // TODO: Use return to display fail or success message                 
                 canClick = false;
             }
         }
