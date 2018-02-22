@@ -23,6 +23,8 @@ public class ClientNetworkManager : MonoBehaviour {
     {
         client = new NetworkClient();
         client.RegisterHandler(MsgType.Connect, OnConnected);
+        client.RegisterHandler(MsgType.Disconnect, OnConnectionError);
+
         client.RegisterHandler(VirtualHausMessageType.APPARTMENT_LOADING, LoadAppartment);
         client.RegisterHandler(VirtualHausMessageType.FURNITURE_LOADING, LoadFurnitures);
 
@@ -43,6 +45,10 @@ public class ClientNetworkManager : MonoBehaviour {
     {
         client.Send(VirtualHausMessageType.CONNECTED, new EmptyMessage());
         status = ClientStatus.CONNECTED;
+    }
+    public void OnConnectionError(NetworkMessage netMsg)
+    {
+        client.Connect(NETWORK_IP_ADDRESS, NETWORK_PORT);
     }
 
     public void LoadAppartment(NetworkMessage netMsg)
@@ -110,18 +116,5 @@ public class ClientNetworkManager : MonoBehaviour {
         };
 
         client.Send(VirtualHausMessageType.NEW_FURNITURE_POSITION, furniturePositionMessage);
-    }
-
-    /*********************/
-    /* Utilities Methods */
-    /*********************/
-
-    public enum ClientStatus
-    {
-        DISCONNECTED,
-        CONNECTING,
-        CONNECTED,
-        APPARTMENT_LOADED,
-        READY
     }
 }
