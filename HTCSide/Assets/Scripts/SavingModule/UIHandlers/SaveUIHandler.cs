@@ -10,6 +10,8 @@ public class SaveUIHandler : MonoBehaviour {
     private InputManager inputManager;
 
     private SavingManager savingManager;
+    private IDSelectorUIHandler idSelectorUIHandler;
+
     public ValidationPopUp.Callback confirmationPopUpCallback;
 
     void Start () {
@@ -17,8 +19,11 @@ public class SaveUIHandler : MonoBehaviour {
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
 
         savingManager = GameObject.Find("SavingManager").GetComponent<SavingManager>();
+        idSelectorUIHandler = transform.GetChild(0).Find("IDSelectorUI").GetComponent<IDSelectorUIHandler>();
+
         confirmationPopUpCallback = SaveOnSelectedID;
-	}
+        idSelectorUIHandler.SetID(SavingUtils.GenerateFreeSaveID());
+    }
 
     void Update()
     {
@@ -39,7 +44,6 @@ public class SaveUIHandler : MonoBehaviour {
             else if (rayCast.GetHit().transform.name == "SaveAs")
             {
                 inputManager.CanClick = false;
-                IDSelectorUIHandler idSelectorUIHandler = transform.GetChild(0).Find("IDSelectorUI").GetComponent<IDSelectorUIHandler>();
                 string saveID = idSelectorUIHandler.GetID();
 
                 if (SavingUtils.IsIdUsed(saveID))
@@ -48,8 +52,7 @@ public class SaveUIHandler : MonoBehaviour {
                 }
                 else
                 {
-                    PopUp.DisplayScheduledPopUp(gameObject, MESSAGE_SUCCESS, 2);    
-                    savingManager.SaveGameObjects(saveID);
+                    SaveOnSelectedID();
                 }
             }
         }
@@ -57,7 +60,6 @@ public class SaveUIHandler : MonoBehaviour {
 
     public void SaveOnSelectedID()
     {
-        IDSelectorUIHandler idSelectorUIHandler = transform.GetChild(0).Find("IDSelectorUI").GetComponent<IDSelectorUIHandler>();
         savingManager.SaveGameObjects(idSelectorUIHandler.GetID());
 
         PopUp.DisplayScheduledPopUp(gameObject, MESSAGE_SUCCESS, 2);
