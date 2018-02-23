@@ -7,7 +7,7 @@ using System;
 
 public static class ThumbnailsHandler
 {
-    public static string thumbnailsPath = Application.dataPath + "/UIComponents/Thumbnails/";
+    public static string thumbnailsPath = Application.dataPath + "/Resources/UIComponents/Thumbnails/";
     private static readonly int SIZE = 512;
 
     private static RenderTexture renderTexture;
