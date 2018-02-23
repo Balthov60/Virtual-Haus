@@ -2,21 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TeleportUI : MonoBehaviour {
+public class TeleportUI {
 
-    private GameObject player;
-    private RayCast rayCast;
-		
-    private void Start()
+    public static void DisplayMovableUIInFrontOfPlayer(GameObject movableUI)
     {
-        player = GameObject.Find("Player");
-        rayCast = GameObject.Find("PointerController").GetComponent<RayCast>();
-    }
+        GameObject player = GameObject.Find("Player");
 
-    public void DisplayMovableUIInFrontOfPlayer(GameObject movableUI)
-    {
         movableUI.GetComponent<RectTransform>().anchoredPosition3D = player.transform.position;
-        movableUI.GetComponent<RectTransform>().LookAt(rayCast.source.transform);
+        movableUI.GetComponent<RectTransform>().LookAt(player.transform.position);
 
         Vector3 newpos = player.transform.position + (player.transform.forward - 0.75f * player.transform.right);
         newpos.y = 1.5f;
