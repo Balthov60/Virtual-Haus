@@ -46,7 +46,7 @@ public class SaveUIHandler : MonoBehaviour {
                 inputManager.CanClick = false;
                 string saveID = idSelectorUIHandler.GetID();
 
-                if (SavingUtils.IsIdUsed(saveID))
+                if (SavingUtils.IsIDUsed(saveID))
                 {
                     PopUp.DisplayValidationPopUp(gameObject, MESSAGE_OVERRIDE, confirmationPopUpCallback);
                 }

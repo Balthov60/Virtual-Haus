@@ -7,15 +7,16 @@ using UnityEngine.SceneManagement;
 public static class SavingUtils
 {
     public static readonly string SAVING_EXTENSION = ".save";
+
     private static string SavingDirectory
     {
         get { return Application.dataPath + "/Saves/"; }
     }
-
     public static string CurrentSavingDirectory
     {
         get { return SavingDirectory + SceneManager.GetActiveScene().name + "/"; }
     }
+
     public static void CreateSavingDirectoryIfNotExist()
     {
         if (!Directory.Exists(CurrentSavingDirectory))
@@ -24,7 +25,7 @@ public static class SavingUtils
 
     /* Saving IDs Utilities methods */
 
-    public static bool IsIdUsed(string id)
+    public static bool IsIDUsed(string id)
     {
         return GetUsedSaveIDs().Contains(id);
     }
@@ -40,7 +41,6 @@ public static class SavingUtils
         while (usedSaveIdentifiers.Contains(saveIdentifier));
 
         return saveIdentifier;
-
     }
 
     private static List<String> GetUsedSaveIDs()

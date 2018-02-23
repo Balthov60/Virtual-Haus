@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-public class LoadUIHandler : MonoBehaviour {
-
+public class LoadUIHandler : MonoBehaviour
+{
     private static readonly string MESSAGE_SUCCESS = "Votre appartement a bien été chargé !";
     private static readonly string MESSAGE_FAILED = "Impossible de charger cet appartement\nCette sauvegarde n'existe pas...";
 

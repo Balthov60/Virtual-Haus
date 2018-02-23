@@ -6,22 +6,16 @@ public class IDSelectorUIHandler : MonoBehaviour
     private RayCast rayCast;
     private InputManager inputManager;
 
-    private static bool canClick;
-
     void Start()
     {
         rayCast = GameObject.Find("PointerController").GetComponent<RayCast>();
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
-
-        canClick = true;
     }
 
     void Update()
     {
-        if (inputManager.IsTriggerClicked() && rayCast.Hit() && canClick)
+        if (inputManager.UserClick())
         {
-            canClick = false;
-
             if (rayCast.GetHit().transform.name == "ButtonDown")
             {
                 Text currentLetterSelector = rayCast.GetHit().transform.parent.Find("LetterView").GetComponentInChildren<Text>();
@@ -32,11 +26,6 @@ public class IDSelectorUIHandler : MonoBehaviour
                 Text currentLetterSelector = rayCast.GetHit().transform.parent.Find("LetterView").GetComponentInChildren<Text>();
                 currentLetterSelector.text = GetPreviousChar(currentLetterSelector.text[0]).ToString();
             }
-        }
-
-        if (!canClick)
-        {
-            canClick = !inputManager.IsTriggerClicked();
         }
     }
 
