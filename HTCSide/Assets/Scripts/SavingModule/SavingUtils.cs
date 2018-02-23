@@ -7,19 +7,27 @@ using UnityEngine.SceneManagement;
 public static class SavingUtils
 {
     public static readonly string SAVING_EXTENSION = ".save";
-
-    public static string SavingDirectory
+    private static string SavingDirectory
     {
-        get { return Application.dataPath + "/Saves/" + SceneManager.GetActiveScene().name + "/"; }
+        get { return Application.dataPath + "/Saves/"; }
+    }
+
+    public static string CurrentSavingDirectory
+    {
+        get { return SavingDirectory + SceneManager.GetActiveScene().name + "/"; }
     }
     public static void CreateSavingDirectoryIfNotExist()
     {
-        if (!Directory.Exists(SavingDirectory))
-            Directory.CreateDirectory(SavingDirectory);
+        if (!Directory.Exists(CurrentSavingDirectory))
+            Directory.CreateDirectory(CurrentSavingDirectory);
     }
 
     /* Saving IDs Utilities methods */
 
+    public static bool IsIdUsed(string id)
+    {
+        return GetUsedSaveIDs().Contains(id);
+    }
     public static String GenerateFreeSaveID()
     {
         List<String> usedSaveIdentifiers = GetUsedSaveIDs();
@@ -34,14 +42,14 @@ public static class SavingUtils
         return saveIdentifier;
 
     }
+
     private static List<String> GetUsedSaveIDs()
     {
         List<String> usedSaveIdentifiers = new List<string>();
 
-        String[] directoriesName = GetDirectoriesName(SavingDirectory);
-        foreach (string directoryName in directoriesName)
+        foreach (string directoryPath in Directory.GetDirectories(SavingDirectory))
         {
-            String[] filesName = GetFilesName(SavingDirectory + "/" + directoryName);
+            String[] filesName = GetFilesName(directoryPath);
             foreach (string fileName in filesName)
             {
                 usedSaveIdentifiers.Add(fileName);
@@ -60,21 +68,15 @@ public static class SavingUtils
         return saveIdentifier;
     }
 
-    private static String[] GetDirectoriesName(string path)
-    {
-        String[] directories = Directory.GetDirectories(path);
-
-        for (int i = 0; i < directories.Length; i++)
-            directories[i] = directories[i].Split('\\')[1];
-
-        return directories;
-    }
     private static String[] GetFilesName(string path)
     {
         String[] files = Directory.GetFiles(path, "*" + SAVING_EXTENSION);
 
         for (int i = 0; i < files.Length; i++)
-            files[i] = files[i].Split('\\')[1].Split('.')[0];
+        {
+            String[] fileSplitted = files[i].Split('\\');
+            files[i] = fileSplitted[fileSplitted.Length - 1].Split('.')[0];
+        }
 
         return files;
     }

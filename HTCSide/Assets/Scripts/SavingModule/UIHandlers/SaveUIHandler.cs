@@ -1,55 +1,65 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SaveUIHandler : MonoBehaviour {
+
+    private static readonly string MESSAGE_SUCCESS = "Votre appartement a bien été sauvegardé !";
+    private static readonly string MESSAGE_NO_CURRENT_SAVE = "Vous n'avez pas de sauvegarde en cours \n Créé en une nouvelle...";
+    private static readonly string MESSAGE_OVERRIDE = "Il existe déjà une sauvegarde sous cet ID\nVoulez vous la remplacer ?";
 
     private RayCast rayCast;
     private InputManager inputManager;
 
     private SavingManager savingManager;
+    public ValidationPopUp.Callback confirmationPopUpCallback;
 
-    private bool canClick;
-
-	void Start () {
+    void Start () {
         rayCast = GameObject.Find("PointerController").GetComponent<RayCast>();
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
 
         savingManager = GameObject.Find("SavingManager").GetComponent<SavingManager>();
-
-        canClick = true;
+        confirmationPopUpCallback = SaveOnSelectedID;
 	}
 
     void Update()
     {
-        if (inputManager.IsTriggerClicked() && rayCast.Hit() && canClick)
+        if (inputManager.UserClick())
         {
             if (rayCast.GetHit().transform.name == "Save")
             {
+                inputManager.CanClick = false;
                 if (savingManager.UpdateCurrentSave())
                 {
-                    PopUp.DisplayBasicPopUp(gameObject, "Votre appartement a bien été sauvegardé", 3);
+                    PopUp.DisplayScheduledPopUp(gameObject, MESSAGE_SUCCESS, 2);
                 }
                 else
                 {
-                    PopUp.DisplayBasicPopUp(gameObject, "Vous n'avez pas de sauvegarde en cours \n Créé en une nouvelle", 4);
+                    PopUp.DisplayScheduledPopUp(gameObject, MESSAGE_NO_CURRENT_SAVE, 4);
                 }
-                canClick = false;
             }
             else if (rayCast.GetHit().transform.name == "SaveAs")
             {
+                inputManager.CanClick = false;
                 IDSelectorUIHandler idSelectorUIHandler = transform.GetChild(0).Find("IDSelectorUI").GetComponent<IDSelectorUIHandler>();
                 string saveID = idSelectorUIHandler.GetID();
 
-                // TODO: display override message
-                savingManager.SaveGameObjects(saveID);
-
-                canClick = false;
+                if (SavingUtils.IsIdUsed(saveID))
+                {
+                    PopUp.DisplayValidationPopUp(gameObject, MESSAGE_OVERRIDE, confirmationPopUpCallback);
+                }
+                else
+                {
+                    PopUp.DisplayScheduledPopUp(gameObject, MESSAGE_SUCCESS, 2);    
+                    savingManager.SaveGameObjects(saveID);
+                }
             }
         }
-        if (!canClick)
-        {
-            canClick = !inputManager.IsTriggerClicked();
-        }
+    }
+
+    public void SaveOnSelectedID()
+    {
+        IDSelectorUIHandler idSelectorUIHandler = transform.GetChild(0).Find("IDSelectorUI").GetComponent<IDSelectorUIHandler>();
+        savingManager.SaveGameObjects(idSelectorUIHandler.GetID());
+
+        PopUp.DisplayScheduledPopUp(gameObject, MESSAGE_SUCCESS, 2);
     }
 }

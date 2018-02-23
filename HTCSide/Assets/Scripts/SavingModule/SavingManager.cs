@@ -51,7 +51,7 @@ public class SavingManager : MonoBehaviour {
         SavingUtils.CreateSavingDirectoryIfNotExist();
 
         string json = JsonUtility.ToJson(savedScene);
-        File.WriteAllText(SavingUtils.SavingDirectory + savingID + SavingUtils.SAVING_EXTENSION, json);
+        File.WriteAllText(SavingUtils.CurrentSavingDirectory + savingID + SavingUtils.SAVING_EXTENSION, json);
     }
 
     /// <summary>
@@ -60,7 +60,7 @@ public class SavingManager : MonoBehaviour {
     /// <returns>boolean : true if savingID exist false elsewhere</returns>
     public bool LoadGameObjects(string savingID)
     {
-        string savingPath = SavingUtils.SavingDirectory + savingID + SavingUtils.SAVING_EXTENSION;
+        string savingPath = SavingUtils.CurrentSavingDirectory + savingID + SavingUtils.SAVING_EXTENSION;
         if (!File.Exists(savingPath)) return false;
 
         string json = File.ReadAllText(savingPath);

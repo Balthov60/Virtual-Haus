@@ -39,7 +39,7 @@ public class HomeUIHandler : MonoBehaviour
                 selector.SetActive(true);
                 selector.GetComponent<RectTransform>().anchoredPosition = MOZART_HAUS_MENU_BUTTON_POSITION;
                 
-                if (inputManager.IsTriggerClicked())
+                if (inputManager.UserClick())
                 {
                     TeleportToMozartHaus();
                 }
