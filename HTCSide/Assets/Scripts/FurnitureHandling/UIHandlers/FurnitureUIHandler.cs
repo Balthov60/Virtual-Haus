@@ -110,10 +110,14 @@ public class FurnitureUIHandler : MonoBehaviour {
         }
         else if (hitObject.parent == rightSide.transform)
         {
-            dragFurniture.SelectObject(GameObject.Find((rayCast.GetHit().transform.GetChild(0).GetComponent<Text>().text)));
+            Transform ui = rayCast.GetHit().transform;
+            dragFurniture.SelectObject(GameObject.Find(ui.GetChild(0).GetComponent<Text>().text));
+
+            Color color = ui.GetChild(2).GetComponent<Image>().color;
+            color.a = 0.5f;
+            ui.GetChild(2).GetComponent<Image>().color = color;
         }
     }
-
 
     private void CreateUI()
     {
@@ -150,6 +154,7 @@ public class FurnitureUIHandler : MonoBehaviour {
         for (int i = 0; i < furnitureQuantity; i++)
         {
             GameObject temp = Instantiate(rightPartUIItem, rightSide.transform);
+            temp.name = room.GetChild(i).name + "_ui";
 
             Vector2 position = temp.GetComponent<RectTransform>().anchoredPosition;
             position.y -= rightPartUIItemHeight * ((int) i / 2) + 0.5f;

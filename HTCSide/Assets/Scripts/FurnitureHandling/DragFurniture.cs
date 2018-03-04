@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class DragFurniture : MonoBehaviour {
 
@@ -91,9 +92,13 @@ public class DragFurniture : MonoBehaviour {
         furnitureSelected.transform.position = new Vector3(0, -50, 0);
         networkManager.SendFurniturePosUpdate(furnitureSelected);
 
+        Transform ui = GameObject.Find(furnitureSelected.name + "_ui").transform;
+        Color color = ui.GetChild(2).GetComponent<Image>().color;
+        color.a = 0f;
+        ui.GetChild(2).GetComponent<Image>().color = color;
+
         furnitureSelected.GetComponent<Collider>().enabled = true;
         furnitureSelected = null;
-
         isClicked = false;
 
         DestroyMovableUI();

@@ -7,18 +7,18 @@ public class MovableUIHandler : MonoBehaviour {
 
     private DragFurniture dragFurniture;
 
-    void Start() {
+    void Start()
+    {
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         rayCast = GameObject.Find("PointerController").GetComponent<RayCast>();
 
         dragFurniture = GameObject.Find("EditionHandler").GetComponent<DragFurniture>();
     }
 
-    void Update () {
-        Debug.Log("test");
+    void Update ()
+    {
         if (dragFurniture.IsClicked())
         {
-            Debug.Log("clicked");
             Vector3 newpos = dragFurniture.GetFurnitureSelected().transform.position;
             Vector3 difference = (rayCast.source.transform.position - dragFurniture.GetFurnitureSelected().transform.position).normalized;        
             Vector3 furnitureSize = dragFurniture.GetFurnitureSelected().GetComponent<Renderer>().bounds.size;

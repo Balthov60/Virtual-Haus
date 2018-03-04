@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RemoveFurniture : MonoBehaviour {
 
@@ -31,6 +32,11 @@ public class RemoveFurniture : MonoBehaviour {
                     canClick = false;
                     rayCast.GetHit().transform.position = new Vector3(0, -50, 0);
                     networkManager.SendFurniturePosUpdate(rayCast.GetHit().transform.gameObject);
+
+                    Transform ui = GameObject.Find(rayCast.GetHit().transform.gameObject.name + "_ui").transform;
+                    Color color = ui.GetChild(2).GetComponent<Image>().color;
+                    color.a = 0f;
+                    ui.GetChild(2).GetComponent<Image>().color = color;
                 }
             }
         }
