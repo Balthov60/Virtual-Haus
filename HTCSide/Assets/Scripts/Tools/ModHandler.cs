@@ -13,6 +13,7 @@ public class ModHandler : MonoBehaviour
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         furnitureMenu = GameObject.Find("FurnitureMenu");
         roomTpUi = GameObject.Find("RoomTpUI");
+        roomTpUi.SetActive(false);
     }
 
     private void Update()
