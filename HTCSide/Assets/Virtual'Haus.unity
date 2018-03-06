@@ -19402,7 +19402,6 @@ GameObject:
   - component: {fileID: 1070500910}
   - component: {fileID: 1070500909}
   - component: {fileID: 1070500908}
-  - component: {fileID: 1070500907}
   - component: {fileID: 1070500906}
   m_Layer: 5
   m_Name: MovableUI
@@ -19423,23 +19422,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af73b85a675c59847b203d89824c774b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1070500907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114740987225275118, guid: 9bc7610609c20c541a2705095cf9fd0b,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1070500905}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &1070500908
 MonoBehaviour:
   m_ObjectHideFlags: 0
