@@ -1,0 +1,67 @@
+# 3ds Max Wavefront OBJ Exporter v0.94b - (c)2007 guruware
+# File Created: 27.05.2017 12:34:45
+
+newmtl st_gold
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.9451 0.7725 0.4078
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka D:\New folder 2\gold356.jpg
+	map_Kd D:\New folder 2\gold356.jpg
+	map_bump -bm 0.3000 D:\New folder 2\gold356.jpg
+	bump -bm 0.3000 D:\New folder 2\gold356.jpg
+
+newmtl st_textile
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.8588 0.5569 0.4078
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka D:\New folder 2\Lace 1.jpg
+	map_Kd D:\New folder 2\Lace 1.jpg
+	map_d D:\New folder 2\Lace 1 O.jpg
+	map_bump D:\New folder 2\Lace 1.jpg
+	bump D:\New folder 2\Lace 1.jpg
+
+newmtl st_leather
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.8157 0.9059 0.7686
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka D:\New folder 2\402.jpg
+	map_Kd D:\New folder 2\402.jpg
+	map_bump -bm 0.3000 D:\New folder 2\402.jpg
+	bump -bm 0.3000 D:\New folder 2\402.jpg
+
+newmtl fabric
+	Ns 43.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.7373 0.6941 0.9098
+	Ks 0.6660 0.6660 0.6660
+	Ke 0.0000 0.0000 0.0000
+	map_Ka D:\New folder 2\TexCreaR.jpg
+	map_Kd D:\New folder 2\TexCreaR.jpg
+	map_bump -bm 0.3000 D:\New folder 2\TexCreaR.jpg
+	bump -bm 0.3000 D:\New folder 2\TexCreaR.jpg
