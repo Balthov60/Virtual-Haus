@@ -8,6 +8,7 @@ public class RemoveFurniture : MonoBehaviour {
     private RayCast rayCast;
     private InputManager inputManager;
     private ModHandler modHandler;
+    private GameObject furnitureMenu;
 
     private ServerNetworkManager networkManager;
 
@@ -17,6 +18,8 @@ public class RemoveFurniture : MonoBehaviour {
         rayCast = GameObject.Find("PointerController").GetComponent<RayCast>();
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         modHandler = GameObject.Find("ModHandler").GetComponent<ModHandler>();
+
+        furnitureMenu = GameObject.Find("FurnitureMenu");
 
         networkManager = GameObject.Find("NetworkManager").GetComponent<ServerNetworkManager>();
     }
@@ -29,14 +32,12 @@ public class RemoveFurniture : MonoBehaviour {
             {
                 if (modHandler.IsInRemoveMod() && rayCast.HitFurniture())
                 {
+                    GameObject gameObject = rayCast.GetHit().transform.gameObject;
                     canClick = false;
-                    rayCast.GetHit().transform.position = new Vector3(0, -50, 0);
-                    networkManager.SendFurniturePosUpdate(rayCast.GetHit().transform.gameObject);
+                    gameObject.transform.position = new Vector3(0, -50, 0);
+                    networkManager.SendFurniturePosUpdate(gameObject);
 
-                    Transform ui = GameObject.Find(rayCast.GetHit().transform.gameObject.name + "_ui").transform;
-                    Color color = ui.GetChild(2).GetComponent<Image>().color;
-                    color.a = 0f;
-                    ui.GetChild(2).GetComponent<Image>().color = color;
+                    UpdateUI(gameObject);
                 }
             }
         }
@@ -44,5 +45,17 @@ public class RemoveFurniture : MonoBehaviour {
         {
             canClick = !inputManager.IsTriggerClicked();
         }
+    }
+
+    private void UpdateUI(GameObject gameObject)
+    {
+        furnitureMenu.SetActive(true);
+
+        Transform ui = GameObject.Find(gameObject.name + "_ui").transform;
+        Color color = ui.GetChild(2).GetComponent<Image>().color;
+        color.a = 0f;
+        ui.GetChild(2).GetComponent<Image>().color = color;
+
+        furnitureMenu.SetActive(false);
     }
 }

@@ -15,7 +15,7 @@ public class RotateFurniture : MonoBehaviour {
 	void Update() {
         if (dragFurniture.IsFurnitureSelected())
         {
-            dragFurniture.GetFurnitureSelected().transform.Rotate(new Vector3(0, 0, inputManager.GetTrackpadHandler().GetPointerTrackpadRotationOffset()));
+            dragFurniture.GetFurnitureSelected().transform.Rotate(new Vector3(0, inputManager.GetTrackpadHandler().GetPointerTrackpadRotationOffset(), 0));
         }
     }
 }
