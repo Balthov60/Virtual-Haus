@@ -40,10 +40,10 @@ public class DragFurniture : MonoBehaviour {
         {
             if (inputManager.IsTriggerClicked() && canClick)
             {
-                canClick = false;
-
                 if (isOnDrag) // Place Game Object
                 {
+                    canClick = false;
+
                     furnitureSelected.GetComponent<Collider>().enabled = true;
                     furnitureSelected = null;
 
@@ -51,11 +51,15 @@ public class DragFurniture : MonoBehaviour {
                 }
                 else if (rayCast.HitFurniture() && !isClicked && !isOnDrag) // Select Game Object
                 {
+                    canClick = false;
+
                     furnitureSelected = GameObject.Find(rayCast.GetHit().transform.name);
                     isClicked = true;
                 }
                 else if (isClicked && !isOnDrag && !movableUIHandler.HitMovableUI()) // UnSelect Game Object
                 {
+                    canClick = false;
+
                     DestroyMovableUI();
 
                     isClicked = false;
