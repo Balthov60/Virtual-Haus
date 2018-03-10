@@ -725,7 +725,7 @@ GameObject:
   - component: {fileID: 222167355597727220}
   - component: {fileID: 114986810769023290}
   m_Layer: 0
-  m_Name: Value
+  m_Name: ClientValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -996,7 +996,7 @@ GameObject:
   - component: {fileID: 222582505797001350}
   - component: {fileID: 114353671767094084}
   m_Layer: 0
-  m_Name: Value
+  m_Name: IPValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1162,9 +1162,9 @@ GameObject:
   - component: {fileID: 224222550919488544}
   - component: {fileID: 222541720284003486}
   - component: {fileID: 114840795252995092}
-  - component: {fileID: 114298171823104840}
+  - component: {fileID: 65422325856090072}
   m_Layer: 0
-  m_Name: Start
+  m_Name: StartNetworkUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1324,6 +1324,7 @@ GameObject:
   - component: {fileID: 224168786623395804}
   - component: {fileID: 223189567367141484}
   - component: {fileID: 114642160805954540}
+  - component: {fileID: 114672844082853072}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -1360,9 +1361,9 @@ GameObject:
   - component: {fileID: 224867624104358406}
   - component: {fileID: 222641189720651054}
   - component: {fileID: 114014075513869566}
-  - component: {fileID: 114788203466137874}
+  - component: {fileID: 65851843092805836}
   m_Layer: 0
-  m_Name: Stop
+  m_Name: StopNetworkUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1623,7 +1624,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224743308418578544}
   m_Layer: 0
-  m_Name: EditionMod
+  m_Name: EditionModTuto
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2088,12 +2089,12 @@ GameObject:
   m_Component:
   - component: {fileID: 224089668513355666}
   m_Layer: 0
-  m_Name: TeleportationMod
+  m_Name: TeleportationModTuto
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1826767344418420
 GameObject:
   m_ObjectHideFlags: 1
@@ -2356,12 +2357,12 @@ GameObject:
   m_Component:
   - component: {fileID: 224121131827851752}
   m_Layer: 0
-  m_Name: RemoveMod
+  m_Name: RemoveModTuto
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1956064376932254
 GameObject:
   m_ObjectHideFlags: 1
@@ -4793,6 +4794,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 20, y: 7, z: 0.01}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65422325856090072
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1429467934314356}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 1, z: 0.1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65423501877848126
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -4948,6 +4961,18 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10, y: 10, z: 0.1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65851843092805836
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1520083026608572}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 1, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65856547023917758
 BoxCollider:
@@ -5483,7 +5508,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: network off
+  m_Text: Network Off
 --- !u!114 &114143890355900686
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5730,47 +5755,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Select your Save ID
---- !u!114 &114298171823104840
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1429467934314356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 114840795252995092}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114302480438631852
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6608,6 +6592,17 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1000
+--- !u!114 &114672844082853072
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1512282405176624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6463d4d28dce25243945b50473e2607a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114687758464739168
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7160,47 +7155,6 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "You can only teleport yourself if you are targeting the ground \nYou won't
     be able to interact with menus if you are in teleportation mod"
---- !u!114 &114788203466137874
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1520083026608572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 114014075513869566}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114792177835760484
 MonoBehaviour:
   m_ObjectHideFlags: 1

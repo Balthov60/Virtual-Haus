@@ -19,10 +19,11 @@ public class ServerNetworkManager : MonoBehaviour
         player = GameObject.Find("Player").transform;
 
         connectionsReady = new Dictionary<int, bool>();
-        SetupServer();
     }
-    private void SetupServer()
+    public void SetupServer()
     {
+        connectionsReady = new Dictionary<int, bool>();
+
         NetworkServer.RegisterHandler(VirtualHausMessageType.CONNECTED, OnClientConnect);
         NetworkServer.RegisterHandler(VirtualHausMessageType.APPARTMENT_LOADED, OnClientAppartmentLoaded);
         NetworkServer.RegisterHandler(VirtualHausMessageType.USER_READY, OnClientReady);
@@ -32,10 +33,26 @@ public class ServerNetworkManager : MonoBehaviour
 
         NetworkServer.Listen(NETWORK_PORT);
     }
+    public void StopServer()
+    {
+        foreach (KeyValuePair<int, bool> connection in connectionsReady)
+        {
+            NetworkServer.SendToClient(connection.Key, MsgType.Disconnect, new EmptyMessage());
+        }
+
+        NetworkServer.Reset();
+    }
 
     void Update()
     {
         SendPlayerPosUpdate();
+    }
+
+    /* For Handler */
+
+    public int GetClientQuantity()
+    {
+        return connectionsReady.Count;
     }
 
 
