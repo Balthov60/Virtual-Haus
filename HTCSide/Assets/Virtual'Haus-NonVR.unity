@@ -2087,6 +2087,26 @@ Prefab:
       propertyPath: m_Name
       value: HomeUI
       objectReference: {fileID: 0}
+    - target: {fileID: 1953865637688266, guid: 0a65a1df52a411748ad4ef7bc6d6cf8c, type: 2}
+      propertyPath: m_Name
+      value: RemoveModTuto
+      objectReference: {fileID: 0}
+    - target: {fileID: 1650201731000912, guid: 0a65a1df52a411748ad4ef7bc6d6cf8c, type: 2}
+      propertyPath: m_Name
+      value: EditionModTuto
+      objectReference: {fileID: 0}
+    - target: {fileID: 1826511404665486, guid: 0a65a1df52a411748ad4ef7bc6d6cf8c, type: 2}
+      propertyPath: m_Name
+      value: TeleportationModTuto
+      objectReference: {fileID: 0}
+    - target: {fileID: 1953865637688266, guid: 0a65a1df52a411748ad4ef7bc6d6cf8c, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1826511404665486, guid: 0a65a1df52a411748ad4ef7bc6d6cf8c, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0a65a1df52a411748ad4ef7bc6d6cf8c, type: 2}
   m_IsPrefabParent: 0
