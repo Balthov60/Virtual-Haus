@@ -119,26 +119,24 @@ public class DragFurniture : MonoBehaviour {
 
     private void UpdateFurniturePosition(RaycastHit hit)
     {
-        HandleWallCollision(hit);
-
-        HandleFurnitureCollision(hit);
-        HandleFurnitureCollision(hit); // Call it twice to prevent double collision
+        HandleMainCollision(hit);
+        HandleAdvancedCollision(hit);
     }
-    private void HandleWallCollision(RaycastHit hit)
+    private void HandleMainCollision(RaycastHit hit)
     {
         Vector3 newPos = hit.point;
 
-        if (hit.transform.name.Contains("Wall"))
-        {
-            Vector3 size = furnitureSelected.GetComponent<Renderer>().bounds.size / 2;
-            size.Scale(hit.normal);
-            newPos += size;
-        }
+        Vector3 size = furnitureSelected.GetComponent<Renderer>().bounds.size / 2 + (0.025f * Vector3.one);
+        size.Scale(hit.normal);
 
-        newPos.y = furnitureSelected.transform.localScale.y / 2;
+        newPos += size;
+        if (hit.normal != Vector3.up)
+            newPos.y = furnitureSelected.transform.localScale.y / 2;
+
         furnitureSelected.transform.position = newPos;
     }
-    private void HandleFurnitureCollision(RaycastHit hit)
+
+    private void HandleAdvancedCollision(RaycastHit hit)
     {
         Collider[] colliders = Physics.OverlapBox(furnitureSelected.transform.position,
                                                   furnitureSelected.GetComponent<Renderer>().bounds.size / 2,
@@ -150,36 +148,42 @@ public class DragFurniture : MonoBehaviour {
             {
                 if (collider.transform.parent.parent.name == "Furnitures")
                 {
-                    Vector3 difference = furnitureSelected.transform.position - collider.transform.position;
-
-                    Vector3 distance = (furnitureSelected.GetComponent<Renderer>().bounds.size / 2);
-                    Vector3 maxDistance = (furnitureSelected.GetComponent<Renderer>().bounds.size / 2);
-                    distance.Scale(difference.normalized);
-
-                    Vector3 selectedToCollideInsidePoint = furnitureSelected.transform.position + distance;
-
-                  
-                    distance = collider.bounds.size / 2;
-                    maxDistance += distance;
-                    distance.Scale(difference.normalized);
-
-                    Vector3 collideToSelectInsidePoint = collider.transform.position + distance;
-
-                    distance = (selectedToCollideInsidePoint - collideToSelectInsidePoint);
-                    distance.Scale(difference.normalized);
-
-                    Vector3 distanceToUpdate = (maxDistance - distance);
-
                     Vector3 newPos = furnitureSelected.transform.position;
 
-                    distanceToUpdate.Scale(hit.normal); // use normal vector to update depending on face hitted
-                    newPos += distanceToUpdate;
+                    Vector3 temp = GetSharedDimension(collider);
+                    temp.y = 0;
+                    newPos -= temp;
 
                     furnitureSelected.transform.position = newPos;
                 }
             }
         }
     }
+    /// <summary>
+    /// Return dimmension common between collider and funiture in drag
+    /// </summary>
+    /// <param name="collider"></param>
+    /// <returns></returns>
+    private Vector3 GetSharedDimension(Collider collider)
+    {
+        Vector3 direction = furnitureSelected.transform.position - collider.transform.position;
+        direction.y = 0;
+
+        Vector3 furnitureSide = furnitureSelected.GetComponent<Renderer>().bounds.size / 2;
+        furnitureSide.Scale(direction.normalized);
+        Vector3 furnitureInsidePoint = furnitureSelected.transform.position - furnitureSide;
+
+        Vector3 colliderSide = collider.bounds.size / 2;
+        colliderSide.Scale(direction.normalized);
+        Vector3 colliderInsidePoint = collider.transform.position + colliderSide;
+
+        Vector3 correction = (Vector3.one * 0.025f);
+        correction.Scale(direction);
+
+        return furnitureInsidePoint - colliderInsidePoint - correction;
+    }
+
+    /* Public Interface */
 
     public bool IsFurnitureSelected()
     {
