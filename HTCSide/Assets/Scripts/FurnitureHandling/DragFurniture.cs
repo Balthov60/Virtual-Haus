@@ -130,34 +130,9 @@ public class DragFurniture : MonoBehaviour {
 
         if (hit.transform.name.Contains("Wall"))
         {
-            float yAngle = hit.transform.rotation.eulerAngles.y;
-
-            if ((yAngle <= 120 && yAngle >= 60) || (yAngle <= 300 && yAngle >= 240)) // Test Axis
-            {
-                float xSize = furnitureSelected.GetComponent<Renderer>().bounds.size.x;
-
-                if (hit.point.x > pointerController.transform.position.x) // Test Positif / Negatif
-                {
-                    newPos.x = newPos.x - xSize / 2;
-                }
-                else
-                {
-                    newPos.x = newPos.x + xSize / 2;
-                }
-            }
-            else if (yAngle <= 30 || yAngle >= 330 || (yAngle > 150 && yAngle <= 210)) // Test Axis
-            {
-                float zSize = furnitureSelected.GetComponent<Renderer>().bounds.size.z;
-
-                if (hit.point.z > pointerController.transform.position.z) // Test Positif / Negatif
-                {
-                    newPos.z = newPos.z - zSize / 2;
-                }
-                else
-                {
-                    newPos.z = newPos.z + zSize / 2;
-                }
-            }
+            Vector3 size = furnitureSelected.GetComponent<Renderer>().bounds.size / 2;
+            size.Scale(hit.normal);
+            newPos += size;
         }
 
         newPos.y = furnitureSelected.transform.localScale.y / 2;
