@@ -12,7 +12,7 @@ public class ModHandler : MonoBehaviour
         mod = Mod.EDITION;
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         furnitureMenu = GameObject.Find("FurnitureMenu");
-        roomTpUi = GameObject.Find("RoomTpUI");
+        roomTpUi = GameObject.Find("MinimapUI");
         roomTpUi.SetActive(false);
     }
 
