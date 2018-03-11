@@ -5474,8 +5474,8 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: When, "Edition Mod" is enabled, there is a furniture menu on your "Menu
-    Controller", click on a furniture will allow you to place it. Placed furnitures
-    thumbnail will be Highlighted
+    Controller", clicking on a furniture will allow you to place it. Furnitures thumbnails
+    that were placed will be highlighted
 --- !u!114 &114143119669890682
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6993,7 +6993,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "The Virtual haus project had been made in order to help people to represent
-    themself in there futur appartment.\n\nThis is a school project made by :\nBalthazar
+    themselves in their futur appartment.\n\nThis is a school project made by :\nBalthazar
     Frolin\nLucas Secret\nMartin Braun\nMat\xE9o Rat"
 --- !u!114 &114755488336581448
 MonoBehaviour:
@@ -7153,8 +7153,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "You can only teleport yourself if you are targeting the ground \nYou won't
-    be able to interact with menus if you are in teleportation mod"
+  m_Text: 'You can only teleport yourself if you are targeting the floor
+
+    You won''t be able to interact with menus if you are in teleportation mod'
 --- !u!114 &114792177835760484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7324,7 +7325,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Watch Out, This mod is dangerous, there is no confirmation for the suppression
+  m_Text: Watch Out, this mod is dangerous, there is no confirmation for the suppression
     of an object and it can't be undone
 --- !u!114 &114828345456269492
 MonoBehaviour:
@@ -7722,7 +7723,7 @@ MonoBehaviour:
     wich room.
 
     Thanks to this side of the project, the user will be able to try several configurations
-    in order to try to find the best one, and maybe the one Mozart Used.'
+    so that he could find the best one, and maybe the one Mozart used.'
 --- !u!114 &114971166407644926
 MonoBehaviour:
   m_ObjectHideFlags: 1
