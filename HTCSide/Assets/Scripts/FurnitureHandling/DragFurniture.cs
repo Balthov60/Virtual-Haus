@@ -120,7 +120,9 @@ public class DragFurniture : MonoBehaviour {
     private void UpdateFurniturePosition(RaycastHit hit)
     {
         HandleWallCollision(hit);
+
         HandleFurnitureCollision(hit);
+        HandleFurnitureCollision(hit); // Call it twice to prevent double collision
     }
     private void HandleWallCollision(RaycastHit hit)
     {
@@ -195,30 +197,8 @@ public class DragFurniture : MonoBehaviour {
 
                     Vector3 newPos = furnitureSelected.transform.position;
 
-                    Vector3 direction = (rayCast.source.transform.position - furnitureSelected.transform.position);
-                    
-                    if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
-                    {
-                        if (direction.x > 0)
-                        {
-                            newPos.x += distanceToUpdate.x;
-                        }
-                        else
-                        {
-                            newPos.x -= distanceToUpdate.x;
-                        }
-                    }
-                    else
-                    {
-                        if (direction.z > 0)
-                        {
-                            newPos.z += distanceToUpdate.z;
-                        }
-                        else
-                        {
-                            newPos.z -= distanceToUpdate.z;
-                        }
-                    }
+                    distanceToUpdate.Scale(hit.normal); // use normal vector to update depending on face hitted
+                    newPos += distanceToUpdate;
 
                     furnitureSelected.transform.position = newPos;
                 }
