@@ -16,8 +16,6 @@ public class ClientNetworkManager : MonoBehaviour {
     {
         status = ClientStatus.DISCONNECTED;
         player = GameObject.Find("Player").transform;
-
-        SetupClient();
     }
     private void SetupClient()
     {
