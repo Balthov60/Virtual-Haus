@@ -41,6 +41,7 @@ public class HomeUIHandler : MonoBehaviour
                 if (inputManager.UserClick())
                 {
                     inputManager.CanClick = false;
+                    HomeTeleportation.isInSpawn = false;
                     TeleportToMozartHaus(); 
                 }
             }

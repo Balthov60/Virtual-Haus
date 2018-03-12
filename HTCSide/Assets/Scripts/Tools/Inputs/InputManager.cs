@@ -3,6 +3,7 @@
 public class InputManager : MonoBehaviour {
 
     private static readonly string MOD_CHANGE_BUTTON_NAME = "ChangeModButton";
+    private static readonly string HOME_BUTTON_NAME = "HomeButton";
     private static readonly string CLICKED_TRIGGER_NAME = "PointerTrigger";
 
     private RayCast rayCast;
@@ -50,6 +51,11 @@ public class InputManager : MonoBehaviour {
     public bool IsModChangeButtonClicked()
     {
         return Input.GetButtonDown(MOD_CHANGE_BUTTON_NAME);
+    }
+
+    public bool IsHomeButtonClicked()
+    {
+        return Input.GetButtonDown(HOME_BUTTON_NAME);
     }
 
     /// <summary>
