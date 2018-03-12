@@ -24,6 +24,9 @@ public class ModHandler : MonoBehaviour
 
         removeModTuto.SetActive(false);
         teleportationModTuto.SetActive(false);
+
+        roomTpUi = GameObject.Find("MinimapUI");
+        roomTpUi.SetActive(false);
     }
 
     private void Update()

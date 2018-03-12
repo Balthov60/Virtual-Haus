@@ -1,4 +1,4 @@
-﻿    using UnityEngine;
+﻿using UnityEngine;
 
 public class MovableUIHandler : MonoBehaviour {
 
@@ -7,14 +7,16 @@ public class MovableUIHandler : MonoBehaviour {
 
     private DragFurniture dragFurniture;
 
-    void Start() {
+    void Start()
+    {
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         rayCast = GameObject.Find("PointerController").GetComponent<RayCast>();
 
         dragFurniture = GameObject.Find("EditionHandler").GetComponent<DragFurniture>();
     }
 
-    void Update () {
+    void Update ()
+    {
         if (dragFurniture.IsClicked())
         {
             Vector3 newpos = dragFurniture.GetFurnitureSelected().transform.position;

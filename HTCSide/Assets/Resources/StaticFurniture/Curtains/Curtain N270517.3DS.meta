@@ -1,0 +1,149 @@
+fileFormatVersion: 2
+guid: 7767d6405458c3b499ffcb8ebfefd7bd
+timeCreated: 1520256079
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Line001
+    100004: Line002
+    100006: Pattern2D1
+    100008: Pattern2D2
+    100010: Pattern2D3
+    100012: Pattern2D_
+    100014: sub01
+    100016: sub02
+    100018: sub03
+    400000: //RootNode
+    400002: Line001
+    400004: Line002
+    400006: Pattern2D1
+    400008: Pattern2D2
+    400010: Pattern2D3
+    400012: Pattern2D_
+    400014: sub01
+    400016: sub02
+    400018: sub03
+    2300000: Line001
+    2300002: Line002
+    2300004: Pattern2D1
+    2300006: Pattern2D2
+    2300008: Pattern2D_
+    2300010: sub01
+    2300012: sub02
+    2300014: sub03
+    3300000: Line001
+    3300002: Line002
+    3300004: Pattern2D1
+    3300006: Pattern2D2
+    3300008: Pattern2D_
+    3300010: sub01
+    3300012: sub02
+    3300014: sub03
+    4300000: Line001
+    4300002: Line002
+    4300004: Pattern2D_
+    4300006: Pattern2D1
+    4300008: Pattern2D2
+    4300010: sub01
+    4300012: sub02
+    4300014: sub03
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: fabric
+    second: {fileID: 2100000, guid: 09883878fd543b441a303ea370de3942, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: st_gold
+    second: {fileID: 2100000, guid: 462d1b6c9f8fce14684fda0306cebf63, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: st_leather
+    second: {fileID: 2100000, guid: aebd4b7736717bd408cc31bc748ae74f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: st_textile
+    second: {fileID: 2100000, guid: 20da72619edfd4143bcdaeb8861ab2de, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

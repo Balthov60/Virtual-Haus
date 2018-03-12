@@ -19,8 +19,9 @@ public static class ThumbnailsHandler
             CreateThumbnailsIfNotExistForRoom(furnitures, i);
         }
 
-        UnityEngine.Object.DestroyImmediate(cameraGameObject);
-        UnityEngine.Object.DestroyImmediate(renderTexture);
+        Object.DestroyImmediate(cameraGameObject);
+        Object.DestroyImmediate(renderTexture);
+        Object.DestroyImmediate(GameObject.Find("DirectionalLight"));
     }
 
     private static GameObject CreateCamera(RenderTexture renderTexture)
@@ -45,12 +46,11 @@ public static class ThumbnailsHandler
         {
             if (FurnitureThumbnailsExist(room.GetChild(i).name)) continue;
             
-            GameObject furnitureToRender = UnityEngine.Object.Instantiate(room.GetChild(i).gameObject);
+            GameObject furnitureToRender = Object.Instantiate(room.GetChild(i).gameObject);
             PlaceGameObjectForScreenShot(furnitureToRender, cameraGameObject);
 
             File.WriteAllBytes(thumbnailsPath + room.GetChild(i).name + ".png", TakePicture().EncodeToPNG());
-
-            UnityEngine.Object.DestroyImmediate(furnitureToRender);
+            Object.DestroyImmediate(furnitureToRender);
         }
     }
     private static Texture2D TakePicture()
@@ -73,13 +73,11 @@ public static class ThumbnailsHandler
         furniture.transform.position = new Vector3(-100, 0);
         Vector3 furnitureSize = furniture.GetComponent<Renderer>().bounds.size;
 
-        float y = furnitureSize.y / 2;
         float z = (furnitureSize.y > furnitureSize.x) ? furnitureSize.y : furnitureSize.x;
-
-        camera.transform.position = new Vector3(-100, y, -z);
+        z += 0.5f;// add border;
+        camera.transform.position = new Vector3(-100, 0, -z);
 
         Vector3 lookAt = furniture.transform.position;
-        lookAt.y += y;
 
         camera.transform.LookAt(lookAt);
     }
