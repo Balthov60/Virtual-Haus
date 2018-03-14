@@ -13,6 +13,8 @@ public class SavingManager : MonoBehaviour {
 
     [SerializeField] private List<string> tags;
 
+    private ServerNetworkManager serverNetworkManager;
+
     private List<GameObject> editableGameObjects;
     private string currentSaveId;
 
@@ -25,6 +27,8 @@ public class SavingManager : MonoBehaviour {
         {
             editableGameObjects.AddRange(GameObject.FindGameObjectsWithTag(tag));
         }
+
+        serverNetworkManager = GameObject.Find("NetworkManager").GetComponent<ServerNetworkManager>();
     }
 
     public string GetCurrentSaveID()
@@ -79,6 +83,8 @@ public class SavingManager : MonoBehaviour {
             GameObject gameObject = GameObject.Find(savedGameObject.name);
             gameObject.transform.position = savedGameObject.position;
             gameObject.transform.rotation = savedGameObject.rotation;
+
+            serverNetworkManager.SendFurniturePosUpdate(gameObject);
         }
     }
 }
