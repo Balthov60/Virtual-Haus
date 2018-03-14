@@ -94,7 +94,6 @@ public class ClientNetworkManager : MonoBehaviour {
         foreach (NewFurnitureInformations furniture in furnitures.list)
         {
             GameObject furniturePrefab = Resources.Load<GameObject>("Furnitures/Prefab/" + furniture.prefabName);
-            Debug.Log(furniture.furniturePosition);
             GameObject instance = Instantiate(furniturePrefab, movable.transform);
 
             instance.transform.localPosition = furniture.furniturePosition / appartmentScaleFactor;
