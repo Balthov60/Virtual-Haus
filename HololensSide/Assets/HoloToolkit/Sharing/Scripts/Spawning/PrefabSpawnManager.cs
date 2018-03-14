@@ -1,5 +1,7 @@
+//
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
+//
 
 using System;
 using System.Collections.Generic;
@@ -223,7 +225,7 @@ namespace HoloToolkit.Sharing.Spawning
 
             dataModel.GameObject = instance;
 
-            // Set the data model on the various ISyncModelAccessor components of the spawned GameObject
+            // Set the data model on the various ISyncModelAccessor components of the spawned game obejct
             ISyncModelAccessor[] syncModelAccessors = instance.GetComponentsInChildren<ISyncModelAccessor>(true);
             if (syncModelAccessors.Length <= 0)
             {

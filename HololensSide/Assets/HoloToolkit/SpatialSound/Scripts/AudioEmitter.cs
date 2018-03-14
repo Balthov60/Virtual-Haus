@@ -55,7 +55,7 @@ namespace HoloToolkit.Unity
             audioSource = gameObject.GetComponent<AudioSource>();
             initialAudioSourceVolume = audioSource.volume;
 
-            // Preallocate the array that will be used to collect RaycastHit structures.
+            // Pre-allocate the array that will be used to collect RaycastHit structures.
             hits = new RaycastHit[MaxObjects];
         }
 	

@@ -52,30 +52,6 @@ namespace HoloToolkit.Unity
         /// </summary>
         private string StatusMessage { get { return statusMessage; } set { statusMessage = value; } }
 
-        /// <summary>
-        /// Checks all the checkboxes in the window.
-        /// </summary>
-        private void SelectAll()
-        {
-            var keys = values.Keys.ToArray();
-            for (int iKey = 0; iKey < keys.Length; iKey++)
-            {
-                Values[keys[iKey]] = true;
-            }
-        }
-
-        /// <summary>
-        /// Unchecks all the checkboxes in the window.
-        /// </summary>
-        private void SelectNone()
-        {
-            var keys = values.Keys.ToArray();
-            for (int iKey = 0; iKey < keys.Length; iKey++)
-            {
-                Values[keys[iKey]] = false;
-            }
-        }
-
         #endregion // Internal Methods
 
         #region Overridables / Event Triggers
@@ -147,24 +123,12 @@ namespace HoloToolkit.Unity
             GUILayout.EndScrollView();
             GUILayout.EndVertical();
 
-            // Buttons
-            GUILayout.BeginHorizontal(EditorStyles.miniButtonRight);
-            bool selectAllClicked = GUILayout.Button("Select All");
-            bool selectNoneClicked = GUILayout.Button("Select None");
+            // Apply button
+            GUILayout.BeginVertical(EditorStyles.miniButtonRight);
             bool applyClicked = GUILayout.Button("Apply");
-            GUILayout.EndHorizontal();
+            GUILayout.EndVertical();
 
             // Clicked?
-            if (selectAllClicked)
-            {
-                SelectAll();
-            }
-
-            if (selectNoneClicked)
-            {
-                SelectNone();
-            }
-
             if (applyClicked)
             {
                 ApplySettings();

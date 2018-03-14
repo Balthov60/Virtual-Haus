@@ -3,8 +3,12 @@
 
 using UnityEngine;
 
-#if UNITY_WSA && UNITY_2017_2_OR_NEWER
+#if UNITY_WSA
+#if UNITY_2017_2_OR_NEWER
 using UnityEngine.XR.WSA;
+#else
+using UnityEngine.VR.WSA;
+#endif
 #endif
 
 namespace HoloToolkit.Unity.InputModule
@@ -18,7 +22,7 @@ namespace HoloToolkit.Unity.InputModule
     public class MixedRealityCameraManager : Singleton<MixedRealityCameraManager>
     {
         [Tooltip("The near clipping plane distance for an opaque display.")]
-        public float NearClipPlane_OpaqueDisplay = 0.1f;
+        public float NearClipPlane_OpaqueDisplay = 0.3f;
 
         [Tooltip("Values for Camera.clearFlags, determining what to clear when rendering a Camera for an opaque display.")]
         public CameraClearFlags CameraClearFlags_OpaqueDisplay = CameraClearFlags.Skybox;
@@ -58,29 +62,29 @@ namespace HoloToolkit.Unity.InputModule
 
         private void Start()
         {
-            CurrentDisplayType = DisplayType.Opaque;
-
+            if (!Application.isEditor)
+            {
 #if UNITY_WSA
 #if UNITY_2017_2_OR_NEWER
             if (!HolographicSettings.IsDisplayOpaque)
 #endif
-            {
-                CurrentDisplayType = DisplayType.Transparent;
-            }
+                {
+                    CurrentDisplayType = DisplayType.Transparent;
+                    ApplySettingsForTransparentDisplay();
+                    if (OnDisplayDetected != null)
+                    {
+                        OnDisplayDetected(DisplayType.Transparent);
+                    }
+                    return;
+                }
 #endif
-
-            if (CurrentDisplayType == DisplayType.Opaque)
-            {
-                ApplySettingsForOpaqueDisplay();
-            }
-            else
-            {
-                ApplySettingsForTransparentDisplay();
             }
 
+            CurrentDisplayType = DisplayType.Opaque;
+            ApplySettingsForOpaqueDisplay();
             if (OnDisplayDetected != null)
             {
-                OnDisplayDetected(CurrentDisplayType);
+                OnDisplayDetected(DisplayType.Opaque);
             }
         }
 

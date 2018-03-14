@@ -6,5 +6,5 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/VirtualHaus_AR.unity
-    guid: cddca32d3280f7047ae3a090ad9e207b
+    path: Assets/VirtualHaus_Hololens.unity
+    guid: 352c7995f83d9224aa0a1dbec1cfa199

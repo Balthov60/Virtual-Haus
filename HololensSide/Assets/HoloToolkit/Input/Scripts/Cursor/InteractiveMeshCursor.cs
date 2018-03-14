@@ -1,7 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See LICENSE in the project root for license information.
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,7 +19,7 @@ namespace HoloToolkit.Unity.InputModule
         [Tooltip("Point light")]
         public GameObject Light;
 
-        [Tooltip("The scale factor to soften the distance scaling, we want the cursor to scale in the distance, but not disappear.")]
+        [Tooltip("The scale factor to soften the distance scaling, we want the cursor to scale in the distance, but not disapprear.")]
         public float DistanceScaleFactor = 0.3f;
 
         [Tooltip("The scale both elements will be at their default state")]

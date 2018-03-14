@@ -6,7 +6,7 @@ using UnityEngine;
 namespace HoloToolkit.Unity.InputModule
 {
     /// <summary>
-    /// Cursor Modifier Interface that provides basic overrides for cursor behavior.
+    /// Cursor Modifier Interface that provides basic overrides for cursor behaviour.
     /// </summary>
     public interface ICursorModifier
     {

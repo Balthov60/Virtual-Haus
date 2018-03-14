@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -53,26 +52,6 @@ public class NewFurniturePositionMessage : MessageBase
 public class NewFurnituresInformations
 {
     public List<NewFurnitureInformations> list;
-
-    public NewFurnituresInformations(int roomIndex)
-    {
-        list = new List<NewFurnitureInformations>();
-        Transform room = GameObject.Find("Furnitures").transform.GetChild(roomIndex);
-
-        for (int i = 0; i < room.childCount; i++)
-        {
-            GameObject furniture = room.GetChild(i).gameObject;
-
-            list.Add(new NewFurnitureInformations()
-            {
-                furnitureName = furniture.name,
-                prefabName = PrefabUtility.GetPrefabParent(furniture).name,
-
-                furniturePosition = furniture.transform.position,
-                furnitureRotation = furniture.transform.rotation
-            });
-        }
-    }
 }
 [Serializable]
 public class NewFurnitureInformations
@@ -82,4 +61,5 @@ public class NewFurnitureInformations
 
     public Vector3 furniturePosition;
     public Quaternion furnitureRotation;
+    public Vector3 furnitureScale;
 }

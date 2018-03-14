@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using UnityEditor;
@@ -17,48 +16,7 @@ namespace HoloToolkit.Unity
     public class ProjectSettingsWindow : AutoConfigureWindow<ProjectSettingsWindow.ProjectSetting>
     {
         private const string SharingServiceURL = "https://raw.githubusercontent.com/Microsoft/MixedRealityToolkit-Unity/master/External/HoloToolkit/Sharing/Server/SharingService.exe";
-
-        /// <summary>
-        /// This is used to keep a local list of axis names, so we don't have to keep iterating through each SerializedProperty.
-        /// </summary>
-        private List<string> axisNames = new List<string>();
-
-        /// <summary>
-        /// This is used to keep a single reference to InputManager.asset, refreshed when necessary.
-        /// </summary>
-        private SerializedObject inputManagerAsset;
-
-        /// <summary>
-        /// Define new axes here adding a new InputManagerAxis to the array.
-        /// </summary>
-        private readonly InputManagerAxis[] newInputAxes =
-        {
-            new InputManagerAxis() { Name = InputMappingAxisUtility.CONTROLLER_LEFT_STICK_HORIZONTAL,  Dead = 0.19f, Sensitivity = 1, Invert = false, Type = AxisType.JoystickAxis, Axis = 1 },
-            new InputManagerAxis() { Name = InputMappingAxisUtility.CONTROLLER_LEFT_STICK_VERTICAL,    Dead = 0.19f, Sensitivity = 1, Invert = true,  Type = AxisType.JoystickAxis, Axis = 2 },
-            new InputManagerAxis() { Name = InputMappingAxisUtility.XBOX_SHARED_TRIGGER,               Dead = 0.19f, Sensitivity = 1, Invert = false, Type = AxisType.JoystickAxis, Axis = 3 },
-            new InputManagerAxis() { Name = InputMappingAxisUtility.CONTROLLER_RIGHT_STICK_HORIZONTAL, Dead = 0.19f, Sensitivity = 1, Invert = false, Type = AxisType.JoystickAxis, Axis = 4 },
-            new InputManagerAxis() { Name = InputMappingAxisUtility.CONTROLLER_RIGHT_STICK_VERTICAL,   Dead = 0.19f, Sensitivity = 1, Invert = true,  Type = AxisType.JoystickAxis, Axis = 5 },
-            new InputManagerAxis() { Name = InputMappingAxisUtility.XBOX_DPAD_HORIZONTAL,              Dead = 0.19f, Sensitivity = 1, Invert = false, Type = AxisType.JoystickAxis, Axis = 6 },
-            new InputManagerAxis() { Name = InputMappingAxisUtility.XBOX_DPAD_VERTICAL,                Dead = 0.19f, Sensitivity = 1, Invert = false, Type = AxisType.JoystickAxis, Axis = 7 },
-            new InputManagerAxis() { Name = InputMappingAxisUtility.CONTROLLER_LEFT_TRIGGER,           Dead = 0.19f, Sensitivity = 1, Invert = false, Type = AxisType.JoystickAxis, Axis = 9 },
-            new InputManagerAxis() { Name = InputMappingAxisUtility.CONTROLLER_RIGHT_TRIGGER,          Dead = 0.19f, Sensitivity = 1, Invert = false, Type = AxisType.JoystickAxis, Axis = 10 },
-
-            new InputManagerAxis() { Name = InputMappingAxisUtility.XBOX_A,                          PositiveButton = "joystick button 0", Gravity = 1000, Dead = 0.001f, Sensitivity = 1000, Type = AxisType.KeyOrMouseButton, Axis = 1 },
-            new InputManagerAxis() { Name = InputMappingAxisUtility.XBOX_B,                          PositiveButton = "joystick button 1", Gravity = 1000, Dead = 0.001f, Sensitivity = 1000, Type = AxisType.KeyOrMouseButton, Axis = 1 },
-            new InputManagerAxis() { Name = InputMappingAxisUtility.XBOX_X,                          PositiveButton = "joystick button 2", Gravity = 1000, Dead = 0.001f, Sensitivity = 1000, Type = AxisType.KeyOrMouseButton, Axis = 1 },
-            new InputManagerAxis() { Name = InputMappingAxisUtility.XBOX_Y,                          PositiveButton = "joystick button 3", Gravity = 1000, Dead = 0.001f, Sensitivity = 1000, Type = AxisType.KeyOrMouseButton, Axis = 1 },
-            new InputManagerAxis() { Name = InputMappingAxisUtility.CONTROLLER_LEFT_BUMPER_OR_GRIP,  PositiveButton = "joystick button 4", Gravity = 1000, Dead = 0.001f, Sensitivity = 1000, Type = AxisType.KeyOrMouseButton, Axis = 1 },
-            new InputManagerAxis() { Name = InputMappingAxisUtility.CONTROLLER_RIGHT_BUMPER_OR_GRIP, PositiveButton = "joystick button 5", Gravity = 1000, Dead = 0.001f, Sensitivity = 1000, Type = AxisType.KeyOrMouseButton, Axis = 1 },
-            new InputManagerAxis() { Name = InputMappingAxisUtility.CONTROLLER_LEFT_MENU,            PositiveButton = "joystick button 6", Gravity = 1000, Dead = 0.001f, Sensitivity = 1000, Type = AxisType.KeyOrMouseButton, Axis = 1 },
-            new InputManagerAxis() { Name = InputMappingAxisUtility.CONTROLLER_RIGHT_MENU,           PositiveButton = "joystick button 7", Gravity = 1000, Dead = 0.001f, Sensitivity = 1000, Type = AxisType.KeyOrMouseButton, Axis = 1 },
-            new InputManagerAxis() { Name = InputMappingAxisUtility.CONTROLLER_LEFT_STICK_CLICK,     PositiveButton = "joystick button 8", Gravity = 1000, Dead = 0.001f, Sensitivity = 1000, Type = AxisType.KeyOrMouseButton, Axis = 1 },
-            new InputManagerAxis() { Name = InputMappingAxisUtility.CONTROLLER_RIGHT_STICK_CLICK,    PositiveButton = "joystick button 9", Gravity = 1000, Dead = 0.001f, Sensitivity = 1000, Type = AxisType.KeyOrMouseButton, Axis = 1 },
-        };
-
-        /// <summary>
-        /// As axes in newInputAxes are removed or renamed, move them here for proper clean-up in user projects.
-        /// </summary>
-        private readonly InputManagerAxis[] obsoleteInputAxes = { };
+        private const string InputManagerAssetURL = "https://raw.githubusercontent.com/Microsoft/MixedRealityToolkit-Unity/master/ProjectSettings/InputManager.asset";
 
         #region Nested Types
 
@@ -69,40 +27,8 @@ namespace HoloToolkit.Unity
             WsaUwpBuildToD3D,
             TargetOccludedDevices,
             SharingServices,
-            UseInputManagerAxes,
+            XboxControllerSupport,
             DotNetScriptingBackend,
-        }
-
-        /// <summary>
-        /// Used to map AxisType from a useful name to the int value the InputManager wants.
-        /// </summary>
-        private enum AxisType
-        {
-            KeyOrMouseButton,
-            MouseMovement,
-            JoystickAxis
-        };
-
-        /// <summary>
-        /// Used to define an entire InputManagerAxis, with each variable defined by the same term the Inspector shows.
-        /// </summary>
-        private class InputManagerAxis
-        {
-            public string Name = "";
-            public string DescriptiveName = "";
-            public string DescriptiveNegativeName = "";
-            public string NegativeButton = "";
-            public string PositiveButton = "";
-            public string AltNegativeButton = "";
-            public string AltPositiveButton = "";
-            public float Gravity = 0.0f;
-            public float Dead = 0.0f;
-            public float Sensitivity = 0.0f;
-            public bool Snap = false;
-            public bool Invert = false;
-            public AxisType Type = default(AxisType);
-            public int Axis = 0;
-            public int JoyNum = 0;
         }
 
         #endregion // Nested Types
@@ -151,14 +77,13 @@ namespace HoloToolkit.Unity
                     case ProjectSetting.SharingServices:
                         Values[(ProjectSetting)i] = EditorPrefsUtility.GetEditorPref(Names[(ProjectSetting)i], false);
                         break;
-                    case ProjectSetting.UseInputManagerAxes:
+                    case ProjectSetting.XboxControllerSupport:
                         Values[(ProjectSetting)i] = EditorPrefsUtility.GetEditorPref(Names[(ProjectSetting)i], false);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
             }
-
         }
 
         private void UpdateSettings(BuildTarget currentBuildTarget)
@@ -184,7 +109,7 @@ namespace HoloToolkit.Unity
 #endif
                         while (!webRequest.isDone)
                         {
-                            if (webRequest.downloadProgress > -1)
+                            if (webRequest.downloadProgress != -1)
                             {
                                 EditorUtility.DisplayProgressBar(
                                     "Downloading the SharingService executable from GitHub",
@@ -197,7 +122,7 @@ namespace HoloToolkit.Unity
 #if UNITY_2017_1_OR_NEWER
                         if (webRequest.isNetworkError || webRequest.isHttpError)
 #else
-                        if (webRequest.isError)
+                            if (webRequest.isError)
 #endif
                         {
                             Debug.LogError("Network Error: " + webRequest.error);
@@ -225,47 +150,71 @@ namespace HoloToolkit.Unity
                 PlayerSettings.WSA.SetCapability(PlayerSettings.WSACapability.PrivateNetworkClientServer, false);
             }
 
-            bool useToolkitAxes = Values[ProjectSetting.UseInputManagerAxes];
+            var inputManagerPath = Directory.GetParent(Path.GetFullPath(Application.dataPath)).FullName + "\\ProjectSettings\\InputManager.asset";
+            bool userPermission = Values[ProjectSetting.XboxControllerSupport];
 
-            if (useToolkitAxes != EditorPrefsUtility.GetEditorPref(Names[ProjectSetting.UseInputManagerAxes], false))
+            if (userPermission)
             {
-                EditorPrefsUtility.SetEditorPref(Names[ProjectSetting.UseInputManagerAxes], useToolkitAxes);
+                userPermission = EditorUtility.DisplayDialog("Attention!",
+                    "Hi there, we noticed that you've enabled the Xbox Controller support.\n\n" +
+                    "Do you give us permission to download the latest input mapping definitions from " +
+                    "the Mixed Reality Toolkit's GitHub page and replace your project's InputManager.asset?\n\n",
+                    "OK", "Cancel");
 
-                // Grabs the actual asset file into a SerializedObject, so we can iterate through it and edit it.
-                inputManagerAsset = new SerializedObject(AssetDatabase.LoadAssetAtPath("ProjectSettings/InputManager.asset", typeof(UnityEngine.Object)));
-
-                if (useToolkitAxes)
+                if (userPermission)
                 {
-                    foreach (InputManagerAxis axis in newInputAxes)
+                    using (var webRequest = UnityWebRequest.Get(InputManagerAssetURL))
                     {
-                        if (!DoesAxisNameExist(axis.Name))
+#if UNITY_2017_2_OR_NEWER
+                        webRequest.SendWebRequest();
+#else
+                        webRequest.Send();
+#endif
+
+                        while (!webRequest.isDone)
                         {
-                            AddAxis(axis);
+                            if (webRequest.downloadProgress != -1)
+                            {
+                                EditorUtility.DisplayProgressBar("Downloading InputManager.asset from GitHub", "Progress...", webRequest.downloadProgress);
+                            }
+                        }
+
+                        EditorUtility.ClearProgressBar();
+
+#if UNITY_2017_1_OR_NEWER
+                        if (webRequest.isNetworkError || webRequest.isHttpError)
+#else
+                            if (webRequest.isError)
+#endif
+                        {
+                            Debug.LogError("Network Error: " + webRequest.error);
+                            userPermission = false;
+                        }
+                        else
+                        {
+                            File.Copy(inputManagerPath, inputManagerPath + ".old", true);
+                            File.WriteAllText(inputManagerPath, webRequest.downloadHandler.text);
                         }
                     }
+                }
+            }
 
+            if (!userPermission)
+            {
+                Values[ProjectSetting.XboxControllerSupport] = false;
+                if (File.Exists(inputManagerPath + ".old"))
+                {
+                    File.Copy(inputManagerPath + ".old", inputManagerPath, true);
+                    File.Delete(inputManagerPath + ".old");
+                    Debug.Log("Previous Input Mapping Restored.");
                 }
                 else
                 {
-                    foreach (InputManagerAxis axis in newInputAxes)
-                    {
-                        if (DoesAxisNameExist(axis.Name))
-                        {
-                            RemoveAxis(axis.Name);
-                        }
-                    }
-
-                    foreach (InputManagerAxis axis in obsoleteInputAxes)
-                    {
-                        if (DoesAxisNameExist(axis.Name))
-                        {
-                            RemoveAxis(axis.Name);
-                        }
-                    }
+                    Debug.LogWarning("No old Input Mapping found!");
                 }
-
-                inputManagerAsset.ApplyModifiedProperties();
             }
+
+            EditorPrefsUtility.SetEditorPref(Names[ProjectSetting.XboxControllerSupport], Values[ProjectSetting.XboxControllerSupport]);
 
             if (currentBuildTarget != BuildTarget.WSAPlayer)
             {
@@ -295,12 +244,8 @@ namespace HoloToolkit.Unity
                 if (!Values[ProjectSetting.TargetOccludedDevices])
                 {
                     EditorUserBuildSettings.wsaSubtarget = WSASubtarget.HoloLens;
-#if UNITY_2017_2_OR_NEWER
                     UnityEditorInternal.VR.VREditor.SetVREnabledDevicesOnTargetGroup(BuildTargetGroup.WSA, new[] { "WindowsMR" });
-#else
-                    UnityEditorInternal.VR.VREditor.SetVREnabledDevicesOnTargetGroup(BuildTargetGroup.WSA, new[] { "HoloLens" });
-#endif
-                    PlayerSettings.WSA.SetCapability(PlayerSettings.WSACapability.HumanInterfaceDevice, Values[ProjectSetting.UseInputManagerAxes]);
+                    PlayerSettings.WSA.SetCapability(PlayerSettings.WSACapability.HumanInterfaceDevice, Values[ProjectSetting.XboxControllerSupport]);
                     BuildDeployPrefs.BuildPlatform = "x86";
 
                     for (var i = 0; i < QualitySettings.names.Length; i++)
@@ -365,7 +310,7 @@ namespace HoloToolkit.Unity
             Descriptions[ProjectSetting.BuildWsaUwp] =
                 "<b>Required</b>\n\n" +
                 "Switches the currently active target to produce a Store app targeting the Universal Windows Platform.\n\n" +
-                "<color=#ffff00ff><b>Note:</b></color> Cross platform development can be done with this toolkit, but many features and " +
+                "<color=#ffff00ff><b>Note:</b></color> Cross platform development can be done with this toolkit, but many features and" +
                 "tools will not work if the build target is not Windows Universal.";
 
             Names[ProjectSetting.WsaEnableXR] = "Enable XR";
@@ -378,9 +323,9 @@ namespace HoloToolkit.Unity
             Names[ProjectSetting.WsaUwpBuildToD3D] = "Build for Direct3D";
             Descriptions[ProjectSetting.WsaUwpBuildToD3D] =
                 "Recommended\n\n" +
-                "Produces an app that targets Direct3D instead of XAML.\n\n" +
-                "Pure Direct3D apps run faster than applications that include XAML. This option should remain checked unless you plan to " +
-                "overlay Unity content with XAML content or you plan to switch between Unity views and XAML views at runtime.";
+                "Produces an app that targets Direct3D instead of Xaml.\n\n" +
+                "Pure Direct3D apps run faster than applications that include Xaml. This option should remain checked unless you plan to " +
+                "overlay Unity content with Xaml content or you plan to switch between Unity views and Xaml views at runtime.";
 
             Names[ProjectSetting.TargetOccludedDevices] = "Target Occluded Devices";
             Descriptions[ProjectSetting.TargetOccludedDevices] =
@@ -396,16 +341,17 @@ namespace HoloToolkit.Unity
             Names[ProjectSetting.SharingServices] = "Enable Sharing Services";
             Descriptions[ProjectSetting.SharingServices] =
                 "Enables the use of the Sharing Services in your project for all apps on any platform.\n\n" +
-                "<color=#ffff00ff><b>Note:</b></color> Start the Sharing Server via 'Mixed Reality Toolkit/Sharing Service/Launch Sharing Service'.\n\n" +
+                "<color=#ffff00ff><b>Note:</b></color> Start the Sharing Server via 'HoloToolkit/Sharing Service/Launch Sharing Service'.\n\n" +
                 "<color=#ffff00ff><b>Note:</b></color> The InternetClientServer and PrivateNetworkClientServer capabilities will be enabled in the " +
                 "appx manifest for you.";
 
-            Names[ProjectSetting.UseInputManagerAxes] = "Use Toolkit-specific InputManager axes";
-            Descriptions[ProjectSetting.UseInputManagerAxes] =
-                "Enables the use of the Xbox Controller for all apps on any platform.\n\n" +
-                "To remove the added axes, simply disable this setting.\n\n" +
-                "<color=#ffff00ff><b>Note:</b></color> The HoloLens platform target requires the HID capability to be defined in the appx manifest. " +
-                "This capability is automatically enabled for you if you select this setting, \"Enable XR\", and don't select \"Target Occluded Devices\".";
+            Names[ProjectSetting.XboxControllerSupport] = "Enable Xbox Controller Support";
+            Descriptions[ProjectSetting.XboxControllerSupport] =
+                "Enables the use of Xbox Controller support for all apps on any platform.\n\n" +
+                "<color=#ff0000ff><b>Warning!</b></color> Enabling this feature will copy your old InputManager.asset and append it with \".old\".  " +
+                "To revert simply disable Xbox Controller Support.\n\n" +
+                "<color=#ffff00ff><b>Note:</b></color> ONLY the HoloLens platform target requires the HID capabilities be defined in the appx manifest.  " +
+                "This capability is automatically enabled for you if you enable Xbox Controller Support and enable VR and target the HoloLens device.";
 
             Names[ProjectSetting.DotNetScriptingBackend] = "Enable .NET scripting backend";
             Descriptions[ProjectSetting.DotNetScriptingBackend] =
@@ -425,119 +371,6 @@ namespace HoloToolkit.Unity
             maxSize = minSize;
         }
 
-        private void OnDisable()
-        {
-            if (inputManagerAsset != null)
-            {
-                inputManagerAsset.Dispose();
-            }
-        }
-
         #endregion // Overrides / Event Handlers
-
-        private void AddAxis(InputManagerAxis axis)
-        {
-            SerializedProperty axesProperty = inputManagerAsset.FindProperty("m_Axes");
-
-            // Creates a new axis by incrementing the size of the m_Axes array.
-            axesProperty.arraySize++;
-
-            // Get the new axis be querying for the last array element.
-            SerializedProperty axisProperty = axesProperty.GetArrayElementAtIndex(axesProperty.arraySize - 1);
-
-            // Iterate through all the properties of the new axis.
-            while (axisProperty.Next(true))
-            {
-                switch (axisProperty.name)
-                {
-                    case "m_Name":
-                        axisProperty.stringValue = axis.Name;
-                        break;
-                    case "descriptiveName":
-                        axisProperty.stringValue = axis.DescriptiveName;
-                        break;
-                    case "descriptiveNegativeName":
-                        axisProperty.stringValue = axis.DescriptiveNegativeName;
-                        break;
-                    case "negativeButton":
-                        axisProperty.stringValue = axis.NegativeButton;
-                        break;
-                    case "positiveButton":
-                        axisProperty.stringValue = axis.PositiveButton;
-                        break;
-                    case "altNegativeButton":
-                        axisProperty.stringValue = axis.AltNegativeButton;
-                        break;
-                    case "altPositiveButton":
-                        axisProperty.stringValue = axis.AltPositiveButton;
-                        break;
-                    case "gravity":
-                        axisProperty.floatValue = axis.Gravity;
-                        break;
-                    case "dead":
-                        axisProperty.floatValue = axis.Dead;
-                        break;
-                    case "sensitivity":
-                        axisProperty.floatValue = axis.Sensitivity;
-                        break;
-                    case "snap":
-                        axisProperty.boolValue = axis.Snap;
-                        break;
-                    case "invert":
-                        axisProperty.boolValue = axis.Invert;
-                        break;
-                    case "type":
-                        axisProperty.intValue = (int)axis.Type;
-                        break;
-                    case "axis":
-                        axisProperty.intValue = axis.Axis - 1;
-                        break;
-                    case "joyNum":
-                        axisProperty.intValue = axis.JoyNum;
-                        break;
-                }
-            }
-        }
-
-        private void RemoveAxis(string axis)
-        {
-            SerializedProperty axesProperty = inputManagerAsset.FindProperty("m_Axes");
-
-            // This loop accounts for multiple axes with the same name.
-            while (axisNames.Contains(axis))
-            {
-                int index = axisNames.IndexOf(axis);
-                axesProperty.DeleteArrayElementAtIndex(index);
-                axisNames.RemoveAt(index);
-            }
-        }
-
-        /// <summary>
-        /// Checks our local cache of axis names to see if an axis exists. This cache is refreshed if it's empty or if InputManager.asset has been changed.
-        /// </summary>
-        private bool DoesAxisNameExist(string axisName)
-        {
-            if (axisNames.Count == 0 || inputManagerAsset.UpdateIfRequiredOrScript())
-            {
-                RefreshLocalAxesList();
-            }
-
-            return axisNames.Contains(axisName);
-        }
-
-        /// <summary>
-        /// Clears our local cache, then refills it by iterating through the m_Axes arrays and storing the display names.
-        /// </summary>
-        private void RefreshLocalAxesList()
-        {
-            axisNames.Clear();
-
-            SerializedProperty axesProperty = inputManagerAsset.FindProperty("m_Axes");
-
-            for (int i = 0; i < axesProperty.arraySize; i++)
-            {
-                axisNames.Add(axesProperty.GetArrayElementAtIndex(i).displayName);
-            }
-        }
     }
 }

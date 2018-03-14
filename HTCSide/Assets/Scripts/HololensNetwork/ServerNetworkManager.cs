@@ -120,7 +120,7 @@ public class ServerNetworkManager : MonoBehaviour
         NewFurniturePositionMessage furniturePositionMessage = new NewFurniturePositionMessage()
         {
             furnitureName = furniture.transform.name,
-            furniturePosition = furniture.transform.position,
+            furniturePosition = furniture.transform.localPosition,
             furnitureRotation = furniture.transform.rotation
         };
 

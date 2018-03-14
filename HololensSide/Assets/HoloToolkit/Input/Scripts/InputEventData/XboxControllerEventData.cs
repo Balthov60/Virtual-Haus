@@ -5,10 +5,8 @@ using UnityEngine.EventSystems;
 
 namespace HoloToolkit.Unity.InputModule
 {
-    public class XboxControllerEventData : SourceStateEventData
+    public class XboxControllerEventData : GamePadEventData
     {
-        public string GamePadName { get; private set; }
-
         public float XboxLeftStickHorizontalAxis { get; private set; }
         public float XboxLeftStickVerticalAxis { get; private set; }
         public float XboxRightStickHorizontalAxis { get; private set; }
@@ -57,8 +55,6 @@ namespace HoloToolkit.Unity.InputModule
         public void Initialize(IInputSource inputSource, uint sourceId, XboxControllerData inputData, object tag = null)
         {
             BaseInitialize(inputSource, sourceId, tag);
-
-            GamePadName = inputData.GamePadName;
 
             XboxLeftStickHorizontalAxis = inputData.XboxLeftStickHorizontalAxis;
             XboxLeftStickVerticalAxis = inputData.XboxLeftStickVerticalAxis;

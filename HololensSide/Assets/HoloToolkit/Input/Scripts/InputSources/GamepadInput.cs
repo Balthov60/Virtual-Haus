@@ -15,16 +15,16 @@ using UnityEngine.VR.WSA.Input;
 namespace HoloToolkit.Unity.InputModule
 {
     /// <summary>
-    /// GamepadInput class maps Xbox GamePad buttons to the GestureRecognizer.
+    /// GamepadInput class maps Xbox gamepad buttons to the GestureRecognizer.
     /// Gamepad button A press and release maps to tap gesture.
     /// Gamepad button A pressed maps to hold started, completed, canceled gesture.
     /// Gamepad button A pressed plus left joystick rotate maps to navigation gesture.
     /// </summary>
-    [Obsolete("Please use XboxControllerHandlerBase")]
+    [Obsolete("Please use GamePadInputSource or XboxControllerInputSource")]
     public class GamepadInput : BaseInputSource
     {
         [Tooltip("Game pad button to press for air tap.")]
-        public string GamePadButtonA = "XBOX_A";
+        public string GamePadButtonA = "Fire1";
 
         [Tooltip("Change this value to give a different source id to your controller.")]
         public uint GamePadId = 50000;
@@ -35,10 +35,10 @@ namespace HoloToolkit.Unity.InputModule
         public float HoldCompletedInterval = 3.0f;
 
         [Tooltip("Name of the joystick axis that navigates around X.")]
-        public string NavigateAroundXAxisName = "CONTROLLER_LEFT_STICK_HORIZONTAL";
+        public string NavigateAroundXAxisName = "ControllerLeftStickX";
 
         [Tooltip("Name of the joystick axis that navigates around Y.")]
-        public string NavigateAroundYAxisName = "CONTROLLER_LEFT_STICK_VERTICAL";
+        public string NavigateAroundYAxisName = "ControllerLeftStickY";
 
         bool isAPressed = false;
         bool holdStarted = false;
@@ -48,7 +48,7 @@ namespace HoloToolkit.Unity.InputModule
 
         private InputManager inputManager;
 
-        private enum GestureState
+        enum GestureState
         {
             APressed,
             NavigationStarted,
@@ -58,7 +58,7 @@ namespace HoloToolkit.Unity.InputModule
             HoldCanceled
         }
 
-        private GestureState currentGestureState;
+        GestureState currentGestureState;
 
         protected virtual void Start()
         {
@@ -137,7 +137,9 @@ namespace HoloToolkit.Unity.InputModule
 
             if (displacementAlongX != 0.0f || displacementAlongY != 0.0f || navigationStarted)
             {
-                Vector3 normalizedOffset = new Vector3(displacementAlongX, displacementAlongY, 0.0f);
+                Vector3 normalizedOffset = new Vector3(displacementAlongX,
+                    displacementAlongY,
+                    0.0f);
 
                 if (!navigationStarted)
                 {

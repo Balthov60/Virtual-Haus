@@ -20,7 +20,7 @@ namespace HoloToolkit.Unity.InputModule
         public event Action ButtonPressed;
 
         /// <summary>
-        /// Press the button programmatically.
+        /// Press the button programatically.
         /// </summary>
         public void Press()
         {

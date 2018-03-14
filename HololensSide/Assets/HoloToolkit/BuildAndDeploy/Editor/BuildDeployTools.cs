@@ -18,7 +18,7 @@ namespace HoloToolkit.Unity
     /// </summary>
     public class BuildDeployTools
     {
-        public const string DefaultMSBuildVersion = "15.0";
+        public static readonly string DefaultMSBuildVersion = "14.0";
 
         public static bool CanBuild()
         {
@@ -54,14 +54,6 @@ namespace HoloToolkit.Unity
             }
 
             return true;
-        }
-
-        /// <summary>
-        /// Do a build configured for Mixed Reality Applications, returns the error from BuildPipeline.BuildPlayer
-        /// </summary>
-        public static bool BuildSLN()
-        {
-            return BuildSLN(BuildDeployPrefs.BuildDirectory, false);
         }
 
         public static bool BuildSLN(string buildDirectory, bool showDialog = true)
@@ -136,14 +128,15 @@ namespace HoloToolkit.Unity
                 }
             }
 
-            // If we got this far then we don't have VS 2015 installed and need to use msBuild 15
-            msBuildVersion = "15.0";
-
             // For MSBuild 15+ we should to use vswhere to give us the correct instance
             string output = @"/C vswhere -version " + msBuildVersion + " -products * -requires Microsoft.Component.MSBuild -property installationPath";
 
-            // get the right program files path based on whether the PC is x86 or x64
-            string programFiles = @"C:\Program Files (x86)\Microsoft Visual Studio\Installer";
+            // get the right program files path based on whether the pc is x86 or x64
+            string programFiles = @"C:\Program Files\";
+            if (Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE", EnvironmentVariableTarget.Machine) == "AMD64")
+            {
+                programFiles = @"C:\Program Files (x86)\";
+            }
 
             var vswherePInfo = new ProcessStartInfo
             {
@@ -153,7 +146,7 @@ namespace HoloToolkit.Unity
                 RedirectStandardOutput = true,
                 RedirectStandardError = false,
                 Arguments = output,
-                WorkingDirectory = programFiles
+                WorkingDirectory = programFiles + @"Microsoft Visual Studio\Installer"
             };
 
             using (var vswhereP = new Process())
@@ -173,8 +166,10 @@ namespace HoloToolkit.Unity
                 string bestPath = paths.OrderBy(p => p.ToLower().Contains("enterprise"))
                                         .ThenBy(p => p.ToLower().Contains("professional"))
                                         .ThenBy(p => p.ToLower().Contains("community")).First();
-
-                return bestPath + @"\MSBuild\" + msBuildVersion + @"\Bin\MSBuild.exe";
+                if (File.Exists(bestPath + @"\MSBuild\" + msBuildVersion + @"\Bin\MSBuild.exe"))
+                {
+                    return bestPath + @"\MSBuild\" + msBuildVersion + @"\Bin\MSBuild.exe";
+                }
             }
 
             Debug.LogError("Unable to find a valid path to Visual Studio Instance!");
@@ -183,9 +178,6 @@ namespace HoloToolkit.Unity
 
         public static bool RestoreNugetPackages(string nugetPath, string storePath)
         {
-            Debug.Assert(File.Exists(nugetPath));
-            Debug.Assert(Directory.Exists(storePath));
-
             var nugetPInfo = new ProcessStartInfo
             {
                 FileName = nugetPath,
@@ -219,11 +211,11 @@ namespace HoloToolkit.Unity
             }
 
             // Get and validate the msBuild path...
-            var msBuildPath = CalcMSBuildPath(msBuildVersion);
+            var vs = CalcMSBuildPath(msBuildVersion);
 
-            if (!File.Exists(msBuildPath))
+            if (!File.Exists(vs))
             {
-                Debug.LogErrorFormat("MSBuild.exe is missing or invalid (path={0}).", msBuildPath);
+                Debug.LogError("MSBuild.exe is missing or invalid (path=" + vs + "). Note that the default version is " + DefaultMSBuildVersion);
                 EditorUtility.ClearProgressBar();
                 return false;
             }
@@ -241,17 +233,13 @@ namespace HoloToolkit.Unity
             }
 
             string nugetPath = Path.Combine(unity, @"Data\PlaybackEngines\MetroSupport\Tools\NuGet.exe");
-            string assemblyCSharp = storePath + "/GeneratedProjects/UWP/Assembly-CSharp";
-            string assemblyCSharpFirstPass = storePath + "/GeneratedProjects/UWP/Assembly-CSharp-firstpass";
-            bool restoreFirstPass = Directory.Exists(assemblyCSharpFirstPass);
 
             // Before building, need to run a nuget restore to generate a json.lock file. Failing to do
             // this breaks the build in VS RTM
-            if (PlayerSettings.GetScriptingBackend(BuildTargetGroup.WSA) == ScriptingImplementation.WinRTDotNET &&
-                (!RestoreNugetPackages(nugetPath, storePath) ||
-                 !RestoreNugetPackages(nugetPath, storePath + "\\" + productName) ||
-                 EditorUserBuildSettings.wsaGenerateReferenceProjects && !RestoreNugetPackages(nugetPath, assemblyCSharp) ||
-                 EditorUserBuildSettings.wsaGenerateReferenceProjects && restoreFirstPass && !RestoreNugetPackages(nugetPath, assemblyCSharpFirstPass)))
+            if (!RestoreNugetPackages(nugetPath, storePath) ||
+                !RestoreNugetPackages(nugetPath, storePath + "\\" + productName) ||
+                EditorUserBuildSettings.wsaGenerateReferenceProjects && !RestoreNugetPackages(nugetPath, storePath + "/GeneratedProjects/UWP/Assembly-CSharp") ||
+                EditorUserBuildSettings.wsaGenerateReferenceProjects && !RestoreNugetPackages(nugetPath, storePath + "/GeneratedProjects/UWP/Assembly-CSharp-firstpass"))
             {
                 Debug.LogError("Failed to restore nuget packages");
                 EditorUtility.ClearProgressBar();
@@ -270,7 +258,7 @@ namespace HoloToolkit.Unity
             // Now do the actual build
             var pInfo = new ProcessStartInfo
             {
-                FileName = msBuildPath,
+                FileName = vs,
                 CreateNoWindow = false,
                 Arguments = string.Format("\"{0}\" /t:{1} /p:Configuration={2} /p:Platform={3} /verbosity:m",
                     solutionProjectPath,
@@ -299,9 +287,9 @@ namespace HoloToolkit.Unity
 
                 if (process.ExitCode == 0 &&
                     showDialog &&
-                    !EditorUtility.DisplayDialog("Build AppX", "AppX Build Successful!", "OK", "Open AppX Folder"))
+                    !EditorUtility.DisplayDialog("Build AppX", "AppX Build Successful!", "OK", "Open Project Folder"))
                 {
-                    Process.Start("explorer.exe", "/f /open," + Path.GetFullPath(BuildDeployPrefs.BuildDirectory + "/" + PlayerSettings.productName + "/AppPackages"));
+                    Process.Start("explorer.exe", "/select," + storePath);
                 }
 
                 if (process.ExitCode != 0)
@@ -357,14 +345,12 @@ namespace HoloToolkit.Unity
                 return;
             }
 
-            // Assume package version always has a '.' between each number.
+            // Assume package version always has a '.'.
             // According to https://msdn.microsoft.com/en-us/library/windows/apps/br211441.aspx
-            // Package versions are always of the form Major.Minor.Build.Revision.
-            // Note: Revision number reserved for Windows Store, and a value other than 0 will fail WACK.
-            var version = PlayerSettings.WSA.packageVersion;
-            var newVersion = new Version(version.Major, version.Minor, version.Build + 1, version.Revision);
+            // Package versions are always of the form Major.Minor.Build.Revision
+            var version = new Version(versionAttr.Value);
+            var newVersion = new Version(version.Major, version.Minor, version.Build, version.Revision + 1);
 
-            PlayerSettings.WSA.packageVersion = newVersion;
             versionAttr.Value = newVersion.ToString();
             rootNode.Save(manifest);
         }

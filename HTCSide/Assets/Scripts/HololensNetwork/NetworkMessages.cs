@@ -67,9 +67,9 @@ public class NewFurnituresInformations
             {
                 furnitureName = furniture.name,
                 prefabName = PrefabUtility.GetPrefabParent(furniture).name,
-
-                furniturePosition = furniture.transform.position,
-                furnitureRotation = furniture.transform.rotation
+                furniturePosition = furniture.transform.localPosition,
+                furnitureRotation = furniture.transform.rotation,
+                furnitureScale = furniture.transform.localScale
             });
         }
     }
@@ -82,4 +82,5 @@ public class NewFurnitureInformations
 
     public Vector3 furniturePosition;
     public Quaternion furnitureRotation;
+    public Vector3 furnitureScale;
 }

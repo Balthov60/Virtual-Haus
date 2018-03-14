@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using HoloToolkit.Unity.InputModule;
+using UnityEngine;
 using UnityEngine.Networking;
 
 public class ClientNetworkManager : MonoBehaviour {
@@ -11,11 +12,17 @@ public class ClientNetworkManager : MonoBehaviour {
     private int roomQuantityToLoad;
 
     private Transform player;
+    private GameObject movable;
+    private GameObject appartment;
+    private float appartmentScaleFactor;
 
     private void Start()
     {
         status = ClientStatus.DISCONNECTED;
         player = GameObject.Find("Player").transform;
+        movable = GameObject.Find("Furnitures");
+
+        SetupClient();
     }
     private void SetupClient()
     {
@@ -56,8 +63,16 @@ public class ClientNetworkManager : MonoBehaviour {
         GameObject appartmentPrefab = Resources.Load<GameObject>("Appartments/" + msg.modelName + "/" + msg.modelName);
         roomQuantityToLoad = msg.roomQuantity;
 
-        GameObject appartment = Instantiate(appartmentPrefab, msg.appartmentPosition, Quaternion.identity);
-        appartment.transform.localScale = msg.appartmentScale;
+        appartment = Instantiate(appartmentPrefab, msg.appartmentPosition, Quaternion.identity);
+        appartmentScaleFactor = msg.appartmentScale.x;
+
+        movable.transform.parent = appartment.transform;
+        movable.transform.position = new Vector3(0, -20 / appartmentScaleFactor, 0);
+
+        TapToPlace tapToPlace = appartment.AddComponent<TapToPlace>();
+        tapToPlace.IsBeingPlaced = true;
+
+        player.localScale /= appartmentScaleFactor;
 
         status = ClientStatus.APPARTMENT_LOADED;
         client.Send(VirtualHausMessageType.APPARTMENT_LOADED, new EmptyMessage());
@@ -79,8 +94,13 @@ public class ClientNetworkManager : MonoBehaviour {
         foreach (NewFurnitureInformations furniture in furnitures.list)
         {
             GameObject furniturePrefab = Resources.Load<GameObject>("Furnitures/Prefab/" + furniture.prefabName);
+            Debug.Log(furniture.furniturePosition);
+            GameObject instance = Instantiate(furniturePrefab, movable.transform);
 
-            GameObject instance = Instantiate(furniturePrefab, furniture.furniturePosition, furniture.furnitureRotation);
+            instance.transform.localPosition = furniture.furniturePosition / appartmentScaleFactor;
+            instance.transform.rotation = furniture.furnitureRotation;
+            instance.transform.localScale = furniture.furnitureScale / appartmentScaleFactor;
+
             instance.name = furniture.furnitureName;
         }
     }
@@ -91,16 +111,18 @@ public class ClientNetworkManager : MonoBehaviour {
     {
         UserPositionMessage msg = netMsg.ReadMessage<UserPositionMessage>();
 
-        player.position = msg.userPosition;
-        player.rotation = msg.userRotation;
+        player.position = (msg.userPosition / appartmentScaleFactor);
+        player.position = appartment.transform.rotation * player.position;
+        player.position += appartment.transform.position;
+        player.rotation = appartment.transform.rotation * msg.userRotation;
     }
     public void UpdateFurniturePosition(NetworkMessage netMsg)
     {
         NewFurniturePositionMessage msg = netMsg.ReadMessage<NewFurniturePositionMessage>();
 
         Transform toUpdate = GameObject.Find(msg.furnitureName).transform;
-        toUpdate.position = msg.furniturePosition;
-        toUpdate.rotation = msg.furnitureRotation;
+        toUpdate.localPosition = msg.furniturePosition / appartmentScaleFactor;
+        toUpdate.localRotation = msg.furnitureRotation;
     }
 
     /* Send Update to server */

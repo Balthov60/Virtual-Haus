@@ -222,6 +222,7 @@ namespace HoloToolkit.Unity.InputModule
             {
                 // Nothing to do. Keep the pointer that must have been set programmatically.
             }
+
             else if (LoadPointer != null)
             {
                 Pointer = LoadPointer.GetComponent<IPointingSource>();
@@ -287,7 +288,9 @@ namespace HoloToolkit.Unity.InputModule
         {
             FocusDetails focusDetails = FocusManager.Instance.GetFocusDetails(Pointer);
             GameObject newTargetedObject = focusDetails.Object;
-            Vector3 lookForward = Vector3.forward;
+
+            // Get the forward vector looking back along the pointing ray.
+            Vector3 lookForward = -Pointer.Ray.direction;
 
             // Normalize scale on before update
             targetScale = Vector3.one;
@@ -297,9 +300,7 @@ namespace HoloToolkit.Unity.InputModule
             {
                 TargetedObject = null;
                 TargetedCursorModifier = null;
-
-                targetPosition = RayStep.GetPointByDistance(Pointer.Rays, DefaultCursorDistance);
-                lookForward = -RayStep.GetDirectionByDistance(Pointer.Rays, DefaultCursorDistance);
+                targetPosition = Pointer.Ray.origin + Pointer.Ray.direction * DefaultCursorDistance;
                 targetRotation = lookForward.magnitude > 0 ? Quaternion.LookRotation(lookForward, Vector3.up) : transform.rotation;
             }
             else
@@ -314,10 +315,6 @@ namespace HoloToolkit.Unity.InputModule
                 else
                 {
                     // If no modifier is on the target, just use the hit result to set cursor position
-                    // Get the look forward by using distance between pointer origin and target position
-                    // (This may not be strictly accurate for extremely wobbly pointers, but it should produce usable results)
-                    float distanceToTarget = Vector3.Distance(Pointer.Rays[0].Origin, focusDetails.Point);
-                    lookForward = -RayStep.GetDirectionByDistance(Pointer.Rays, distanceToTarget);
                     targetPosition = focusDetails.Point + (lookForward * SurfaceCursorDistance);
                     Vector3 lookRotation = Vector3.Slerp(focusDetails.Normal, lookForward, LookRotationBlend);
                     targetRotation = Quaternion.LookRotation(lookRotation == Vector3.zero ? lookForward : lookRotation, Vector3.up);
@@ -371,7 +368,7 @@ namespace HoloToolkit.Unity.InputModule
         /// <param name="eventData"></param>
         public virtual void OnInputUp(InputEventData eventData)
         {
-            if (Pointer != null && Pointer.OwnsInput(eventData))
+            if (Pointer.OwnsInput(eventData))
             {
                 IsInputSourceDown = false;
             }
@@ -383,7 +380,7 @@ namespace HoloToolkit.Unity.InputModule
         /// <param name="eventData"></param>
         public virtual void OnInputDown(InputEventData eventData)
         {
-            if (Pointer != null && Pointer.OwnsInput(eventData))
+            if (Pointer.OwnsInput(eventData))
             {
                 IsInputSourceDown = true;
             }
@@ -405,7 +402,7 @@ namespace HoloToolkit.Unity.InputModule
         /// <param name="eventData"></param>
         public virtual void OnSourceDetected(SourceStateEventData eventData)
         {
-            if (Pointer != null && Pointer.OwnsInput(eventData))
+            if (Pointer.OwnsInput(eventData))
             {
                 visibleHandsCount++;
                 IsHandVisible = true;
@@ -419,7 +416,7 @@ namespace HoloToolkit.Unity.InputModule
         /// <param name="eventData"></param>
         public virtual void OnSourceLost(SourceStateEventData eventData)
         {
-            if (Pointer != null && Pointer.OwnsInput(eventData))
+            if (Pointer.OwnsInput(eventData))
             {
                 visibleHandsCount--;
                 if (visibleHandsCount == 0)
@@ -443,7 +440,7 @@ namespace HoloToolkit.Unity.InputModule
         }
 
         /// <summary>
-        /// Virtual function for checking state changes.
+        /// Virtual function for checking state changess.
         /// </summary>
         public virtual CursorStateEnum CheckCursorState()
         {

@@ -41,14 +41,14 @@ namespace HoloToolkit.Unity.InputModule
         public AnimatorParameter InputDisabledParameter;
 
         /// <summary>
-        /// Link the cursor animator
+        /// Link the the cursor animator
         /// </summary>
         [SerializeField]
         [Tooltip("Animator for the cursor")]
         protected Animator CursorAnimator;
 
         /// <summary>
-        /// Change animation state when enabling input
+        /// Change anim state when enabling input
         /// </summary>
         public override void OnInputEnabled()
         {
@@ -57,7 +57,7 @@ namespace HoloToolkit.Unity.InputModule
         }
 
         /// <summary>
-        /// Change animation state when disabling input
+        /// Change anim state when disabling input
         /// </summary>
         public override void OnInputDisabled()
         {
@@ -66,7 +66,7 @@ namespace HoloToolkit.Unity.InputModule
         }
 
         /// <summary>
-        /// Override to set the cursor animation trigger
+        /// Override to set the cursor anim trigger
         /// </summary>
         /// <param name="modifier"></param>
         protected override void OnActiveModifier(CursorModifier modifier)

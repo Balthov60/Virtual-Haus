@@ -131,7 +131,7 @@ namespace HoloToolkit.Unity
         /// <summary>
         /// Pop the minimal element of the queue. Will fail at runtime if queue is empty.
         /// </summary>
-        /// <returns>The minimal element</returns>
+        /// <returns>The minmal element</returns>
         public KeyValuePair<TPriority, TValue> Pop()
         {
             KeyValuePair<TPriority, TValue> ret = queue[0];

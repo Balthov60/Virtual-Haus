@@ -41,24 +41,24 @@ namespace HoloToolkit.Unity.InputModule
         public List<GameObject> Inputs = new List<GameObject>(0);
 
         [SerializeField]
-        private GameObject mouse = null;
+        private GameObject mouse;
 
         [SerializeField]
-        private GameObject leftHand = null;
+        private GameObject leftHand;
 
         [SerializeField]
-        private GameObject rightHand = null;
+        private GameObject rightHand;
 
         private void Awake()
         {
             bool spawnControllers = false;
 
 #if UNITY_2017_2_OR_NEWER
-            spawnControllers = !XRDevice.isPresent && XRSettings.enabled && simulateHandsInEditor;
+            spawnControllers = !XRDevice.isPresent;
 #else
-            spawnControllers = simulateHandsInEditor;
+            spawnControllers = !VRDevice.isPresent;
 #endif
-            if (spawnControllers)
+            if (spawnControllers && Application.isEditor && simulateHandsInEditor)
             {
                 sourceType = InputSourceType.Hand;
                 sourceNumber = InputSourceNumber.Two;
