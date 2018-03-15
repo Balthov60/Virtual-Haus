@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -66,7 +65,7 @@ public class NewFurnituresInformations
             list.Add(new NewFurnitureInformations()
             {
                 furnitureName = furniture.name,
-                prefabName = PrefabUtility.GetPrefabParent(furniture).name,
+                prefabName = furniture.name.Split(' ')[0],
                 furniturePosition = furniture.transform.localPosition,
                 furnitureRotation = furniture.transform.rotation,
                 furnitureScale = furniture.transform.localScale

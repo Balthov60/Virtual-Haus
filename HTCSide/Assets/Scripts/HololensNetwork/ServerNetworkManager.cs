@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -73,7 +71,7 @@ public class ServerNetworkManager : MonoBehaviour
 
         AppartmentLoadingMessage appartmentLoadingMessage = new AppartmentLoadingMessage
         {
-            modelName = PrefabUtility.GetPrefabParent(currentAppartment).name,
+            modelName = currentAppartment.GetChild(0).name,
             roomQuantity = GameObject.Find("Furnitures").transform.childCount,
 
             appartmentScale = currentAppartment.localScale,

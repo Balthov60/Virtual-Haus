@@ -1,14 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class PopUp {
 
-    private static readonly string POP_UP_FOLDER_PATH = "Assets/Scripts/PopUpModule/Prefabs/";
-
+    private static readonly string POP_UP_FOLDER_PATH = "UIComponents/PopUpModule/Prefabs/";
 
     /// <summary>
     /// Display A basic pop up for a defined duration.
@@ -44,7 +39,7 @@ public class PopUp {
 
     private static GameObject InstantiatePopUp(string popUpName, GameObject source)
     {
-        GameObject popUpPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(POP_UP_FOLDER_PATH + popUpName + ".prefab");
+        GameObject popUpPrefab = Resources.Load<GameObject>(POP_UP_FOLDER_PATH + popUpName);
 
         return Object.Instantiate(popUpPrefab, source.transform);
     }
