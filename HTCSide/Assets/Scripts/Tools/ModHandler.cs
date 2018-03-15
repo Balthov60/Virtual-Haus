@@ -5,7 +5,7 @@ public class ModHandler : MonoBehaviour
     private Mod mod;
     private InputManager inputManager;
     private GameObject furnitureMenu;
-    private GameObject roomTpUi;
+    private GameObject minimapUI;
 
     private GameObject removeModTuto;
     private GameObject editionModTuto;
@@ -16,7 +16,6 @@ public class ModHandler : MonoBehaviour
         mod = Mod.EDITION;
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         furnitureMenu = GameObject.Find("FurnitureMenu");
-        roomTpUi = GameObject.Find("RoomTpUI");
 
         removeModTuto = GameObject.Find("RemoveModTuto");
         editionModTuto = GameObject.Find("EditionModTuto");
@@ -25,8 +24,8 @@ public class ModHandler : MonoBehaviour
         removeModTuto.SetActive(false);
         teleportationModTuto.SetActive(false);
 
-        roomTpUi = GameObject.Find("MinimapUI");
-        roomTpUi.SetActive(false);
+        minimapUI = GameObject.Find("MinimapUI");
+        minimapUI.SetActive(false);
     }
 
     private void Update()
@@ -38,7 +37,7 @@ public class ModHandler : MonoBehaviour
             {
                 mod = Mod.REMOVE;
                 furnitureMenu.SetActive(false);
-                roomTpUi.SetActive(false);
+                minimapUI.SetActive(false);
 
                 removeModTuto.SetActive(true);
                 editionModTuto.SetActive(false);
@@ -48,7 +47,7 @@ public class ModHandler : MonoBehaviour
             {
                 mod = Mod.UTILITIES;
                 furnitureMenu.SetActive(false);
-                roomTpUi.SetActive(true);
+                minimapUI.SetActive(true);
 
                 removeModTuto.SetActive(false);
                 editionModTuto.SetActive(false);
@@ -58,7 +57,7 @@ public class ModHandler : MonoBehaviour
             {
                 mod = Mod.EDITION;
                 furnitureMenu.SetActive(true);
-                roomTpUi.SetActive(false);
+                minimapUI.SetActive(false);
 
                 removeModTuto.SetActive(false);
                 editionModTuto.SetActive(true);
