@@ -11,6 +11,9 @@ public static class ThumbnailsHandler
 
     public static void CreateThumbnailsIfNotExist(GameObject furnitures)
     {
+        if (!Directory.Exists(thumbnailsPath))
+            Directory.CreateDirectory(thumbnailsPath);
+
         renderTexture = new RenderTexture(SIZE, SIZE, 24);
         cameraGameObject = CreateCamera(renderTexture);
 
