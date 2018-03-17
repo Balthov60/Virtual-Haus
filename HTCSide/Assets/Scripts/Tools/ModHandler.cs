@@ -4,6 +4,7 @@ public class ModHandler : MonoBehaviour
 {
     private Mod mod;
     private InputManager inputManager;
+    private DragFurniture dragFurniture;
     private GameObject furnitureMenu;
     private GameObject minimapUI;
 
@@ -15,6 +16,7 @@ public class ModHandler : MonoBehaviour
     {
         mod = Mod.EDITION;
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
+        dragFurniture = GameObject.Find("EditionHandler").GetComponent<DragFurniture>();
         furnitureMenu = GameObject.Find("FurnitureMenu");
 
         removeModTuto = GameObject.Find("RemoveModTuto");
@@ -30,6 +32,8 @@ public class ModHandler : MonoBehaviour
 
     private void Update()
     {
+        if (dragFurniture.IsClicked() || dragFurniture.IsOnDrag()) return;
+
         if (inputManager.GetTrackpadHandler().IsMenuTrackpadClicked())
         {
             Vector2 menuTrackPadPos = inputManager.GetTrackpadHandler().GetMenuTrackpadPos();

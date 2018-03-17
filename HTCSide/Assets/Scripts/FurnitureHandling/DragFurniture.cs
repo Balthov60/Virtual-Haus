@@ -175,6 +175,10 @@ public class DragFurniture : MonoBehaviour {
     {
         return isClicked;
     }
+    public bool IsOnDrag()
+    {
+        return isOnDrag;
+    }
     public void DestroyMovableUI()
     {
         movableUI.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(0, -40, 0);
