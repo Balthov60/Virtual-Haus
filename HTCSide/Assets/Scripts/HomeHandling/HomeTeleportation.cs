@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class HomeTeleportation : MonoBehaviour {
 
@@ -16,26 +14,27 @@ public class HomeTeleportation : MonoBehaviour {
     {
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         player = GameObject.Find("Player");
+
         isInSpawn = true;
     }
 
-    void Update () {
-		if (inputManager.IsHomeButtonClicked())
+    private void Update()
+    {
+        if (!inputManager.IsHomeButtonClicked()) return;
+
+        if (isInSpawn)
         {
-            if (isInSpawn)
+            if (previousPosition != Vector3.zero)
             {
-                if (previousPosition != Vector3.zero)
-                {
-                    player.transform.position = previousPosition;
-                    isInSpawn = false;
-                }
+                player.transform.position = previousPosition;
+                isInSpawn = false;
             }
-            else
-            {
-                previousPosition = player.transform.position;
-                player.transform.position = MOZART_HAUS_HOME;
-                isInSpawn = true;
-            }
+        }
+        else
+        {
+            previousPosition = player.transform.position;
+            player.transform.position = MOZART_HAUS_HOME;
+            isInSpawn = true;
         }
 	}
 }

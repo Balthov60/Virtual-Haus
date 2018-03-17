@@ -14,22 +14,21 @@ public class IDSelectorUIHandler : MonoBehaviour
 
     void Update()
     {
-        if (inputManager.UserClick())
+        if (!inputManager.UserClick()) return;
+
+        if (rayCast.GetHit().transform.name == "ButtonDown")
         {
-            if (rayCast.GetHit().transform.name == "ButtonDown")
-            {
-                inputManager.CanClick = false;
+            inputManager.CanClick = false;
 
-                Text currentLetterSelector = rayCast.GetHit().transform.parent.Find("LetterView").GetComponentInChildren<Text>();
-                currentLetterSelector.text = GetNextChar(currentLetterSelector.text[0]).ToString();
-            }
-            else if (rayCast.GetHit().transform.name == "ButtonUp")
-            {
-                inputManager.CanClick = false;
+            Text currentLetterSelector = rayCast.GetHit().transform.parent.Find("LetterView").GetComponentInChildren<Text>();
+            currentLetterSelector.text = GetNextChar(currentLetterSelector.text[0]).ToString();
+        }
+        else if (rayCast.GetHit().transform.name == "ButtonUp")
+        {
+            inputManager.CanClick = false;
 
-                Text currentLetterSelector = rayCast.GetHit().transform.parent.Find("LetterView").GetComponentInChildren<Text>();
-                currentLetterSelector.text = GetPreviousChar(currentLetterSelector.text[0]).ToString();
-            }
+            Text currentLetterSelector = rayCast.GetHit().transform.parent.Find("LetterView").GetComponentInChildren<Text>();
+            currentLetterSelector.text = GetPreviousChar(currentLetterSelector.text[0]).ToString();
         }
     }
 

@@ -1,21 +1,19 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class HomeUIHandler : MonoBehaviour
 {
-    private static readonly Vector3 MOZART_HAUS_SPAWN = new Vector3(-2, 0, -3.5f);
     private static readonly string NOT_AVAILABLE_MESSAGE = "Fonctionnalitée non disponnible...";
-
     private static Vector2 MOZART_HAUS_MENU_BUTTON_POSITION;
     private static Vector2 APPARTEMENTS_MENU_BUTTON_POSITION;
     private static Vector2 PARAMETERS_MENU_BUTTON_POSITION;
 
+    [SerializeField] public Vector3 appartmentSpawn;
     public GameObject selector;
 
     private RayCast rayCast;
     private InputManager inputManager;
 
-    public void Start()
+    private void Start()
     {
         rayCast = GameObject.Find("PointerController").GetComponent<RayCast>();
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
@@ -28,42 +26,41 @@ public class HomeUIHandler : MonoBehaviour
             GameObject.Find("ParametersMenuButton").GetComponent<RectTransform>().anchoredPosition;
     }
 
-    public void Update()
+    private void Update()
     {
         selector.SetActive(false);
+
+        if (!rayCast.Hit()) return;
         
-        if (rayCast.Hit())
+        if (rayCast.GetHit().transform.name == "MozartHausMenuButton")
         {
-            if (rayCast.GetHit().transform.name == "MozartHausMenuButton")
-            {
-                MoveSelectorTo(MOZART_HAUS_MENU_BUTTON_POSITION);
+            MoveSelectorTo(MOZART_HAUS_MENU_BUTTON_POSITION);
 
-                if (inputManager.UserClick())
-                {
-                    inputManager.CanClick = false;
-                    HomeTeleportation.isInSpawn = false;
-                    TeleportToMozartHaus(); 
-                }
+            if (inputManager.UserClick())
+            {
+                inputManager.CanClick = false;
+                HomeTeleportation.isInSpawn = false;
+                TeleportToMozartHaus(); 
             }
-            else if (rayCast.GetHit().transform.name == "AppartementsMenuButton")
-            {
-                MoveSelectorTo(APPARTEMENTS_MENU_BUTTON_POSITION);
+        }
+        else if (rayCast.GetHit().transform.name == "AppartementsMenuButton")
+        {
+            MoveSelectorTo(APPARTEMENTS_MENU_BUTTON_POSITION);
 
-                if (inputManager.UserClick())
-                {
-                    inputManager.CanClick = false;
-                    PopUp.DisplayScheduledPopUp(gameObject, NOT_AVAILABLE_MESSAGE, 2);
-                }
+            if (inputManager.UserClick())
+            {
+                inputManager.CanClick = false;
+                PopUp.DisplayScheduledPopUp(gameObject, NOT_AVAILABLE_MESSAGE, 2);
             }
-            else if (rayCast.GetHit().transform.name == "ParametersMenuButton")
-            {
-                MoveSelectorTo(PARAMETERS_MENU_BUTTON_POSITION);
+        }
+        else if (rayCast.GetHit().transform.name == "ParametersMenuButton")
+        {
+            MoveSelectorTo(PARAMETERS_MENU_BUTTON_POSITION);
 
-                if (inputManager.UserClick())
-                {
-                    inputManager.CanClick = false;
-                    PopUp.DisplayScheduledPopUp(gameObject, NOT_AVAILABLE_MESSAGE, 2);
-                }
+            if (inputManager.UserClick())
+            {
+                inputManager.CanClick = false;
+                PopUp.DisplayScheduledPopUp(gameObject, NOT_AVAILABLE_MESSAGE, 2);
             }
         }
     }
@@ -81,7 +78,7 @@ public class HomeUIHandler : MonoBehaviour
     {
         GameObject player = GameObject.Find("Player");
 
-        Vector3 newPlayerPosition = MOZART_HAUS_SPAWN;
+        Vector3 newPlayerPosition = appartmentSpawn;
         newPlayerPosition.y = player.transform.position.y;
 
         player.transform.position = newPlayerPosition;

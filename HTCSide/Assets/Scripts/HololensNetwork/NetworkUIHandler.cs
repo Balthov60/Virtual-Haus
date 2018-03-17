@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Net;
+﻿using System.Net;
 using System.Net.Sockets;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,25 +7,25 @@ public class NetworkUIHandler : MonoBehaviour {
 
     private Text networkStatus;
     private Text clientValue;
-    private Text ipValue;
 
+    private ServerNetworkManager serverNetworkManager;
     private InputManager inputManager;
     private RayCast rayCast;
-    private ServerNetworkManager serverNetworkManager;
 
-    void Start () {
+    private void Start()
+    {
         networkStatus = GameObject.Find("NetworkStatus").GetComponent<Text>();
         clientValue = GameObject.Find("ClientValue").GetComponent<Text>();
-        ipValue = GameObject.Find("IPValue").GetComponent<Text>();
 
+        serverNetworkManager = GameObject.Find("NetworkManager").GetComponent<ServerNetworkManager>();
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         rayCast = GameObject.Find("PointerController").GetComponent<RayCast>();
-        serverNetworkManager = GameObject.Find("NetworkManager").GetComponent<ServerNetworkManager>();
 
-        ipValue.text = GetLocalIPAddress();
+        GameObject.Find("IPValue").GetComponent<Text>().text = GetLocalIPAddress();
     }
 	
-	void Update () {
+	private void Update()
+    {
         clientValue.text = serverNetworkManager.GetClientQuantity().ToString();
 
         if (inputManager.UserClick())

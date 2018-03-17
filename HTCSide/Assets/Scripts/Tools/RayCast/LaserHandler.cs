@@ -3,15 +3,17 @@
 public class LaserHandler : MonoBehaviour
 {
     private LineRenderer laserLine;
-    private RayCast rayCast;
     private ModHandler modHandler;
+    private RayCast rayCast;
+
     private GameObject cylinder;
 
     void Start()
     {
         laserLine = GetComponent<LineRenderer>();
-        rayCast = GameObject.Find("PointerController").GetComponent<RayCast>();
         modHandler = GameObject.Find("ModHandler").GetComponent<ModHandler>();
+        rayCast = GameObject.Find("PointerController").GetComponent<RayCast>();
+
         InitCylinderPointer();
     }
 
@@ -45,7 +47,7 @@ public class LaserHandler : MonoBehaviour
         {
             cylinder.GetComponent<Renderer>().enabled = true;
 
-            if (rayCast.GetHit().transform.name.Contains("Wall"))
+            if (!rayCast.GetHit().transform.name.Contains("Floor"))
             {
                 laserLine.enabled = false;
                 cylinder.GetComponent<Renderer>().enabled = false;
@@ -74,7 +76,8 @@ public class LaserHandler : MonoBehaviour
     private void InitCylinderPointer()
     {
         cylinder = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-        cylinder.transform.localScale = new Vector3(0.3f, 0.03f, 0.3f);
+        cylinder.transform.localScale = new Vector3(0.3f, 0.02f, 0.3f);
+
         cylinder.GetComponent<Collider>().enabled = false;
         cylinder.GetComponent<MeshRenderer>().allowOcclusionWhenDynamic = false;
         cylinder.GetComponent<MeshRenderer>().receiveShadows = false;

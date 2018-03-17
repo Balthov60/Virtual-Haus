@@ -21,19 +21,15 @@ public class LoadUIHandler : MonoBehaviour
 	
 	private void Update()
     {
-        if (inputManager.UserClick())
+        if (!inputManager.UserClick() || !(rayCast.GetHit().transform.name == "Load")) return;
+
+        if (savingManager.LoadGameObjects(idSelectorUIHandler.GetID()))
         {
-            if (rayCast.GetHit().transform.name == "Load")
-            {
-                if (savingManager.LoadGameObjects(idSelectorUIHandler.GetID()))
-                {
-                    PopUp.DisplayScheduledPopUp(gameObject, MESSAGE_SUCCESS, 2);
-                }
-                else
-                {
-                    PopUp.DisplayScheduledPopUp(gameObject, MESSAGE_FAILED, 3);
-                }
-            }
+            PopUp.DisplayScheduledPopUp(gameObject, MESSAGE_SUCCESS, 2);
+        }
+        else
+        {
+            PopUp.DisplayScheduledPopUp(gameObject, MESSAGE_FAILED, 3);
         }
     }
 }

@@ -30,8 +30,9 @@ public class FurnitureUIHandler : MonoBehaviour {
     private bool canClick;
 
 
-    void Start() {
-		scrollViewHeight = scrollView.GetComponent<RectTransform>().rect.height;
+    private void Start()
+    {
+        scrollViewHeight = scrollView.GetComponent<RectTransform>().rect.height;
         rightSideHeight = rightSide.GetComponent<RectTransform>().rect.height;
 
         leftPartUIItemHeight = leftPartUIItem.GetComponent<RectTransform>().rect.height;
@@ -47,26 +48,24 @@ public class FurnitureUIHandler : MonoBehaviour {
         CreateUI();
     }
 
+    /**************************/
+    /* UI Interaction Handler */
+    /**************************/
 
-    void Update()
+    private void Update()
     {
         Scroll();
-
-        if (canClick)
-        {
-            Select();
-        }
-        else
-        {
-            canClick = !inputManager.IsTriggerClicked();
-        }
+        Select();
     }
 
+    /// <summary>
+    /// Scroll if user scroll on the trackpad. Use a scroll stack to prevent unwanted click.
+    /// </summary>
     private void Scroll()
     {
         scrollStack += inputManager.GetTrackpadHandler().GetMenuTrackpadRotationOffset();
 
-        if (!(Mathf.Abs((float) scrollStack) >= 3))
+        if (!(Mathf.Abs((float)scrollStack) >= 3))
             return;
 
         if (scrollStack < -200 || scrollStack > 0) // test if scrollStack < -200 for gap issues when angle go from 360 to 0
@@ -92,39 +91,42 @@ public class FurnitureUIHandler : MonoBehaviour {
 
         scrollStack = 0;
     }
-
+    /// <summary>
+    /// Test if user want to select an item and handle is request if so.
+    /// </summary>
     private void Select()
     {
-        if (!modHandler.IsInEditionMod() || !inputManager.IsTriggerClicked())
+        if (!modHandler.IsInEditionMod() || !inputManager.UserClick())
             return;
 
-        if (!rayCast.Hit())
-            return;
-
-        canClick = false;
         Transform hitObject = rayCast.GetHit().transform;
 
         if (hitObject.parent == leftSide.transform)
         {
+            inputManager.CanClick = false;
             UpdateRightUIPart(hitObject.GetSiblingIndex());
         }
         else if (hitObject.parent == rightSide.transform)
         {
+            inputManager.CanClick = false;
             Transform ui = rayCast.GetHit().transform;
             dragFurniture.SelectObject(GameObject.Find(ui.GetChild(0).GetComponent<Text>().text));
-
-            Color color = ui.GetChild(2).GetComponent<Image>().color;
-            color.a = 0.5f;
-            ui.GetChild(2).GetComponent<Image>().color = color;
+            SetFurnitureSelected(ui);
         }
     }
+
+    /*******************/
+    /* UI Manipulation */
+    /*******************/
 
     private void CreateUI()
     {
         ThumbnailsHandler.CreateThumbnailsIfNotExist(furnitures);
+
         UpdateLeftUIPart();
         UpdateRightUIPart(0);
     }
+
     private void UpdateLeftUIPart()
     {
         for (int i = 0; i < furnitures.transform.childCount; i++)
@@ -140,42 +142,53 @@ public class FurnitureUIHandler : MonoBehaviour {
     private void UpdateRightUIPart(int index)
     {
         foreach (Transform child in rightSide.transform)
-        {
-            GameObject.Destroy(child.gameObject);
-        }
+            Destroy(child.gameObject);
 
         Transform room = furnitures.transform.GetChild(index);
         int furnitureQuantity = room.childCount;
+        UpdateUISize(furnitureQuantity);
 
+        for (int i = 0; i < furnitureQuantity; i++)
+            AddNewUIFor(room, i);
+    }
+
+    private void AddNewUIFor(Transform room, int index)
+    {
+        GameObject temp = Instantiate(rightPartUIItem, rightSide.transform);
+        temp.name = room.GetChild(index).name + "_ui";
+
+        Vector2 position = temp.GetComponent<RectTransform>().anchoredPosition;
+        position.y -= rightPartUIItemHeight * (index / 2) + 0.5f;
+        temp.GetComponent<RectTransform>().anchoredPosition = position;
+
+        if (index % 2 == 1)
+        {
+            Vector2 pivot = temp.GetComponent<RectTransform>().pivot;
+            pivot.x = -1;
+            temp.GetComponent<RectTransform>().pivot = pivot;
+
+            Vector3 center = temp.GetComponent<BoxCollider>().center;
+            center.x += 1;
+            temp.GetComponent<BoxCollider>().center = center;
+        }
+
+        temp.GetComponentInChildren<Text>().text = room.GetChild(index).name;
+        Texture2D texture = new Texture2D(512, 512);
+        texture.LoadImage(File.ReadAllBytes(ThumbnailsHandler.thumbnailsPath + room.GetChild(index).name + ".png"));
+
+        temp.GetComponentInChildren<RawImage>().texture = texture;
+    }
+
+    private void UpdateUISize(int furnitureQuantity)
+    {
         Vector2 size = rightSide.GetComponent<RectTransform>().sizeDelta;
         rightSideHeight = size.y = furnitureQuantity / 2 + furnitureQuantity % 2;
         rightSide.GetComponent<RectTransform>().sizeDelta = size;
-
-        for (int i = 0; i < furnitureQuantity; i++)
-        {
-            GameObject temp = Instantiate(rightPartUIItem, rightSide.transform);
-            temp.name = room.GetChild(i).name + "_ui";
-
-            Vector2 position = temp.GetComponent<RectTransform>().anchoredPosition;
-            position.y -= rightPartUIItemHeight * ((int) i / 2) + 0.5f;
-            temp.GetComponent<RectTransform>().anchoredPosition = position;
-
-            if (i % 2 == 1)
-            {
-                Vector2 pivot = temp.GetComponent<RectTransform>().pivot;
-                pivot.x = -1;
-                temp.GetComponent<RectTransform>().pivot = pivot;
-
-                Vector3 center = temp.GetComponent<BoxCollider>().center;
-                center.x += 1;
-                temp.GetComponent<BoxCollider>().center = center;
-            }
-
-            temp.GetComponentInChildren<Text>().text = room.GetChild(i).name;
-            Texture2D texture = new Texture2D(512, 512);
-            texture.LoadImage(File.ReadAllBytes(ThumbnailsHandler.thumbnailsPath + room.GetChild(i).name + ".png"));
-
-            temp.GetComponentInChildren<RawImage>().texture = texture;
-        }
+    }
+    private void SetFurnitureSelected(Transform ui)
+    {
+        Color color = ui.GetChild(2).GetComponent<Image>().color;
+        color.a = 0.5f;
+        ui.GetChild(2).GetComponent<Image>().color = color;
     }
 }

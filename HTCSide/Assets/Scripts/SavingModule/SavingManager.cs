@@ -24,9 +24,7 @@ public class SavingManager : MonoBehaviour {
         editableGameObjects = new List<GameObject>();
 
         foreach (string tag in tags)
-        {
             editableGameObjects.AddRange(GameObject.FindGameObjectsWithTag(tag));
-        }
 
         serverNetworkManager = GameObject.Find("NetworkManager").GetComponent<ServerNetworkManager>();
     }
@@ -43,6 +41,7 @@ public class SavingManager : MonoBehaviour {
     public bool UpdateCurrentSave()
     {
         if (currentSaveId == null) return false;
+
         SaveGameObjects(currentSaveId);
         return true;
     }

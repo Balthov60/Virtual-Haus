@@ -1,18 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerPointerHandler : MonoBehaviour
 {
-
-    public GameObject camera;
+    public GameObject mainCamera;
 
     void Update()
     {
         Vector3 newRotation = transform.rotation.eulerAngles;
-        newRotation.y = camera.transform.rotation.eulerAngles.y;
+        newRotation.y = mainCamera.transform.rotation.eulerAngles.y;
         transform.rotation = Quaternion.Euler(newRotation);
 
-        transform.localPosition = camera.transform.localPosition = Vector3.zero;
+        transform.localPosition = mainCamera.transform.localPosition = Vector3.zero;
     }
 }

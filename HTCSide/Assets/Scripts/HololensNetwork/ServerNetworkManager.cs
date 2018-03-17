@@ -50,7 +50,7 @@ public class ServerNetworkManager : MonoBehaviour
 
     public int GetClientQuantity()
     {
-        return connectionsReady.Count;
+        return (connectionsReady != null) ? connectionsReady.Count : 0;
     }
 
 

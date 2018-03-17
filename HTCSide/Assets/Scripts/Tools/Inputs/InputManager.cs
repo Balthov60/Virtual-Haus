@@ -16,15 +16,15 @@ public class InputManager : MonoBehaviour {
 
     public bool CanClick
     {
-        set {
-            if (!value)
-            {
-                Invoke("EnableClick", CLICK_COOLDOWN_IN_SECOND);
-            }
-
+        set
+        {
+            if (!value) Invoke("EnableClick", CLICK_COOLDOWN_IN_SECOND);
             _canClick = value;
         }
-        get { return _canClick; }
+        get
+        {
+            return _canClick;
+        }
     }
     private void EnableClick()
     {
@@ -35,10 +35,10 @@ public class InputManager : MonoBehaviour {
 
     private void Start()
     {
-        CanClick = true;
-
         rayCast = GameObject.Find("PointerController").GetComponent<RayCast>();
         trackpadHandler = GameObject.Find("InputManager").GetComponent<TrackpadHandler>();
+
+        CanClick = true;
     }
 
     // Public Interface
@@ -75,6 +75,6 @@ public class InputManager : MonoBehaviour {
     /// <returns>boolean true if user click works</returns>
     public bool UserClick()
     {
-        return (IsTriggerClicked() && rayCast.Hit() && CanClick);
+        return (IsTriggerClicked() && rayCast.Hit());
     }
 }

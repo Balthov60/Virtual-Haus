@@ -21,28 +21,27 @@ public class ValidationPopUp : DefaultPopUp {
     }
 	
 	void Update() {
-		if (inputManager.UserClick())
+        if (!inputManager.UserClick()) return;
+
+        if (rayCast.GetHit().transform.name == "YesPopUp")
         {
-            if (rayCast.GetHit().transform.name == "YesPopUp")
-            {
-                inputManager.CanClick = false;
+            inputManager.CanClick = false;
 
-                if (callback == null)
-                {
-                    throw new Exception("No Callback defined");
-                }
-                else
-                {
-                    callback();
-                    Remove();
-                }
+            if (callback == null)
+            {
+                throw new Exception("No Callback defined");
             }
-            else if (rayCast.GetHit().transform.name == "NoPopUp")
+            else
             {
-                inputManager.CanClick = false;
-
+                callback();
                 Remove();
             }
+        }
+        else if (rayCast.GetHit().transform.name == "NoPopUp")
+        {
+            inputManager.CanClick = false;
+
+            Remove();
         }
 	}
 }

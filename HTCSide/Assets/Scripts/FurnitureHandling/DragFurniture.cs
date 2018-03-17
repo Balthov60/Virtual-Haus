@@ -4,84 +4,69 @@ using UnityEngine.UI;
 public class DragFurniture : MonoBehaviour {
 
     private RayCast rayCast;
-    private InputManager inputManager;
     private ModHandler modHandler;
+    private InputManager inputManager;
 
-    public GameObject movableUI;
     private MovableUIHandler movableUIHandler;
-
-    private GameObject furnitureSelected;
-    private GameObject pointerController;
-
     private ServerNetworkManager networkManager;
 
-    private bool isOnDrag = false;
-    private bool isClicked = false;
-    private bool canClick = true;
+    public GameObject movableUI;
+    private GameObject furnitureSelected;
 
+    private bool isOnDrag;
+    private bool isClicked;
 
-    void Start()
+    private void Start()
     {
         rayCast = GameObject.Find("PointerController").GetComponent<RayCast>();
-        inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         modHandler = GameObject.Find("ModHandler").GetComponent<ModHandler>();
-        movableUIHandler = movableUI.GetComponent<MovableUIHandler>();
+        inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
 
+        movableUIHandler = movableUI.GetComponent<MovableUIHandler>();
         networkManager = GameObject.Find("NetworkManager").GetComponent<ServerNetworkManager>();
-        pointerController = GameObject.Find("PointerController");
 
         isOnDrag = isClicked = false;
-        canClick = true;
     }
 
-    void Update()
+    private void Update()
     {
-        if (modHandler.IsInEditionMod() && rayCast.Hit())
+        if (!modHandler.IsInEditionMod() || !rayCast.Hit()) return;
+
+        if (inputManager.IsTriggerClicked())
         {
-            if (inputManager.IsTriggerClicked() && canClick)
+            if (isOnDrag) // Place Game Object
             {
-                if (isOnDrag) // Place Game Object
-                {
-                    canClick = false;
+                inputManager.CanClick = false;
 
-                    furnitureSelected.GetComponent<Collider>().enabled = true;
-                    furnitureSelected = null;
+                furnitureSelected.GetComponent<Collider>().enabled = true;
+                furnitureSelected = null;
 
-                    isOnDrag = false;
-                }
-                else if (rayCast.HitFurniture() && !isClicked && !isOnDrag) // Select Game Object
-                {
-                    canClick = false;
-
-                    furnitureSelected = GameObject.Find(rayCast.GetHit().transform.name);
-                    isClicked = true;
-                }
-                else if (isClicked && !isOnDrag && !movableUIHandler.HitMovableUI()) // UnSelect Game Object
-                {
-                    canClick = false;
-
-                    DestroyMovableUI();
-
-                    isClicked = false;
-                }                              
+                isOnDrag = false;
             }
-            if (isOnDrag) // Move Game Object
+            else if (rayCast.HitFurniture() && !isClicked && !isOnDrag) // Select Game Object
             {
-                UpdateFurniturePosition(rayCast.GetHit());
-                networkManager.SendFurniturePosUpdate(furnitureSelected);
-            }
+                inputManager.CanClick = false;
 
-            if (!canClick)
-            {
-                canClick = !inputManager.IsTriggerClicked();
+                furnitureSelected = GameObject.Find(rayCast.GetHit().transform.name);
+                isClicked = true;
             }
+            else if (isClicked && !isOnDrag && !movableUIHandler.HitMovableUI()) // UnSelect Game Object
+            {
+                inputManager.CanClick = false;
+
+                DestroyMovableUI();
+
+                isClicked = false;
+            }                              
+        }
+        if (isOnDrag) // Move Game Object
+        {
+            UpdateFurniturePosition(rayCast.GetHit());
+            networkManager.SendFurniturePosUpdate(furnitureSelected);
         }
     }
 
-    private void DestroyMovableUI()
-    {
-        movableUI.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(0, -40, 0);
-    }
+    /* Edit Furniture */
 
     public void SelectObject(GameObject gameObject)
     {
@@ -89,7 +74,6 @@ public class DragFurniture : MonoBehaviour {
         furnitureSelected.GetComponent<Collider>().enabled = false;
 
         isOnDrag = true;
-        canClick = false;
     }
     public void RemoveSelectedObject()
     {
@@ -112,7 +96,6 @@ public class DragFurniture : MonoBehaviour {
         furnitureSelected.GetComponent<Collider>().enabled = false;
         isClicked = false;
         isOnDrag = true;
-        canClick = false;
 
         DestroyMovableUI();
     }
@@ -122,6 +105,9 @@ public class DragFurniture : MonoBehaviour {
         HandleMainCollision(hit);
         HandleAdvancedCollision(hit);
     }
+
+    /* Collision Handling */
+
     private void HandleMainCollision(RaycastHit hit)
     {
         Vector3 newPos = hit.point;
@@ -185,6 +171,14 @@ public class DragFurniture : MonoBehaviour {
 
     /* Public Interface */
 
+    public bool IsClicked()
+    {
+        return isClicked;
+    }
+    public void DestroyMovableUI()
+    {
+        movableUI.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(0, -40, 0);
+    }
     public bool IsFurnitureSelected()
     {
         return furnitureSelected != null;
@@ -192,13 +186,5 @@ public class DragFurniture : MonoBehaviour {
     public GameObject GetFurnitureSelected()
     {
         return furnitureSelected;
-    }
-    public bool CanClick()
-    {
-        return canClick;
-    }
-    public bool IsClicked()
-    {
-        return isClicked;
     }
 }

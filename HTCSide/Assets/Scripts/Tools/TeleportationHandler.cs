@@ -7,8 +7,6 @@ public class TeleportationHandler : MonoBehaviour
     private ModHandler modHandler;
     private GameObject player;
 
-    private bool canTeleport = true;
-
     void Start()
     {
         rayCast = GameObject.Find("PointerController").GetComponent<RayCast>();
@@ -19,15 +17,11 @@ public class TeleportationHandler : MonoBehaviour
 
     void Update()
     {
-        if (inputManager.IsTriggerClicked() && canTeleport && modHandler.IsInUtilitiesMod() && rayCast.Hit() && !rayCast.GetHit().transform.name.Contains("Wall"))
+        if (modHandler.IsInUtilitiesMod() && inputManager.UserClick() && rayCast.GetHit().transform.name.Contains("Floor"))
         {
+            inputManager.CanClick = false;
+
             Teleport(rayCast.GetHit());
-            canTeleport = false;
-        }
-        else if (!canTeleport)
-        {
-            canTeleport = !inputManager.IsTriggerClicked();
-            
         }
     }
 

@@ -1,49 +1,35 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class RemoveFurniture : MonoBehaviour {
 
     private RayCast rayCast;
-    private InputManager inputManager;
     private ModHandler modHandler;
+    private InputManager inputManager;
+
     private GameObject furnitureMenu;
-
     private ServerNetworkManager networkManager;
-
-    private bool canClick = true;
 
     void Start () {
         rayCast = GameObject.Find("PointerController").GetComponent<RayCast>();
-        inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         modHandler = GameObject.Find("ModHandler").GetComponent<ModHandler>();
+        inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
 
         furnitureMenu = GameObject.Find("FurnitureMenu");
-
         networkManager = GameObject.Find("NetworkManager").GetComponent<ServerNetworkManager>();
     }
 
     void Update()
     {
-        if (modHandler.IsInRemoveMod() && rayCast.HitFurniture())
-        {
-            if (inputManager.IsTriggerClicked() && canClick)
-            {
-                if (modHandler.IsInRemoveMod() && rayCast.HitFurniture())
-                {
-                    GameObject gameObject = rayCast.GetHit().transform.gameObject;
-                    canClick = false;
-                    gameObject.transform.position = new Vector3(0, -50, 0);
-                    networkManager.SendFurniturePosUpdate(gameObject);
+        if (!modHandler.IsInRemoveMod() || !rayCast.HitFurniture()) return;
 
-                    UpdateUI(gameObject);
-                }
-            }
-        }
-        if (!canClick)
+        if (inputManager.UserClick())
         {
-            canClick = !inputManager.IsTriggerClicked();
+            GameObject gameObject = rayCast.GetHit().transform.gameObject;
+            gameObject.transform.position = new Vector3(0, -50, 0);
+
+            networkManager.SendFurniturePosUpdate(gameObject);
+            UpdateUI(gameObject);
         }
     }
 
