@@ -10,11 +10,10 @@ public class FurnitureUIHandler : MonoBehaviour {
     public GameObject leftSide;
     public GameObject rightSide;
     public GameObject scrollView;
-    public GameObject furnitures;
+    private GameObject furnitures;
 
     public GameObject leftPartUIItem;
     public GameObject rightPartUIItem;
-
 
     private InputManager inputManager;
     private ModHandler modHandler;
@@ -38,6 +37,7 @@ public class FurnitureUIHandler : MonoBehaviour {
         leftPartUIItemHeight = leftPartUIItem.GetComponent<RectTransform>().rect.height;
         rightPartUIItemHeight = rightPartUIItem.GetComponent<RectTransform>().rect.height;
 
+        furnitures = GameObject.Find("Furnitures");
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
         modHandler = GameObject.Find("ModHandler").GetComponent<ModHandler>();
         rayCast = GameObject.Find("PointerController").GetComponent<RayCast>();
@@ -139,7 +139,7 @@ public class FurnitureUIHandler : MonoBehaviour {
             temp.GetComponentInChildren<Text>().text = furnitures.transform.GetChild(i).name;
         }
     }
-    private void UpdateRightUIPart(int index)
+    public void UpdateRightUIPart(int index)
     {
         foreach (Transform child in rightSide.transform)
             Destroy(child.gameObject);
@@ -149,10 +149,14 @@ public class FurnitureUIHandler : MonoBehaviour {
         UpdateUISize(furnitureQuantity);
 
         for (int i = 0; i < furnitureQuantity; i++)
-            AddNewUIFor(room, i);
+        {
+            GameObject item = AddNewUIFor(room, i);
+            if (room.GetChild(i).position != DragFurniture.DEFAULT_FURNITURE_POSITION)
+                SetFurnitureSelected(item.transform);
+        }
     }
 
-    private void AddNewUIFor(Transform room, int index)
+    private GameObject AddNewUIFor(Transform room, int index)
     {
         GameObject temp = Instantiate(rightPartUIItem, rightSide.transform);
         temp.name = room.GetChild(index).name + "_ui";
@@ -177,6 +181,8 @@ public class FurnitureUIHandler : MonoBehaviour {
         texture.LoadImage(File.ReadAllBytes(ThumbnailsHandler.thumbnailsPath + room.GetChild(index).name + ".png"));
 
         temp.GetComponentInChildren<RawImage>().texture = texture;
+
+        return temp;
     }
 
     private void UpdateUISize(int furnitureQuantity)

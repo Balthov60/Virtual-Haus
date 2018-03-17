@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class DragFurniture : MonoBehaviour {
 
+    public static readonly Vector3 DEFAULT_FURNITURE_POSITION = new Vector3(0, -20, 0);
+
     private RayCast rayCast;
     private ModHandler modHandler;
     private InputManager inputManager;
@@ -77,7 +79,7 @@ public class DragFurniture : MonoBehaviour {
     }
     public void RemoveSelectedObject()
     {
-        furnitureSelected.transform.position = new Vector3(0, -50, 0);
+        furnitureSelected.transform.position = DEFAULT_FURNITURE_POSITION;
         networkManager.SendFurniturePosUpdate(furnitureSelected);
 
         Transform ui = GameObject.Find(furnitureSelected.name + "_ui").transform;
