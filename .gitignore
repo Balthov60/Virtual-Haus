@@ -1,6 +1,9 @@
 # Project Linked
-HTCSide/Assets/Saves/*
-HTCSide/Assets/Resources/UIComponents/Thumbnails/*
+HTCSide/Assets/Saves/Virtual'Haus-NonVR/
+HTCSide/Assets/Saves/Virtual'Haus/
+HTCSide/Assets/Saves/*.meta
+HTCSide/Assets/Resources/UIComponents/Thumbnails/*.png
+HTCSide/Assets/Resources/UIComponents/Thumbnails/*.meta
 Build/
 
 # Basics
