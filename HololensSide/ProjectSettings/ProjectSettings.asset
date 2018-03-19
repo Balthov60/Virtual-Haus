@@ -549,6 +549,7 @@ PlayerSettings:
   metroSplashScreenUseBackgroundColor: 0
   platformCapabilities:
     WindowsStoreApps:
+      HumanInterfaceDevice: False
       InternetClient: True
       InternetClientServer: False
       Microphone: True

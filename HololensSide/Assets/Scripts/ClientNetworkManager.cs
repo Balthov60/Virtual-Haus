@@ -5,10 +5,9 @@ using UnityEngine.Networking;
 public class ClientNetworkManager : MonoBehaviour {
 
     private static readonly int NETWORK_PORT = 4875;
-    private static readonly string NETWORK_IP_ADDRESS = "127.0.0.1";
+    private static readonly string NETWORK_IP_ADDRESS = "192.168.43.1";
 
     private NetworkClient client;
-    private ClientStatus status;
     private int roomQuantityToLoad;
 
     private Transform player;
@@ -18,7 +17,6 @@ public class ClientNetworkManager : MonoBehaviour {
 
     private void Start()
     {
-        status = ClientStatus.DISCONNECTED;
         player = GameObject.Find("Player").transform;
         movable = GameObject.Find("Furnitures");
 
@@ -37,7 +35,6 @@ public class ClientNetworkManager : MonoBehaviour {
         client.RegisterHandler(VirtualHausMessageType.NEW_FURNITURE_POSITION, UpdateFurniturePosition);
 
         client.Connect(NETWORK_IP_ADDRESS, NETWORK_PORT);
-        status = ClientStatus.CONNECTING;
     }
 
     /*****************************/
@@ -49,7 +46,6 @@ public class ClientNetworkManager : MonoBehaviour {
     public void OnConnected(NetworkMessage netMsg)
     {
         client.Send(VirtualHausMessageType.CONNECTED, new EmptyMessage());
-        status = ClientStatus.CONNECTED;
     }
     public void OnConnectionError(NetworkMessage netMsg)
     {
@@ -73,8 +69,7 @@ public class ClientNetworkManager : MonoBehaviour {
         tapToPlace.IsBeingPlaced = true;
 
         player.localScale /= appartmentScaleFactor;
-
-        status = ClientStatus.APPARTMENT_LOADED;
+        
         client.Send(VirtualHausMessageType.APPARTMENT_LOADED, new EmptyMessage());
     }
 
@@ -86,7 +81,6 @@ public class ClientNetworkManager : MonoBehaviour {
         if (--roomQuantityToLoad == 0) // Receive furnitures room by room to prevent oversized messages.
         {
             client.Send(VirtualHausMessageType.USER_READY, new EmptyMessage());
-            status = ClientStatus.READY;
         }
     }
     private void PlaceFurnitures(NewFurnituresInformations furnitures)
