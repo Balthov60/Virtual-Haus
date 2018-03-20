@@ -11,5 +11,8 @@ public class PlayerPointerHandler : MonoBehaviour
         transform.rotation = Quaternion.Euler(newRotation);
 
         transform.localPosition = mainCamera.transform.localPosition = Vector3.zero;
+        Vector3 position = transform.localPosition;
+        position.y = 3.5f;
+        transform.localPosition = position;
     }
 }
