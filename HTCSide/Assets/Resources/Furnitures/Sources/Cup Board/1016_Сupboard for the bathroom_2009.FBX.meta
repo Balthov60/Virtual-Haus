@@ -1,0 +1,247 @@
+fileFormatVersion: 2
+guid: c1e0f5c8be7807b4ba06a1357c6c1e2d
+timeCreated: 1521581768
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: 1016_Bathroom Accessory_01
+    100002: 1016_Bathroom Accessory_02
+    100004: 1016_Bathroom Accessory_03
+    100006: 1016_BathroomCupboard
+    100008: 1016_BathroomCupboard_MeshPart0
+    100010: 1016_BathroomCupboard_MeshPart1
+    100012: 1016_Soap
+    100014: 1016_Toothbrush_01
+    100016: 1016_Toothbrush_02
+    100018: 1016_Toothbrush_bristles_01
+    100020: 1016_Toothbrush_bristles_01_MeshPart0
+    100022: 1016_Toothbrush_bristles_01_MeshPart1
+    100024: 1016_Toothbrush_bristles_01_MeshPart2
+    100026: 1016_Toothbrush_bristles_01_MeshPart3
+    100028: 1016_Toothbrush_bristles_02
+    100030: 1016_Toothbrush_bristles_02_MeshPart0
+    100032: 1016_Toothbrush_bristles_02_MeshPart1
+    100034: 1016_Toothbrush_bristles_02_MeshPart2
+    100036: 1016_Toothbrush_bristles_02_MeshPart3
+    100038: 1016_Toothbrush_handle_01
+    100040: 1016_Toothbrush_handle_02
+    100042: //RootNode
+    400000: 1016_Bathroom Accessory_01
+    400002: 1016_Bathroom Accessory_02
+    400004: 1016_Bathroom Accessory_03
+    400006: 1016_BathroomCupboard
+    400008: 1016_BathroomCupboard_MeshPart0
+    400010: 1016_BathroomCupboard_MeshPart1
+    400012: 1016_Soap
+    400014: 1016_Toothbrush_01
+    400016: 1016_Toothbrush_02
+    400018: 1016_Toothbrush_bristles_01
+    400020: 1016_Toothbrush_bristles_01_MeshPart0
+    400022: 1016_Toothbrush_bristles_01_MeshPart1
+    400024: 1016_Toothbrush_bristles_01_MeshPart2
+    400026: 1016_Toothbrush_bristles_01_MeshPart3
+    400028: 1016_Toothbrush_bristles_02
+    400030: 1016_Toothbrush_bristles_02_MeshPart0
+    400032: 1016_Toothbrush_bristles_02_MeshPart1
+    400034: 1016_Toothbrush_bristles_02_MeshPart2
+    400036: 1016_Toothbrush_bristles_02_MeshPart3
+    400038: 1016_Toothbrush_handle_01
+    400040: 1016_Toothbrush_handle_02
+    400042: //RootNode
+    2300000: 1016_Bathroom Accessory_01
+    2300002: 1016_Bathroom Accessory_02
+    2300004: 1016_Bathroom Accessory_03
+    2300006: 1016_BathroomCupboard_MeshPart0
+    2300008: 1016_BathroomCupboard_MeshPart1
+    2300010: 1016_Soap
+    2300012: 1016_Toothbrush_bristles_01_MeshPart0
+    2300014: 1016_Toothbrush_bristles_01_MeshPart1
+    2300016: 1016_Toothbrush_bristles_01_MeshPart2
+    2300018: 1016_Toothbrush_bristles_01_MeshPart3
+    2300020: 1016_Toothbrush_bristles_02_MeshPart0
+    2300022: 1016_Toothbrush_bristles_02_MeshPart1
+    2300024: 1016_Toothbrush_bristles_02_MeshPart2
+    2300026: 1016_Toothbrush_bristles_02_MeshPart3
+    2300028: 1016_Toothbrush_handle_01
+    2300030: 1016_Toothbrush_handle_02
+    3300000: 1016_Bathroom Accessory_01
+    3300002: 1016_Bathroom Accessory_02
+    3300004: 1016_Bathroom Accessory_03
+    3300006: 1016_BathroomCupboard_MeshPart0
+    3300008: 1016_BathroomCupboard_MeshPart1
+    3300010: 1016_Soap
+    3300012: 1016_Toothbrush_bristles_01_MeshPart0
+    3300014: 1016_Toothbrush_bristles_01_MeshPart1
+    3300016: 1016_Toothbrush_bristles_01_MeshPart2
+    3300018: 1016_Toothbrush_bristles_01_MeshPart3
+    3300020: 1016_Toothbrush_bristles_02_MeshPart0
+    3300022: 1016_Toothbrush_bristles_02_MeshPart1
+    3300024: 1016_Toothbrush_bristles_02_MeshPart2
+    3300026: 1016_Toothbrush_bristles_02_MeshPart3
+    3300028: 1016_Toothbrush_handle_01
+    3300030: 1016_Toothbrush_handle_02
+    4300000: 1016_BathroomCupboard_MeshPart0
+    4300002: 1016_BathroomCupboard_MeshPart1
+    4300004: 1016_Bathroom Accessory_01
+    4300006: 1016_Soap
+    4300008: 1016_Bathroom Accessory_03
+    4300010: 1016_Bathroom Accessory_02
+    4300012: 1016_Toothbrush_handle_02
+    4300014: 1016_Toothbrush_bristles_02_MeshPart0
+    4300016: 1016_Toothbrush_bristles_02_MeshPart1
+    4300018: 1016_Toothbrush_bristles_02_MeshPart2
+    4300020: 1016_Toothbrush_bristles_02_MeshPart3
+    4300022: 1016_Toothbrush_handle_01
+    4300024: 1016_Toothbrush_bristles_01_MeshPart0
+    4300026: 1016_Toothbrush_bristles_01_MeshPart1
+    4300028: 1016_Toothbrush_bristles_01_MeshPart2
+    4300030: 1016_Toothbrush_bristles_01_MeshPart3
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 1016_BC_Metal Decor
+    second: {fileID: 2100000, guid: 6c8a2be4a7ee4324ca882bfde0a3e7d1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 1016_BC_Pattern_01
+    second: {fileID: 2100000, guid: 3f672059671ac814a9cbe38f09bdba78, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 1016_BC_Pattern_02
+    second: {fileID: 2100000, guid: 43ea67150414a1f4689a9b8f0d9c05d9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 1016_BC_Wood_01
+    second: {fileID: 2100000, guid: 0e64be1f62d93bc4e87c9c8224e038b7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 1016_BC_Wood_02
+    second: {fileID: 2100000, guid: a271f61980f06cf42b0fdb662276f5a7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 1016_Ceramic
+    second: {fileID: 2100000, guid: ba979e7a400b06d49a8471c4953f77b4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 1016_LightWood
+    second: {fileID: 2100000, guid: 17482a552aa93ca4ba4258e1e7195af0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 1016_Marble
+    second: {fileID: 2100000, guid: 5f991a043c32ceb48ba146600aceb318, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 1016_Marble_02
+    second: {fileID: 2100000, guid: 5b6a000d85fde73468b4a901e52d6e51, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 1016_Marble_03
+    second: {fileID: 2100000, guid: bcb1b243b6026ef4a8eb28bdbab52a6e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 1016_Old Gold
+    second: {fileID: 2100000, guid: 9c790629cfcface469622c07f12a6fab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 1016_Old Metal
+    second: {fileID: 2100000, guid: eb769406e4d79e3499e089bdba2d2ba9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 1016_White Plastic
+    second: {fileID: 2100000, guid: 1442745b5f0b9c840bda64516bc0497a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 1016_soap
+    second: {fileID: 2100000, guid: 4a08e235905e9be4e8aa8e1ee8831b77, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

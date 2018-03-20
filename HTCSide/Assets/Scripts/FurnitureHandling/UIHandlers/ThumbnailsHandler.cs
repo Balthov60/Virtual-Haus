@@ -17,10 +17,14 @@ public static class ThumbnailsHandler
         renderTexture = new RenderTexture(SIZE, SIZE, 24);
         cameraGameObject = CreateCamera(renderTexture);
 
+        RenderTexture.active = renderTexture;
+
         for (int i = 0; i < furnitures.transform.childCount; i++)
         {
             CreateThumbnailsIfNotExistForRoom(furnitures, i);
         }
+
+        RenderTexture.active = cameraGameObject.GetComponent<Camera>().targetTexture = null;
 
         Object.DestroyImmediate(cameraGameObject);
         Object.DestroyImmediate(renderTexture);
@@ -44,13 +48,13 @@ public static class ThumbnailsHandler
     {
         Transform room = furnitures.transform.GetChild(roomIndex);
         int furnituresQuantity = room.childCount;
-
         for (int i = 0; i < furnituresQuantity; i++)
         {
             if (FurnitureThumbnailsExist(room.GetChild(i).name)) continue;
             
             GameObject furnitureToRender = Object.Instantiate(room.GetChild(i).gameObject);
             PlaceGameObjectForScreenShot(furnitureToRender, cameraGameObject);
+
 
             File.WriteAllBytes(thumbnailsPath + room.GetChild(i).name + ".png", TakePicture().EncodeToPNG());
             Object.DestroyImmediate(furnitureToRender);
@@ -59,10 +63,9 @@ public static class ThumbnailsHandler
     private static Texture2D TakePicture()
     {
         cameraGameObject.GetComponent<Camera>().Render();
-        RenderTexture.active = renderTexture;
         Texture2D virtualPhoto = new Texture2D(SIZE, SIZE, TextureFormat.ARGB32, false);
         virtualPhoto.ReadPixels(new Rect(0, 0, SIZE, SIZE), 0, 0);
-        RenderTexture.active = cameraGameObject.GetComponent<Camera>().targetTexture = null;
+        virtualPhoto.Apply();
 
         return virtualPhoto;
     }
@@ -74,7 +77,7 @@ public static class ThumbnailsHandler
     private static void PlaceGameObjectForScreenShot(GameObject furniture, GameObject camera)
     {
         furniture.transform.position = new Vector3(-100, 0);
-        Vector3 furnitureSize = furniture.GetComponent<Renderer>().bounds.size;
+        Vector3 furnitureSize = furniture.GetComponent<Collider>().bounds.size;
 
         float z = (furnitureSize.y > furnitureSize.x) ? furnitureSize.y : furnitureSize.x;
         z += 0.5f;// add border;
