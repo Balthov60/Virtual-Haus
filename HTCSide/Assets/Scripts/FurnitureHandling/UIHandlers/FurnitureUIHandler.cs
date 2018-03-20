@@ -25,6 +25,8 @@ public class FurnitureUIHandler : MonoBehaviour {
     private float leftPartUIItemHeight;
     private float rightPartUIItemHeight;
 
+    private float realHeight = 0;
+
     private double scrollStack;
     private bool canClick;
 
@@ -54,7 +56,9 @@ public class FurnitureUIHandler : MonoBehaviour {
 
     private void Update()
     {
-        Scroll();
+        if (scrollViewHeight < realHeight)
+            Scroll();
+
         Select();
     }
 
@@ -190,6 +194,8 @@ public class FurnitureUIHandler : MonoBehaviour {
         Vector2 size = rightSide.GetComponent<RectTransform>().sizeDelta;
         rightSideHeight = size.y = furnitureQuantity / 2 + furnitureQuantity % 2;
         rightSide.GetComponent<RectTransform>().sizeDelta = size;
+
+        realHeight = size.y;
     }
     private void SetFurnitureSelected(Transform ui)
     {
