@@ -43,7 +43,7 @@ public class MovableUIHandler : MonoBehaviour {
     {
         Vector3 newpos = dragFurniture.GetFurnitureSelected().transform.position;
         Vector3 difference = (rayCast.source.transform.position - dragFurniture.GetFurnitureSelected().transform.position).normalized;
-        Vector3 furnitureSize = dragFurniture.GetFurnitureSelected().GetComponent<Renderer>().bounds.size;
+        Vector3 furnitureSize = dragFurniture.GetFurnitureSelected().GetComponent<Collider>().bounds.size;
 
         if (furnitureSize.x > furnitureSize.z)
         {

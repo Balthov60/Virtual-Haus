@@ -114,12 +114,12 @@ public class DragFurniture : MonoBehaviour {
     {
         Vector3 newPos = hit.point;
 
-        Vector3 size = furnitureSelected.GetComponent<Renderer>().bounds.size / 2 + (0.025f * Vector3.one);
+        Vector3 size = furnitureSelected.GetComponentInChildren<Renderer>().bounds.size / 2 + (0.025f * Vector3.one);
         size.Scale(hit.normal);
-
+       
         newPos += size;
         if (hit.normal != Vector3.up)
-            newPos.y = furnitureSelected.transform.localScale.y / 2;
+            newPos.y = furnitureSelected.GetComponentInChildren<Renderer>().bounds.size.y / 2;
 
         furnitureSelected.transform.position = newPos;
     }
@@ -127,7 +127,7 @@ public class DragFurniture : MonoBehaviour {
     private void HandleAdvancedCollision(RaycastHit hit)
     {
         Collider[] colliders = Physics.OverlapBox(furnitureSelected.transform.position,
-                                                  furnitureSelected.GetComponent<Renderer>().bounds.size / 2,
+                                                  furnitureSelected.GetComponentInChildren<Renderer>().bounds.size / 2,
                                                   furnitureSelected.transform.rotation);
 
         foreach(Collider collider in colliders)
@@ -157,7 +157,7 @@ public class DragFurniture : MonoBehaviour {
         Vector3 direction = furnitureSelected.transform.position - collider.transform.position;
         direction.y = 0;
 
-        Vector3 furnitureSide = furnitureSelected.GetComponent<Renderer>().bounds.size / 2;
+        Vector3 furnitureSide = furnitureSelected.GetComponentInChildren<Renderer>().bounds.size / 2;
         furnitureSide.Scale(direction.normalized);
         Vector3 furnitureInsidePoint = furnitureSelected.transform.position - furnitureSide;
 

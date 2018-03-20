@@ -65,7 +65,7 @@ public class NewFurnituresInformations
             list.Add(new NewFurnitureInformations()
             {
                 furnitureName = furniture.name,
-                prefabName = furniture.name.Split(' ')[0],
+                prefabName = furniture.transform.GetChild(0).name,
                 furniturePosition = furniture.transform.localPosition,
                 furnitureRotation = furniture.transform.rotation,
                 furnitureScale = furniture.transform.localScale
