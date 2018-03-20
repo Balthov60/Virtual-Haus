@@ -29,6 +29,8 @@ public class ServerNetworkManager : MonoBehaviour
         NetworkServer.RegisterHandler(VirtualHausMessageType.NEW_FURNITURE_POSITION, UpdateFurniturePosition);
         NetworkServer.RegisterHandler(MsgType.Disconnect, OnClientDisconnect);
 
+        NetworkServer.RegisterHandler(MsgType.Connect, OnConnect);
+
         NetworkServer.Listen(NETWORK_PORT);
     }
     public void StopServer()
@@ -41,8 +43,14 @@ public class ServerNetworkManager : MonoBehaviour
         NetworkServer.Reset();
     }
 
+    public void OnConnect(NetworkMessage netMsg)
+    {
+        Debug.Log("Connect : " + netMsg.conn.address);
+    }
+
     void Update()
     {
+        Debug.Log(NetworkServer.connections.Count);
         SendPlayerPosUpdate();
     }
 

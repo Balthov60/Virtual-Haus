@@ -1,11 +1,12 @@
 ﻿using HoloToolkit.Unity.InputModule;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class ClientNetworkManager : MonoBehaviour {
 
     private static readonly int NETWORK_PORT = 4875;
-    private static readonly string NETWORK_IP_ADDRESS = "192.168.43.1";
+    public string NETWORK_IP_ADDRESS;
 
     private NetworkClient client;
     private int roomQuantityToLoad;
@@ -60,8 +61,9 @@ public class ClientNetworkManager : MonoBehaviour {
         roomQuantityToLoad = msg.roomQuantity;
 
         appartment = Instantiate(appartmentPrefab, msg.appartmentPosition, Quaternion.identity);
-        appartmentScaleFactor = msg.appartmentScale.x;
+        appartmentScaleFactor = msg.appartmentScale.x * 5;
 
+        appartment.transform.localScale = Vector3.one / 5;
         movable.transform.parent = appartment.transform;
         movable.transform.position = new Vector3(0, -20 / appartmentScaleFactor, 0);
 
@@ -108,6 +110,11 @@ public class ClientNetworkManager : MonoBehaviour {
         player.position = appartment.transform.rotation * player.position;
         player.position += appartment.transform.position;
         player.rotation = appartment.transform.rotation * msg.userRotation;
+
+        Vector3 position = player.position;
+
+        // position.y += 0.1f;
+        // player.position = position;
     }
     public void UpdateFurniturePosition(NetworkMessage netMsg)
     {
