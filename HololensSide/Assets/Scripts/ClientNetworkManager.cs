@@ -113,8 +113,8 @@ public class ClientNetworkManager : MonoBehaviour {
 
         Vector3 position = player.position;
 
-        // position.y += 0.1f;
-        // player.position = position;
+        position.y += 0.2f;
+        player.position = position;
     }
     public void UpdateFurniturePosition(NetworkMessage netMsg)
     {
