@@ -53,13 +53,13 @@ public class MovableUIHandler : MonoBehaviour {
         {
             newpos = newpos + difference * (furnitureSize.z * 0.65f);
         }
-        newpos.y = 1f;
+        newpos.y = 0.5f;
 
 
         GetComponent<RectTransform>().anchoredPosition3D = newpos;
 
         Vector3 lookAt = rayCast.source.transform.position;
-        lookAt.y = 1f;
+        lookAt.y = 0.5f;
         GetComponent<RectTransform>().LookAt(lookAt);
     }
 
