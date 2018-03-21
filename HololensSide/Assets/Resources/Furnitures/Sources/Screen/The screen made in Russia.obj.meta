@@ -1,0 +1,348 @@
+fileFormatVersion: 2
+guid: 43f901d5002b6ba469151861a83a3e16
+timeCreated: 1521583258
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: nakladka
+    100002: nakladka_001
+    100004: nakladka_002
+    100006: nakladka_003
+    100008: nakladka_004
+    100010: nakladka_005
+    100012: petlya_005
+    100014: petlya_006
+    100016: petlya_007
+    100018: petlya_008
+    100020: petlya_009
+    100022: petlya_010
+    100024: petlya_011
+    100026: petlya_012
+    100028: petlya_013
+    100030: petlya_014
+    100032: petlya_3
+    100034: petlya_4
+    100036: Shape002
+    100038: Shape002_MeshPart0
+    100040: Shape002_MeshPart1
+    100042: Shape003
+    100044: Shape003_MeshPart0
+    100046: Shape003_MeshPart1
+    100048: Shape004
+    100050: Shape004_MeshPart0
+    100052: Shape004_MeshPart1
+    100054: Shape005
+    100056: Shape006
+    100058: Shape1
+    100060: //RootNode
+    400000: nakladka
+    400002: nakladka_001
+    400004: nakladka_002
+    400006: nakladka_003
+    400008: nakladka_004
+    400010: nakladka_005
+    400012: petlya_005
+    400014: petlya_006
+    400016: petlya_007
+    400018: petlya_008
+    400020: petlya_009
+    400022: petlya_010
+    400024: petlya_011
+    400026: petlya_012
+    400028: petlya_013
+    400030: petlya_014
+    400032: petlya_3
+    400034: petlya_4
+    400036: Shape002
+    400038: Shape002_MeshPart0
+    400040: Shape002_MeshPart1
+    400042: Shape003
+    400044: Shape003_MeshPart0
+    400046: Shape003_MeshPart1
+    400048: Shape004
+    400050: Shape004_MeshPart0
+    400052: Shape004_MeshPart1
+    400054: Shape005
+    400056: Shape006
+    400058: Shape1
+    400060: //RootNode
+    2300000: nakladka
+    2300002: nakladka_001
+    2300004: nakladka_002
+    2300006: nakladka_003
+    2300008: nakladka_004
+    2300010: nakladka_005
+    2300012: petlya_005
+    2300014: petlya_006
+    2300016: petlya_007
+    2300018: petlya_008
+    2300020: petlya_009
+    2300022: petlya_010
+    2300024: petlya_011
+    2300026: petlya_012
+    2300028: petlya_013
+    2300030: petlya_014
+    2300032: petlya_3
+    2300034: petlya_4
+    2300036: Shape002_MeshPart0
+    2300038: Shape002_MeshPart1
+    2300040: Shape003_MeshPart0
+    2300042: Shape003_MeshPart1
+    2300044: Shape004_MeshPart0
+    2300046: Shape004_MeshPart1
+    2300048: Shape005
+    2300050: Shape006
+    2300052: Shape1
+    3300000: nakladka
+    3300002: nakladka_001
+    3300004: nakladka_002
+    3300006: nakladka_003
+    3300008: nakladka_004
+    3300010: nakladka_005
+    3300012: petlya_005
+    3300014: petlya_006
+    3300016: petlya_007
+    3300018: petlya_008
+    3300020: petlya_009
+    3300022: petlya_010
+    3300024: petlya_011
+    3300026: petlya_012
+    3300028: petlya_013
+    3300030: petlya_014
+    3300032: petlya_3
+    3300034: petlya_4
+    3300036: Shape002_MeshPart0
+    3300038: Shape002_MeshPart1
+    3300040: Shape003_MeshPart0
+    3300042: Shape003_MeshPart1
+    3300044: Shape004_MeshPart0
+    3300046: Shape004_MeshPart1
+    3300048: Shape005
+    3300050: Shape006
+    3300052: Shape1
+    4300000: nakladka
+    4300002: nakladka_001
+    4300004: nakladka_002
+    4300006: nakladka_003
+    4300008: nakladka_004
+    4300010: nakladka_005
+    4300012: petlya_005
+    4300014: petlya_006
+    4300016: petlya_007
+    4300018: petlya_008
+    4300020: petlya_009
+    4300022: petlya_010
+    4300024: petlya_011
+    4300026: petlya_012
+    4300028: petlya_013
+    4300030: petlya_014
+    4300032: petlya_3
+    4300034: petlya_4
+    4300036: Shape002_MeshPart0
+    4300038: Shape002_MeshPart1
+    4300040: Shape003_MeshPart0
+    4300042: Shape003_MeshPart1
+    4300044: Shape004_MeshPart0
+    4300046: Shape004_MeshPart1
+    4300048: Shape005
+    4300050: Shape006
+    4300052: Shape1
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shape002Mat
+    second: {fileID: 2100000, guid: 9700999bd3d932741814c6b920d20fda, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shape003Mat
+    second: {fileID: 2100000, guid: b2a2a9eb6a8532d4dbba89f37ce43377, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shape004Mat
+    second: {fileID: 2100000, guid: 465fd310cdc78844d96ce59b329062b5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shape005Mat
+    second: {fileID: 2100000, guid: 2f02851d4a1bb99478485cd8c3039cab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shape006Mat
+    second: {fileID: 2100000, guid: b901c989244e9c54cb1cc9e5d3c7e1a4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shape1Mat
+    second: {fileID: 2100000, guid: 84a45fa5fa4ebd9449a14bfa8d1b7774, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: nakladkaMat
+    second: {fileID: 2100000, guid: 0fe513dfed2216840aea26631538dad3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: nakladka_001Mat
+    second: {fileID: 2100000, guid: d37e0c1ee50cf814e9a6bc7b4bc3f0d3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: nakladka_002Mat
+    second: {fileID: 2100000, guid: 29046e0d008062a499c9d6226e234bb7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: nakladka_003Mat
+    second: {fileID: 2100000, guid: 377459d5caadb5748b0e505c6d378038, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: nakladka_004Mat
+    second: {fileID: 2100000, guid: ac7cb89227a75ff4b8241d59bfa6d5f9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: nakladka_005Mat
+    second: {fileID: 2100000, guid: eb0aacf751037404ca3141db4584d35c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: petlya_005Mat
+    second: {fileID: 2100000, guid: 650a39c7de2fb5944a540f38cf385011, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: petlya_006Mat
+    second: {fileID: 2100000, guid: 51dcd44b5448c6e45b9037415de2a323, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: petlya_007Mat
+    second: {fileID: 2100000, guid: e3657fb1884b75c4a8e4e62a02290dd5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: petlya_008Mat
+    second: {fileID: 2100000, guid: fa0311f41580b144fb9af164103de313, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: petlya_009Mat
+    second: {fileID: 2100000, guid: cd1a533f5a390254c944caac4a890969, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: petlya_010Mat
+    second: {fileID: 2100000, guid: 1be7550ab391b8e4481f21d46485a748, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: petlya_011Mat
+    second: {fileID: 2100000, guid: a884b781068bc6f4db6d427c1eab674a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: petlya_012Mat
+    second: {fileID: 2100000, guid: 9d66329e67f97ee4cb310ad199ba6d86, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: petlya_013Mat
+    second: {fileID: 2100000, guid: ac4ef2a8ef854584983c1f05c8dca0ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: petlya_014Mat
+    second: {fileID: 2100000, guid: 70a9e1575f0e9c546ae4470924d2a54e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: petlya_3Mat
+    second: {fileID: 2100000, guid: 3505782cff5b6ce4b8be103fff32b4bb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: petlya_4Mat
+    second: {fileID: 2100000, guid: 9430f36cc44efe9439c2f108db171a96, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

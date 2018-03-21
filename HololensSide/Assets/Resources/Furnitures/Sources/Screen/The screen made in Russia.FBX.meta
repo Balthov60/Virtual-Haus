@@ -1,0 +1,251 @@
+fileFormatVersion: 2
+guid: 10544b6d7fce7154e8366c3bd74c9e06
+timeCreated: 1521583216
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: nakladka
+    100002: nakladka 001
+    100004: nakladka 002
+    100006: nakladka 003
+    100008: nakladka 004
+    100010: nakladka 005
+    100012: Particle View 01
+    100014: petlya 005
+    100016: petlya 006
+    100018: petlya 007
+    100020: petlya 008
+    100022: petlya 009
+    100024: petlya 010
+    100026: petlya 011
+    100028: petlya 012
+    100030: petlya 013
+    100032: petlya 014
+    100034: petlya 3
+    100036: petlya 4
+    100038: Shape002
+    100040: Shape002_MeshPart0
+    100042: Shape002_MeshPart1
+    100044: Shape003
+    100046: Shape003_MeshPart0
+    100048: Shape003_MeshPart1
+    100050: Shape004
+    100052: Shape004_MeshPart0
+    100054: Shape004_MeshPart1
+    100056: Shape005
+    100058: Shape006
+    100060: Shape1
+    100062: //RootNode
+    400000: nakladka
+    400002: nakladka 001
+    400004: nakladka 002
+    400006: nakladka 003
+    400008: nakladka 004
+    400010: nakladka 005
+    400012: Particle View 01
+    400014: petlya 005
+    400016: petlya 006
+    400018: petlya 007
+    400020: petlya 008
+    400022: petlya 009
+    400024: petlya 010
+    400026: petlya 011
+    400028: petlya 012
+    400030: petlya 013
+    400032: petlya 014
+    400034: petlya 3
+    400036: petlya 4
+    400038: Shape002
+    400040: Shape002_MeshPart0
+    400042: Shape002_MeshPart1
+    400044: Shape003
+    400046: Shape003_MeshPart0
+    400048: Shape003_MeshPart1
+    400050: Shape004
+    400052: Shape004_MeshPart0
+    400054: Shape004_MeshPart1
+    400056: Shape005
+    400058: Shape006
+    400060: Shape1
+    400062: //RootNode
+    2300000: nakladka
+    2300002: nakladka 001
+    2300004: nakladka 002
+    2300006: nakladka 003
+    2300008: nakladka 004
+    2300010: nakladka 005
+    2300012: petlya 005
+    2300014: petlya 006
+    2300016: petlya 007
+    2300018: petlya 008
+    2300020: petlya 009
+    2300022: petlya 010
+    2300024: petlya 011
+    2300026: petlya 012
+    2300028: petlya 013
+    2300030: petlya 014
+    2300032: petlya 3
+    2300034: petlya 4
+    2300036: Shape002_MeshPart0
+    2300038: Shape002_MeshPart1
+    2300040: Shape003_MeshPart0
+    2300042: Shape003_MeshPart1
+    2300044: Shape004_MeshPart0
+    2300046: Shape004_MeshPart1
+    2300048: Shape005
+    2300050: Shape006
+    2300052: Shape1
+    3300000: nakladka
+    3300002: nakladka 001
+    3300004: nakladka 002
+    3300006: nakladka 003
+    3300008: nakladka 004
+    3300010: nakladka 005
+    3300012: petlya 005
+    3300014: petlya 006
+    3300016: petlya 007
+    3300018: petlya 008
+    3300020: petlya 009
+    3300022: petlya 010
+    3300024: petlya 011
+    3300026: petlya 012
+    3300028: petlya 013
+    3300030: petlya 014
+    3300032: petlya 3
+    3300034: petlya 4
+    3300036: Shape002_MeshPart0
+    3300038: Shape002_MeshPart1
+    3300040: Shape003_MeshPart0
+    3300042: Shape003_MeshPart1
+    3300044: Shape004_MeshPart0
+    3300046: Shape004_MeshPart1
+    3300048: Shape005
+    3300050: Shape006
+    3300052: Shape1
+    4300000: Shape005
+    4300002: Shape002_MeshPart0
+    4300004: Shape002_MeshPart1
+    4300006: Shape1
+    4300008: petlya 008
+    4300010: petlya 006
+    4300012: petlya 4
+    4300014: petlya 014
+    4300016: petlya 012
+    4300018: petlya 010
+    4300020: Shape003_MeshPart0
+    4300022: Shape003_MeshPart1
+    4300024: petlya 3
+    4300026: petlya 007
+    4300028: petlya 005
+    4300030: petlya 009
+    4300032: petlya 011
+    4300034: petlya 013
+    4300036: Shape004_MeshPart0
+    4300038: Shape004_MeshPart1
+    4300040: Shape006
+    4300042: nakladka 004
+    4300044: nakladka 005
+    4300046: nakladka 001
+    4300048: nakladka
+    4300050: nakladka 002
+    4300052: nakladka 003
+    9500000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Chrome_
+    second: {fileID: 2100000, guid: b2a72ebe01f911747b95212e34b5f9d1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: fanera.belaya
+    second: {fileID: 2100000, guid: 85bdd8728f50b48439ce4b8d196362ca, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metalik.kraska
+    second: {fileID: 2100000, guid: 66d8ebb06e1fa5d4f81cbc16046f3486, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: podstavka
+    second: {fileID: 2100000, guid: 512950a99ce4d2d4ab7217b4e3e54455, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
