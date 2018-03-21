@@ -68,7 +68,6 @@ public class ClientNetworkManager : MonoBehaviour {
         movable.transform.position = new Vector3(0, -20 / appartmentScaleFactor, 0);
 
         TapToPlace tapToPlace = appartment.AddComponent<TapToPlace>();
-        Debug.Log(tapToPlace);
         tapToPlace.IsBeingPlaced = true;
 
         player.localScale /= appartmentScaleFactor;
@@ -114,7 +113,7 @@ public class ClientNetworkManager : MonoBehaviour {
 
         Vector3 position = player.position;
 
-        position.y += 0.2f;
+        // position.y += 0.2f;
         player.position = position;
     }
     public void UpdateFurniturePosition(NetworkMessage netMsg)

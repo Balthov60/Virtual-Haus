@@ -118,8 +118,9 @@ public class DragFurniture : MonoBehaviour {
         size.Scale(hit.normal);
        
         newPos += size;
+
         if (hit.normal != Vector3.up)
-            newPos.y = furnitureSelected.GetComponentInChildren<Renderer>().bounds.size.y / 2;
+            newPos.y = furnitureSelected.GetComponentInChildren<Renderer>().bounds.size.y / 2 + 0.0820f;
 
         furnitureSelected.transform.position = newPos;
     }

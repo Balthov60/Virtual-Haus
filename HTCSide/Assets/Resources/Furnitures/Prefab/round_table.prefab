@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4731416455460680}
   - component: {fileID: 65414880734618502}
   m_Layer: 0
-  m_Name: Round Table
+  m_Name: round_table
   m_TagString: Furniture
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 33375367406041490}
   - component: {fileID: 23634429691381606}
   m_Layer: 0
-  m_Name: Round Table
+  m_Name: round_table
   m_TagString: Furniture
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

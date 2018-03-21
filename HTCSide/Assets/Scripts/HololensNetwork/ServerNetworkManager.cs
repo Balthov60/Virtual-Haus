@@ -137,7 +137,6 @@ public class ServerNetworkManager : MonoBehaviour
 
     private void SendMessageToAllClientReady(short msgType, MessageBase message)
     {
-        // TODO: Fix this error (resuming game after a script update remove this connectionsReady GO)
         if (connectionsReady == null) return;
 
         foreach (KeyValuePair<int, bool> connection in connectionsReady)
