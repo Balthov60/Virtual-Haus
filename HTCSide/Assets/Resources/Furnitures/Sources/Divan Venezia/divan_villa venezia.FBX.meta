@@ -1,0 +1,313 @@
+fileFormatVersion: 2
+guid: abf9b46cac1ea3248a32cf6c9bf31542
+timeCreated: 1521645373
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Arch33_019_obj_004
+    100002: Arch33_019_obj_005
+    100004: Arch33_019_obj_006
+    100006: Arch33_019_obj_006_MeshPart0
+    100008: Arch33_019_obj_006_MeshPart1
+    100010: CF614
+    100012: CF615
+    100014: CF616
+    100016: CF617
+    100018: CF618
+    100020: CF619
+    100022: Cylinder01
+    100024: //RootNode
+    100026: Group1871013300
+    100028: Group1871013301
+    100030: Group1871013302
+    100032: Group1871013303
+    100034: Group1871013304
+    100036: Group1871013305
+    100038: Group1871013306
+    100040: Group1871013538
+    100042: Line016
+    100044: Line018
+    100046: Line053
+    100048: Loft001
+    100050: Loft001_MeshPart0
+    100052: Loft001_MeshPart1
+    100054: Loft002
+    100056: Loft002_MeshPart0
+    100058: Loft002_MeshPart1
+    100060: Ob7ject206
+    100062: Object04
+    100064: Object05
+    100066: Object206
+    100068: Rectangle003
+    100070: Rectangle003_MeshPart0
+    100072: Rectangle003_MeshPart1
+    100074: Rectangle004
+    100076: Rectangle005
+    100078: Rectangle006
+    100080: Rectangle006_MeshPart0
+    100082: Rectangle006_MeshPart1
+    100084: W697
+    100086: W8034
+    100088: W8035
+    100090: W8045
+    100092: w8045
+    100094: w8045_MeshPart0
+    100096: w8045_MeshPart1
+    100098: w8045_MeshPart2
+    400000: Arch33_019_obj_004
+    400002: Arch33_019_obj_005
+    400004: Arch33_019_obj_006
+    400006: Arch33_019_obj_006_MeshPart0
+    400008: Arch33_019_obj_006_MeshPart1
+    400010: CF614
+    400012: CF615
+    400014: CF616
+    400016: CF617
+    400018: CF618
+    400020: CF619
+    400022: Cylinder01
+    400024: //RootNode
+    400026: Group1871013300
+    400028: Group1871013301
+    400030: Group1871013302
+    400032: Group1871013303
+    400034: Group1871013304
+    400036: Group1871013305
+    400038: Group1871013306
+    400040: Group1871013538
+    400042: Line016
+    400044: Line018
+    400046: Line053
+    400048: Loft001
+    400050: Loft001_MeshPart0
+    400052: Loft001_MeshPart1
+    400054: Loft002
+    400056: Loft002_MeshPart0
+    400058: Loft002_MeshPart1
+    400060: Ob7ject206
+    400062: Object04
+    400064: Object05
+    400066: Object206
+    400068: Rectangle003
+    400070: Rectangle003_MeshPart0
+    400072: Rectangle003_MeshPart1
+    400074: Rectangle004
+    400076: Rectangle005
+    400078: Rectangle006
+    400080: Rectangle006_MeshPart0
+    400082: Rectangle006_MeshPart1
+    400084: W697
+    400086: W8034
+    400088: W8035
+    400090: W8045
+    400092: w8045
+    400094: w8045_MeshPart0
+    400096: w8045_MeshPart1
+    400098: w8045_MeshPart2
+    2300000: Arch33_019_obj_004
+    2300002: Arch33_019_obj_005
+    2300004: Arch33_019_obj_006_MeshPart0
+    2300006: Arch33_019_obj_006_MeshPart1
+    2300008: CF614
+    2300010: CF615
+    2300012: CF616
+    2300014: CF617
+    2300016: CF618
+    2300018: CF619
+    2300020: Cylinder01
+    2300022: Line016
+    2300024: Line018
+    2300026: Line053
+    2300028: Loft001_MeshPart0
+    2300030: Loft001_MeshPart1
+    2300032: Loft002_MeshPart0
+    2300034: Loft002_MeshPart1
+    2300036: Ob7ject206
+    2300038: Object04
+    2300040: Object05
+    2300042: Object206
+    2300044: Rectangle003_MeshPart0
+    2300046: Rectangle003_MeshPart1
+    2300048: Rectangle004
+    2300050: Rectangle006_MeshPart0
+    2300052: Rectangle006_MeshPart1
+    2300054: W697
+    2300056: W8034
+    2300058: W8035
+    2300060: W8045
+    2300062: w8045_MeshPart0
+    2300064: w8045_MeshPart1
+    2300066: w8045_MeshPart2
+    3300000: Arch33_019_obj_004
+    3300002: Arch33_019_obj_005
+    3300004: Arch33_019_obj_006_MeshPart0
+    3300006: Arch33_019_obj_006_MeshPart1
+    3300008: CF614
+    3300010: CF615
+    3300012: CF616
+    3300014: CF617
+    3300016: CF618
+    3300018: CF619
+    3300020: Cylinder01
+    3300022: Line016
+    3300024: Line018
+    3300026: Line053
+    3300028: Loft001_MeshPart0
+    3300030: Loft001_MeshPart1
+    3300032: Loft002_MeshPart0
+    3300034: Loft002_MeshPart1
+    3300036: Ob7ject206
+    3300038: Object04
+    3300040: Object05
+    3300042: Object206
+    3300044: Rectangle003_MeshPart0
+    3300046: Rectangle003_MeshPart1
+    3300048: Rectangle004
+    3300050: Rectangle006_MeshPart0
+    3300052: Rectangle006_MeshPart1
+    3300054: W697
+    3300056: W8034
+    3300058: W8035
+    3300060: W8045
+    3300062: w8045_MeshPart0
+    3300064: w8045_MeshPart1
+    3300066: w8045_MeshPart2
+    4300000: Object206
+    4300002: Line016
+    4300004: Loft001_MeshPart0
+    4300006: Loft001_MeshPart1
+    4300008: Arch33_019_obj_004
+    4300010: Line018
+    4300012: Loft002_MeshPart0
+    4300014: Loft002_MeshPart1
+    4300016: Arch33_019_obj_005
+    4300018: Arch33_019_obj_006_MeshPart0
+    4300020: Arch33_019_obj_006_MeshPart1
+    4300022: W8034
+    4300024: CF615
+    4300026: CF614
+    4300028: CF617
+    4300030: W8035
+    4300032: CF616
+    4300034: Rectangle006_MeshPart0
+    4300036: Rectangle006_MeshPart1
+    4300038: Rectangle003_MeshPart0
+    4300040: Rectangle003_MeshPart1
+    4300042: Rectangle004
+    4300044: w8045_MeshPart0
+    4300046: w8045_MeshPart1
+    4300048: w8045_MeshPart2
+    4300050: W8045
+    4300052: CF618
+    4300054: CF619
+    4300056: Ob7ject206
+    4300058: Line053
+    4300060: Cylinder01
+    4300062: Object04
+    4300064: Object05
+    4300066: W697
+    9500000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 02 - Default
+    second: {fileID: 2100000, guid: c2f4e621e0d6e6d42a22888e44e80284, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 20 - Default
+    second: {fileID: 2100000, guid: 93bf158e26de8204d84e6c50697d46e0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DIRT
+    second: {fileID: 2100000, guid: 81a9d88180ac7eb47916621ebf5444be, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 'Material #1235456884'
+    second: {fileID: 2100000, guid: d2a083a9e73412f49804f25964d767db, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 'Material #1235456896'
+    second: {fileID: 2100000, guid: b5f41646a64b78b48a6751cbdc6ec4ff, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
