@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: a95df088ccc36e649bb35a2b8e1f6fda
-timeCreated: 1520340926
+guid: 8839cd36ccf77a64997cdd5ca9a0dfb2
+timeCreated: 1521653794
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -12,7 +12,6 @@ ModelImporter:
     2300000: default
     3300000: default
     4300000: default
-    6400000: default
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -29,11 +28,6 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Sol
     second: {fileID: 2100000, guid: fe02b72d5be68cf4b92e1de568f81b92, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: defaultMat
-    second: {fileID: 2100000, guid: 67f312e75f36a4d4aacfdccf050e8bad, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -65,8 +59,8 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
-    importVisibility: 0
+    addColliders: 0
+    importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1

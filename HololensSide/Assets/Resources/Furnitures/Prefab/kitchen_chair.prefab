@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4157272967730844}
   - component: {fileID: 65542285146608398}
   m_Layer: 0
-  m_Name: Kitchen Chair
+  m_Name: kitchen_chair
   m_TagString: Furniture
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -57,7 +57,7 @@ public class ClientNetworkManager : MonoBehaviour {
     {
         AppartmentLoadingMessage msg = netMsg.ReadMessage<AppartmentLoadingMessage>();
 
-        GameObject appartmentPrefab = Resources.Load<GameObject>("Appartments/" + msg.modelName + "/" + msg.modelName);
+        GameObject appartmentPrefab = Resources.Load<GameObject>("Appartments/" + msg.modelName);
         roomQuantityToLoad = msg.roomQuantity;
 
         appartment = Instantiate(appartmentPrefab, msg.appartmentPosition, Quaternion.identity);
@@ -68,6 +68,7 @@ public class ClientNetworkManager : MonoBehaviour {
         movable.transform.position = new Vector3(0, -20 / appartmentScaleFactor, 0);
 
         TapToPlace tapToPlace = appartment.AddComponent<TapToPlace>();
+        Debug.Log(tapToPlace);
         tapToPlace.IsBeingPlaced = true;
 
         player.localScale /= appartmentScaleFactor;
