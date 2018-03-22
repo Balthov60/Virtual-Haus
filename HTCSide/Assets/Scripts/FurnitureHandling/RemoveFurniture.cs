@@ -37,10 +37,12 @@ public class RemoveFurniture : MonoBehaviour {
     {
         furnitureMenu.SetActive(true);
 
-        Transform ui = GameObject.Find(gameObject.name + "_ui").transform;
-        Color color = ui.GetChild(2).GetComponent<Image>().color;
+        GameObject ui = GameObject.Find(gameObject.name + "_ui");
+        if (ui == null) return;
+
+        Color color = ui.transform.GetChild(2).GetComponent<Image>().color;
         color.a = 0f;
-        ui.GetChild(2).GetComponent<Image>().color = color;
+        ui.transform.GetChild(2).GetComponent<Image>().color = color;
 
         furnitureMenu.SetActive(false);
     }
