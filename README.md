@@ -3,10 +3,8 @@
 PTUT IUT Informatique Bourg-en-Bresse Lyon 1
 
 Tuteur : Jean-Phillipe Farrugia
-Groupe : Balthazar Frolin
-         Martin Braun
-         Lucas Secret
-         Mateo Rat
+
+Groupe : Balthazar Frolin, Martin Braun, Lucas Secret, Mateo Rat
 
 ## Demo
 
